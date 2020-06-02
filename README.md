@@ -1,4 +1,4 @@
-# Piano-Tracker-App
+# Piano Tracker App
 Android-only ease of tracking piano self-education
 
 This is a simple, no-frills application, built natively for Android using Kotlin.
@@ -12,6 +12,5 @@ My intention is to have an application that can help me:
 In future, I will add:
 
   a.) The ability to add notes
-  b.) The ability to sync across devices (upload the stats to a remote database rather than the 
-      SQLite Database on my LG v20)
+  b.) Upload the stats to a remote database
   c.) Enhanced functionality, such as ear training and a metronome
