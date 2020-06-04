@@ -10,4 +10,6 @@
     <string name="menu_home">Home</string>
     <string name="menu_session">Session</string>
     <string name="menu_stats">Stats</string>
+    <string name="home_welcomeBack">Welcome Back!</string>
+    <string name="home_callToAction">Let\'s learn some piano!</string>
 </resources>
