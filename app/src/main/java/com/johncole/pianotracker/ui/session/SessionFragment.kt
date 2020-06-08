@@ -8,7 +8,7 @@ import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.johncole.pianotracker.R
-import com.johncole.pianotracker.ui.dialog.NewPracticeActivityFragment
+import com.johncole.pianotracker.ui.dialog.NewPracticeActivityDialogFragment
 
 class SessionFragment : Fragment() {
     private val viewModel: SessionViewModel by viewModels()
@@ -29,8 +29,8 @@ class SessionFragment : Fragment() {
         return layout
     }
 
-    fun launchNewPracticeActivityDialog() {
-        val newFragment = NewPracticeActivityFragment()
+    private fun launchNewPracticeActivityDialog() {
+        val newFragment = NewPracticeActivityDialogFragment()
         newFragment.show(parentFragmentManager, "new_practice_activity_dialog")
     }
 

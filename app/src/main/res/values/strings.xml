@@ -14,15 +14,16 @@
     <string name="home_callToAction">Let\'s learn some piano!</string>
     <string name="session_readyToPractice">Ready to Practice?</string>
     <string name="session_practiceType">Practice type:</string>
-    <string name="txtV_key_name">Enter key name…</string>
+    <string name="key_name">Enter key name…</string>
     <string name="start_session">Start Session</string>
-    <string name="txtV_add_an_activity">Add an activity to your practice list. When you are done, click \"Start Session\" to begin timing.</string>
+    <string name="add_an_activity">Add an activity to your practice list. When you are done, click \"Start Session\" to begin timing.</string>
     <string name="select_bpm">Select BPM:</string>
-    <string name="txtV_select_key">Select Key:</string>
-    <string name="txtV_set_practice_activity">Choose Practice Activity:</string>
-    <string name="txtE_enter_notes">Enter notes...</string>
+    <string name="select_key">Select Key:</string>
+    <string name="set_practice_activity">Choose Practice Activity:</string>
+    <string name="enter_notes">Enter notes…</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="add_a_practice_activity">Add a practice activity</string>
     <string name="new_practice_activity">New Practice Activity</string>
+    <string name="technical_work_type">Technical Work Type:</string>
 </resources>

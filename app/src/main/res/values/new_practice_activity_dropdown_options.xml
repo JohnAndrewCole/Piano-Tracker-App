@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="key_array">
+        <item>C</item>
+        <item>G</item>
+        <item>D</item>
+        <item>A</item>
+        <item>E</item>
+        <item>B</item>
+        <item>G♭</item>
+        <item>D♭</item>
+        <item>A♭</item>
+        <item>E♭</item>
+        <item>B♭</item>
+        <item>F</item>
+    </string-array>
+
+    <string-array name="practice_type_array">
+        <item>Technical Work</item>
+        <item>Playing for Fun</item>
+        <item>Working on a Piece</item>
+        <item>Improvising</item>
+        <item>Composing</item>
+    </string-array>
+
+    <string-array name="technical_work_type">
+        <item>Scales</item>
+        <item>Modes</item>
+        <item>Chords</item>
+        <item>Rhythm</item>
+        <item>Sheet Reading</item>
+        <item>Ear Training</item>
+    </string-array>
+</resources>

@@ -14,4 +14,5 @@
     <dimen name="secondary_text">14sp</dimen>
     <dimen name="button_text">14sp</dimen>
     <dimen name="text_inputs">16sp</dimen>
+    <dimen name="dialog_sub_heading">18sp</dimen>
 </resources>

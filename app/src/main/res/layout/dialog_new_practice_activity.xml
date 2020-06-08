@@ -26,8 +26,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:text="@string/txtV_set_practice_activity"
-        android:textSize="18sp"
+        android:text="@string/set_practice_activity"
+        android:textSize="@dimen/dialog_sub_heading"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtV_new_practice_activity_title" />
@@ -40,10 +40,36 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="#BBDEFB"
-        android:entries="@android:array/organizationTypes"
+        android:entries="@array/practice_type_array"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtV_select_practice_activity" />
+
+    <TextView
+        android:id="@+id/txtV_select_technical_work_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/technical_work_type"
+        android:textSize="@dimen/dialog_sub_heading"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_select_practice_activity" />
+
+    <Spinner
+        android:id="@+id/spinner_select_technical_work_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#BBDEFB"
+        android:entries="@array/technical_work_type"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtV_select_technical_work_type" />
 
     <TextView
         android:id="@+id/txtV_select_key"
@@ -51,11 +77,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/txtV_select_key"
-        android:textSize="18sp"
+        android:text="@string/select_key"
+        android:textSize="@dimen/dialog_sub_heading"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_select_practice_activity" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_select_technical_work_type" />
 
     <Spinner
         android:id="@+id/spinner_select_key"
@@ -65,7 +91,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="#BBDEFB"
-        android:entries="@android:array/emailAddressTypes"
+        android:entries="@array/key_array"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtV_select_key" />
@@ -92,7 +118,7 @@
         tools:text="100 BPM" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/seekBar_bpm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -111,13 +137,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="@string/txtE_enter_notes"
+        android:hint="@string/enter_notes"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:maxLength="280"
         android:textSize="@dimen/paragraph_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_bpm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
