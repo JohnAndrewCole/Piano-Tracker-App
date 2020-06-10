@@ -24,7 +24,7 @@
         <item>Composing</item>
     </string-array>
 
-    <string-array name="technical_work_type">
+    <string-array name="technical_work_type_array">
         <item>Scales</item>
         <item>Modes</item>
         <item>Chords</item>

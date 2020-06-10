@@ -27,4 +27,5 @@
     <string name="new_practice_activity">New Practice Activity</string>
     <string name="technical_work_type">Technical Work Type:</string>
     <string name="seek_bar_bpm_display">%1$d BPM</string>
+    <string name="bpm">BPM</string>
 </resources>

@@ -65,7 +65,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="#BBDEFB"
-        android:entries="@array/technical_work_type"
+        android:entries="@array/technical_work_type_array"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

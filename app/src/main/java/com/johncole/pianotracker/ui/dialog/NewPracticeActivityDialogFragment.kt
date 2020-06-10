@@ -3,18 +3,39 @@ package com.johncole.pianotracker.ui.dialog
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.johncole.pianotracker.R
+import com.johncole.pianotracker.models.session.PracticeActivityModel
+import com.johncole.pianotracker.ui.session.SessionViewModel
+import kotlinx.android.synthetic.main.dialog_new_practice_activity.*
 
-class NewPracticeActivityDialogFragment : DialogFragment(), AdapterView.OnItemSelectedListener {
+
+private const val TAG = "NewPracticeActivityDial"
+
+class NewPracticeActivityDialogFragment : DialogFragment() {
+    private val viewModel:SessionViewModel by viewModels()
+
+    // variables for setup of dialog
     private var dialogView: View? = null
     private var technicalWorkTypeSpinner: Spinner? = null
     private var technicalWorkTypeHeading: TextView? = null
     private var bpmSeekBar: SeekBar? = null
     private var bpmTextView: TextView? = null
+
+    // variables for capturing data
+    private var technicalWorkTypeSelected: String? = null
+    private var practiceWorkTypeSelected: String? = null
+    private var keySelected: String? = null
+    private var bpmSelected: Int? = null
+
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -30,7 +51,21 @@ class NewPracticeActivityDialogFragment : DialogFragment(), AdapterView.OnItemSe
                 // Add action buttons
                 .setPositiveButton(R.string.save
                 ) { _, _ ->
-                    // TODO: Save this dialog's data to the device's SQLite database
+//                    id, String? (practiceActivityType, technicalWorkType, key, bpm, notes), lengthInSeconds: Int?
+                    val id = 23
+                    val randomSeconds = 560
+
+                    // pass the data captured here to the view model
+                    val newTestPracticeActivity = PracticeActivityModel(id,
+                        practiceWorkTypeSelected,
+                        technicalWorkTypeSelected,
+                        keySelected,
+                        bpmSelected,
+                        txtE_enter_notes.text.toString(),
+                        randomSeconds)
+
+                    Log.d(TAG, "New Practice Activity $newTestPracticeActivity sent (hopefully) to the database.")
+                    dialog?.cancel()
                 }
                 .setNegativeButton(R.string.cancel
                 ) { _, _ ->
@@ -39,7 +74,9 @@ class NewPracticeActivityDialogFragment : DialogFragment(), AdapterView.OnItemSe
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
 
-        setUpAdapter(dialogView!!)
+        setUpAdapterForPracticeTypeSpinner(dialogView!!)
+        setUpAdapterForTechnicalWorkTypeSpinner(dialogView!!)
+        setUpAdapterForKeySelectSpinner(dialogView!!)
         technicalWorkTypeSpinner = dialogView!!.findViewById(R.id.spinner_select_technical_work_type)
         technicalWorkTypeHeading = dialogView!!.findViewById(R.id.txtV_select_technical_work_type)
 
@@ -49,8 +86,17 @@ class NewPracticeActivityDialogFragment : DialogFragment(), AdapterView.OnItemSe
         return dialog
     }
 
-    private fun setUpAdapter(view: View) {
-        val parentSpinner: Spinner = view.findViewById(R.id.spinner_select_practice_activity)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return dialogView
+    }
+
+    override fun onDestroyView() {
+        dialogView = null
+        super.onDestroyView()
+    }
+
+    private fun setUpAdapterForPracticeTypeSpinner(view: View) {
+        val practiceActivityTypeSpinner: Spinner = view.findViewById(R.id.spinner_select_practice_activity)
         // Create an ArrayAdapter using the string array and a default spinner layout
         context?.let {
             ArrayAdapter.createFromResource(
@@ -61,27 +107,86 @@ class NewPracticeActivityDialogFragment : DialogFragment(), AdapterView.OnItemSe
                 // Specify the layout to use when the list of choices appears
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 // Apply the adapter to the spinner
-                parentSpinner.adapter = adapter
+                practiceActivityTypeSpinner.adapter = adapter
             }
         }
 
-        parentSpinner.onItemSelectedListener = this
-    }
+        practiceActivityTypeSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+                // An item was selected. You can retrieve the selected item using
+                val selectedItem = parent.getItemAtPosition(pos)
+                practiceWorkTypeSelected = selectedItem.toString()
+                if (selectedItem.toString() == "Technical Work") {
+                    technicalWorkTypeSpinner?.visibility = View.VISIBLE
+                    technicalWorkTypeHeading?.visibility = View.VISIBLE
+                } else {
+                    technicalWorkTypeSpinner?.visibility = View.GONE
+                    technicalWorkTypeHeading?.visibility = View.GONE
+                }
+            }
 
-    override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-        // An item was selected. You can retrieve the selected item using
-        val selectedItem = parent.getItemAtPosition(pos)
-        if (selectedItem.toString() == "Technical Work") {
-            technicalWorkTypeSpinner?.visibility = View.VISIBLE
-            technicalWorkTypeHeading?.visibility = View.VISIBLE
-        } else {
-            technicalWorkTypeSpinner?.visibility = View.GONE
-            technicalWorkTypeHeading?.visibility = View.GONE
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Another interface callback
+            }
         }
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>) {
-        // Another interface callback
+    private fun setUpAdapterForTechnicalWorkTypeSpinner(view: View) {
+        val technicalWorkTypeSpinner: Spinner = view.findViewById(R.id.spinner_select_technical_work_type)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        context?.let {
+            ArrayAdapter.createFromResource(
+                it,
+                R.array.technical_work_type_array,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                technicalWorkTypeSpinner.adapter = adapter
+            }
+        }
+
+        technicalWorkTypeSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+                // An item was selected. You can retrieve the selected item using
+                val selectedItem = parent.getItemAtPosition(pos)
+                technicalWorkTypeSelected = selectedItem.toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Another interface callback
+            }
+        }
+    }
+
+    private fun setUpAdapterForKeySelectSpinner(view: View) {
+        val keySelectSpinner: Spinner = view.findViewById(R.id.spinner_select_key)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        context?.let {
+            ArrayAdapter.createFromResource(
+                it,
+                R.array.key_array,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                keySelectSpinner.adapter = adapter
+            }
+        }
+
+        keySelectSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+                // An item was selected. You can retrieve the selected item using
+                val selectedItem = parent.getItemAtPosition(pos)
+                keySelected = selectedItem.toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Another interface callback
+            }
+        }
     }
 
     private fun setUpSeekBar(view: View) {
@@ -95,6 +200,7 @@ class NewPracticeActivityDialogFragment : DialogFragment(), AdapterView.OnItemSe
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                 bpmProgress  = seek.progress
+                bpmSelected = bpmProgress
                 bpmTextView?.text = getString(R.string.seek_bar_bpm_display, bpmProgress)
             }
 

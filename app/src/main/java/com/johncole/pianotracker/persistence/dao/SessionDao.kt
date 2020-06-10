@@ -18,6 +18,10 @@ interface SessionDao {
     @Query("SELECT * FROM session WHERE date LIKE :first")
     fun findByName(first: OffsetDateTime): SessionEntity
 
+    // See the SessionEntity class for explanation on DateTime implementation.
+    @Query("SELECT * FROM session ORDER BY datetime(date)")
+    fun getSessionsOrderedByDate(): List<SessionEntity>
+
     @Insert
     fun insertAll(vararg users: SessionEntity)
 

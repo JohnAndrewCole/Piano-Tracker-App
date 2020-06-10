@@ -1,11 +1,11 @@
 package com.johncole.pianotracker.ui.stats
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.johncole.pianotracker.R
 
 class StatsFragment : Fragment() {
@@ -13,8 +13,7 @@ class StatsFragment : Fragment() {
     companion object {
         fun newInstance() = StatsFragment()
     }
-
-    private lateinit var viewModel: StatsViewModel
+    private val viewModel: StatsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +24,6 @@ class StatsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(StatsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
