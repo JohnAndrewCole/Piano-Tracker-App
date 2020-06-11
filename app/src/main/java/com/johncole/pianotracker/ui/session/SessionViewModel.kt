@@ -1,6 +1,7 @@
 package com.johncole.pianotracker.ui.session
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
@@ -9,6 +10,8 @@ import com.johncole.pianotracker.models.session.SessionModel
 import com.johncole.pianotracker.persistence.database.PianoTrackerDatabase
 import kotlinx.coroutines.launch
 import java.time.OffsetDateTime
+
+private const val TAG = "SessionViewModel"
 
 class SessionViewModel(application: Application) : AndroidViewModel(application) {
     private val isNewSession = true
@@ -36,7 +39,12 @@ class SessionViewModel(application: Application) : AndroidViewModel(application)
         practiceActivityModel.sessionId = sessionId
 
         viewModelScope.launch {
-            appDatabase.practiceActivityDao().insertNewPracticeActivity(practiceActivityModel)
+            Log.d(TAG, "Inserting new practice activity $practiceActivityModel")
+            try {
+                appDatabase.practiceActivityDao().insertNewPracticeActivity(practiceActivityModel)
+            } catch (e: Exception) {
+                println(e)
+            }
         }
     }
 }
