@@ -129,8 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtV_select_bpm"
-        tools:targetApi="o" />
+        app:layout_constraintTop_toBottomOf="@+id/txtV_select_bpm" />
 
     <EditText
         android:id="@+id/txtE_enter_notes"

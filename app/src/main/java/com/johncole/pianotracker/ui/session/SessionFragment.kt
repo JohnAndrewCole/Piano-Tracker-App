@@ -13,6 +13,8 @@ import com.johncole.pianotracker.ui.dialog.NewPracticeActivityDialogFragment
 class SessionFragment : Fragment() {
     private val viewModel: SessionViewModel by viewModels()
 
+    // TODO: If RecyclerView is empty, set isNewSession to true
+
     companion object {
         fun newInstance() =
             SessionFragment()

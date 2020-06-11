@@ -12,10 +12,12 @@ import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.johncole.pianotracker.R
 import com.johncole.pianotracker.models.session.PracticeActivityModel
 import com.johncole.pianotracker.ui.session.SessionViewModel
 import kotlinx.android.synthetic.main.dialog_new_practice_activity.*
+import kotlinx.coroutines.launch
 
 
 private const val TAG = "NewPracticeActivityDial"
@@ -36,33 +38,36 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
     private var keySelected: String? = null
     private var bpmSelected: Int? = null
 
-
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = activity?.let {
             val builder = AlertDialog.Builder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater
+
+            // Inflate the dialog's layout - pass null as the parent view because it's going in the dialog layout
             dialogView = inflater.inflate(R.layout.dialog_new_practice_activity, null)
 
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
             builder.setView(dialogView)
                 // Add action buttons
                 .setPositiveButton(R.string.save
                 ) { _, _ ->
 //                    id, String? (practiceActivityType, technicalWorkType, key, bpm, notes), lengthInSeconds: Int?
-                    val id = 23
                     val randomSeconds = 560
 
                     // pass the data captured here to the view model
-                    val newTestPracticeActivity = PracticeActivityModel(id,
+                    val newTestPracticeActivity = PracticeActivityModel(null,
+                        null,
                         practiceWorkTypeSelected,
                         technicalWorkTypeSelected,
                         keySelected,
                         bpmSelected,
                         txtE_enter_notes.text.toString(),
                         randomSeconds)
+
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        viewModel.insertNewPracticeActivity(newTestPracticeActivity)
+                    }
 
                     Log.d(TAG, "New Practice Activity $newTestPracticeActivity sent (hopefully) to the database.")
                     dialog?.cancel()

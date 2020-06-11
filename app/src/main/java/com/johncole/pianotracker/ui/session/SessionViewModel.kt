@@ -2,21 +2,41 @@ package com.johncole.pianotracker.ui.session
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.johncole.pianotracker.models.session.PracticeActivityModel
+import com.johncole.pianotracker.models.session.SessionModel
 import com.johncole.pianotracker.persistence.database.PianoTrackerDatabase
+import kotlinx.coroutines.launch
+import java.time.OffsetDateTime
 
 class SessionViewModel(application: Application) : AndroidViewModel(application) {
-    private val practiceActivityModel: PracticeActivityModel? = null
+    private val isNewSession = true
+    private var sessionId: Int = 0
 
     private val appDatabase: PianoTrackerDatabase by lazy {
-        Room.databaseBuilder(
-        application,
+        Room.databaseBuilder(application,
         PianoTrackerDatabase::class.java,
         "piano-tracker-database").build()
     }
 
-    private fun insertNewPracticeActivity(practiceActivityModel: PracticeActivityModel) {
-        // TODO: Actually insert the data
+    private fun createNewSession(): Int {
+        viewModelScope.launch {
+            val newEntity = SessionModel(null, OffsetDateTime.now(), null)
+            sessionId = appDatabase.sessionDao().createNewSession(newEntity).toInt()
+        }
+
+        return sessionId
+    }
+
+    fun insertNewPracticeActivity(practiceActivityModel: PracticeActivityModel) {
+        if (isNewSession) {
+            createNewSession()
+        }
+        practiceActivityModel.sessionId = sessionId
+
+        viewModelScope.launch {
+            appDatabase.practiceActivityDao().insertNewPracticeActivity(practiceActivityModel)
+        }
     }
 }
