@@ -1,4 +1,4 @@
-package com.johncole.pianotracker.ui.session
+package com.johncole.pianotracker
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.johncole.pianotracker.R
-import com.johncole.pianotracker.ui.dialog.NewPracticeActivityDialogFragment
 
 class SessionFragment : Fragment() {
-    private val viewModel: SessionViewModel by viewModels()
 
     // TODO: If RecyclerView is empty, set isNewSession to true
 
@@ -32,7 +28,8 @@ class SessionFragment : Fragment() {
     }
 
     private fun launchNewPracticeActivityDialog() {
-        val newFragment = NewPracticeActivityDialogFragment()
+        val newFragment =
+            NewPracticeActivityDialogFragment()
         newFragment.show(parentFragmentManager, "new_practice_activity_dialog")
     }
 

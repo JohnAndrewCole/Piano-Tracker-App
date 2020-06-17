@@ -1,4 +1,4 @@
-package com.johncole.pianotracker.ui.stats
+package com.johncole.pianotracker
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.johncole.pianotracker.R
+import com.johncole.pianotracker.viewmodels.StatsViewModel
 
 class StatsFragment : Fragment() {
 

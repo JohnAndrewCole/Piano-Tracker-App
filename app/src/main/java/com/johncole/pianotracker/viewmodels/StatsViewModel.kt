@@ -1,4 +1,4 @@
-package com.johncole.pianotracker.ui.stats
+package com.johncole.pianotracker.viewmodels
 
 import androidx.lifecycle.ViewModel
 

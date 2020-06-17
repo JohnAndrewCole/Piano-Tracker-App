@@ -1,4 +1,4 @@
-package com.johncole.pianotracker.ui.home
+package com.johncole.pianotracker.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

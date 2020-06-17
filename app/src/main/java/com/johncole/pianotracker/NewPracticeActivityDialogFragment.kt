@@ -1,9 +1,8 @@
-package com.johncole.pianotracker.ui.dialog
+package com.johncole.pianotracker
 
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,18 +11,13 @@ import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.johncole.pianotracker.R
-import com.johncole.pianotracker.models.session.PracticeActivityModel
-import com.johncole.pianotracker.ui.session.SessionViewModel
-import kotlinx.android.synthetic.main.dialog_new_practice_activity.*
-import kotlinx.coroutines.launch
-
-
-private const val TAG = "NewPracticeActivityDial"
+import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.viewmodels.SessionViewModel
 
 class NewPracticeActivityDialogFragment : DialogFragment() {
-    private val viewModel:SessionViewModel by viewModels()
+    private val viewModel: SessionViewModel by viewModels {
+        InjectorUtils.provideSessionViewModelFactory(requireActivity())
+    }
 
     // variables for setup of dialog
     private var dialogView: View? = null
@@ -50,30 +44,11 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
 
             builder.setView(dialogView)
                 // Add action buttons
-                .setPositiveButton(R.string.save
-                ) { _, _ ->
-//                    id, String? (practiceActivityType, technicalWorkType, key, bpm, notes), lengthInSeconds: Int?
-                    val randomSeconds = 560
-
-                    // pass the data captured here to the view model
-                    val newTestPracticeActivity = PracticeActivityModel(null,
-                        null,
-                        practiceWorkTypeSelected,
-                        technicalWorkTypeSelected,
-                        keySelected,
-                        bpmSelected,
-                        txtE_enter_notes.text.toString(),
-                        randomSeconds)
-
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        viewModel.insertNewPracticeActivity(newTestPracticeActivity)
-                    }
-
-                    Log.d(TAG, "New Practice Activity $newTestPracticeActivity sent (hopefully) to the database.")
+                .setPositiveButton(R.string.save) { _, _ ->
+                    viewModel.createSession()
                     dialog?.cancel()
                 }
-                .setNegativeButton(R.string.cancel
-                ) { _, _ ->
+                .setNegativeButton(R.string.cancel) { _, _ ->
                     dialog?.cancel()
                 }
             builder.create()

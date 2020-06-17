@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.johncole.pianotracker.ui.home.HomeFragment"
+        android:name="com.johncole.pianotracker.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_session"
-        android:name="com.johncole.pianotracker.ui.session.SessionFragment"
+        android:name="com.johncole.pianotracker.SessionFragment"
         android:label="@string/menu_session"
         tools:layout="@layout/fragment_session" />
 
     <fragment
         android:id="@+id/nav_stats"
-        android:name="com.johncole.pianotracker.ui.stats.StatsFragment"
+        android:name="com.johncole.pianotracker.StatsFragment"
         android:label="@string/menu_stats"
         tools:layout="@layout/fragment_stats" />
 
