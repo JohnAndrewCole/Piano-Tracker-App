@@ -2,6 +2,7 @@ package com.johncole.pianotracker
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.utilities.PRACTICE_ACTIVITY_BUNDLE_KEY
+import com.johncole.pianotracker.utilities.SESSION_FRAGMENT_REQUEST_CODE
 import com.johncole.pianotracker.viewmodels.SessionViewModel
 
 class NewPracticeActivityDialogFragment : DialogFragment() {
+
     private val viewModel: SessionViewModel by viewModels {
         InjectorUtils.provideSessionViewModelFactory(requireActivity())
     }
@@ -46,10 +50,13 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
                 // Add action buttons
                 .setPositiveButton(R.string.save) { _, _ ->
                     viewModel.createSession()
-                    dialog?.cancel()
+                    val intent = Intent()
+                    intent.putExtra(PRACTICE_ACTIVITY_BUNDLE_KEY, true)
+                    targetFragment?.onActivityResult(targetRequestCode, SESSION_FRAGMENT_REQUEST_CODE, intent)
+                    dialog?.dismiss()
                 }
                 .setNegativeButton(R.string.cancel) { _, _ ->
-                    dialog?.cancel()
+                    dialog?.dismiss()
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
