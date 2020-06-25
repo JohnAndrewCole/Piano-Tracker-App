@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.johncole.pianotracker.databinding.FragmentStatsBinding
 import com.johncole.pianotracker.viewmodels.StatsViewModel
 
 class StatsFragment : Fragment() {
@@ -19,12 +20,8 @@ class StatsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_stats, container, false)
-    }
+        val binding = FragmentStatsBinding.inflate(inflater, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
+        return binding.root
     }
-
 }

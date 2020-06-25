@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/sessionListFragment">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.johncole.pianotracker.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/sessionListFragment"
+        android:name="com.johncole.pianotracker.SessionListFragment"
+        android:label="SessionListFragment" >
+        <action
+            android:id="@+id/action_sessionListFragment_to_sessionFragment2"
+            app:destination="@id/sessionFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/nav_session"
+        android:id="@+id/sessionFragment"
         android:name="com.johncole.pianotracker.SessionFragment"
-        android:label="@string/menu_session"
+        android:label="fragment_session"
         tools:layout="@layout/fragment_session" />
-
     <fragment
-        android:id="@+id/nav_stats"
+        android:id="@+id/statsFragment"
         android:name="com.johncole.pianotracker.StatsFragment"
-        android:label="@string/menu_stats"
+        android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" />
-
 </navigation>
