@@ -40,4 +40,11 @@
     <string name="seconds_length">%d seconds</string>
     <string name="no_sessions_yet">You have no sessions yet!</string>
     <string name="add_session">Add Session</string>
+    <string name="date">Date:</string>
+    <string name="session_name">Session Name:</string>
+    <string name="how_long_session">Length of session:</string>
+    <string name="session_goal">Session Goal:</string>
+    <string name="required">REQUIRED</string>
+    <string name="optional">OPTIONAL</string>
+    <string name="save_session">Save Session</string>
 </resources>
