@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_session_list"
+        android:id="@+id/sessionListFragment"
         android:icon="@drawable/ic_session_list_black_24dp"
         android:title="@string/menu_session" />
 
     <item
-        android:id="@+id/navigation_stats"
+        android:id="@+id/statsFragment"
         android:icon="@drawable/ic_stats_black_24dp"
         android:title="@string/menu_stats" />
 
     <item
-        android:id="@+id/navigation_settings"
+        android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/menu_settings" />
 

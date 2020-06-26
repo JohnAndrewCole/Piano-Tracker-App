@@ -10,7 +10,7 @@
         android:name="com.johncole.pianotracker.SessionListFragment"
         android:label="SessionListFragment" >
         <action
-            android:id="@+id/action_sessionListFragment_to_sessionFragment2"
+            android:id="@+id/action_sessionListFragment_to_sessionFragment"
             app:destination="@id/sessionFragment" />
     </fragment>
     <fragment
@@ -23,4 +23,8 @@
         android:name="com.johncole.pianotracker.StatsFragment"
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.johncole.pianotracker.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
