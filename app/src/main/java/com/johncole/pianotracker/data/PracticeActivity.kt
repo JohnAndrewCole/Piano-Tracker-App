@@ -32,7 +32,7 @@ data class PracticeActivity(
     /**
      * Indicates the length of the [PracticeActivity], measured in seconds.
      */
-    @ColumnInfo(name = "length") var length: Int
+    @ColumnInfo(name = "length") var length: Long? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

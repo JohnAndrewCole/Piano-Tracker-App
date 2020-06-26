@@ -19,7 +19,17 @@ data class Session(
     /**
      * Indicates the length of the [Session], measured in seconds.
      */
-    @ColumnInfo(name = "session_length") val sessionLength: Int? = 0
+    @ColumnInfo(name = "session_length") val sessionLength: Long = 0,
+
+    /**
+     * Indicates an optional name given to the [Session] by the user.
+     */
+    @ColumnInfo(name="session_name") val sessionName: String? = null,
+
+    /**
+     * Indicates an optional goal for the [Session]
+     */
+    @ColumnInfo(name="session_goal") val sessionGoal: String? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

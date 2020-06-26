@@ -4,6 +4,7 @@ import android.content.Context
 import com.johncole.pianotracker.data.AppDatabase
 import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.SessionRepository
+import com.johncole.pianotracker.viewmodels.SessionListViewModelFactory
 import com.johncole.pianotracker.viewmodels.SessionViewModelFactory
 
 /**
@@ -23,5 +24,9 @@ object InjectorUtils {
 
     fun provideSessionViewModelFactory(context: Context): SessionViewModelFactory {
         return SessionViewModelFactory(getSessionRepository(context), getPracticeActivityRepository(context))
+    }
+
+    fun provideSessionListViewModelFactory(context: Context) : SessionListViewModelFactory {
+        return SessionListViewModelFactory(getSessionRepository(context))
     }
 }
