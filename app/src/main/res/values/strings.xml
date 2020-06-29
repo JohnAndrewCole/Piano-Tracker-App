@@ -47,4 +47,5 @@
     <string name="required">REQUIRED</string>
     <string name="optional">OPTIONAL</string>
     <string name="save_session">Save Session</string>
+    <string name="time">Time:</string>
 </resources>

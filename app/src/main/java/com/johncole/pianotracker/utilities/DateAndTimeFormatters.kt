@@ -39,3 +39,7 @@ fun convertDurationToFormatted(sessionLength: Long, res: Resources): String {
         }
     }
 }
+
+/**
+ * Convert a date into a string format
+ */

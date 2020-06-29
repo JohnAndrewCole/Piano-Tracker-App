@@ -1,34 +1,29 @@
 package com.johncole.pianotracker.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.johncole.pianotracker.NewPracticeActivityDialogFragment
-import com.johncole.pianotracker.SessionFragment
 import com.johncole.pianotracker.data.PracticeActivityRepository
-import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
-import kotlinx.coroutines.launch
-import java.util.*
 
-/**
- * The ViewModel used in [SessionFragment] and [NewPracticeActivityDialogFragment].
- */
 class SessionViewModel (
 private val sessionRepository: SessionRepository,
 private val practiceActivityRepository: PracticeActivityRepository
 ) : ViewModel() {
 
-    fun createSession() {
-        val newSession = Session(Calendar.getInstance(), 560)
-        viewModelScope.launch {
-            sessionRepository.createNewSession(newSession)
-        }
+    private val _sessionDate = MutableLiveData<String>()
+    val sessionDate: LiveData<String>
+        get() = _sessionDate
+
+    private val _sessionStartTime = MutableLiveData<String>()
+    val sessionStartTime: LiveData<String>
+        get() = _sessionStartTime
+
+    fun setDate(newDate: String) {
+        _sessionDate.value = newDate
     }
 
-//    fun addPracticeActivityToSession(newPracticeActivity: PracticeActivity) {
-//        newPracticeActivity.sessionId = sessionId
-//        viewModelScope.launch {
-//            practiceActivityRepository.createNewPracticeActivity(newPracticeActivity)
-//        }
-//    }
+    fun setStartTime(newTime: String) {
+        _sessionStartTime.value = newTime
+    }
 }

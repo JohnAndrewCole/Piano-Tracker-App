@@ -3,23 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.johncole.pianotracker.viewmodels.SessionViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SessionFragment">
-
-        <Button
-            android:id="@+id/session_start_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:enabled="false"
-            android:text="@string/start_session"
-            android:textSize="@dimen/button_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/session_date_text_view"
@@ -29,21 +23,51 @@
             android:text="@string/date"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/session_date_input"
+            app:layout_constraintBaseline_toBaselineOf="@+id/session_date_edit_text"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/session_date_input"
+            android:id="@+id/session_date_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:autofillHints="@string/optional"
             android:ems="10"
+            android:focusable="false"
             android:hint="@string/required"
             android:inputType="date"
-            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/session_date_text_view"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/session_time_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/time"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/session_time_edit_text"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/session_time_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:autofillHints="@string/optional"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="@string/optional"
+            android:inputType="date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/session_time_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/session_date_edit_text" />
 
         <TextView
             android:id="@+id/session_name_text_view"
@@ -62,29 +86,17 @@
             android:layout_height="52dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:autofillHints="OPTIONAL"
             android:ems="10"
             android:hint="@string/optional"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.382"
             app:layout_constraintStart_toEndOf="@+id/session_name_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/session_date_input" />
-
-        <EditText
-            android:id="@+id/session_time_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:hint="@string/optional"
-            android:inputType="time"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_time_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text" />
 
         <TextView
-            android:id="@+id/session_time_text_view"
+            android:id="@+id/session_length_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -98,6 +110,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/session_name_input" />
 
+        <EditText
+            android:id="@+id/session_length_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:autofillHints="OPTIONAL"
+            android:ems="10"
+            android:hint="@string/optional"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/session_length_text_view" />
+
         <TextView
             android:id="@+id/session_goal_text_view"
             android:layout_width="wrap_content"
@@ -110,7 +137,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_time_input" />
+            app:layout_constraintTop_toBottomOf="@+id/session_length_edit_text" />
 
         <EditText
             android:id="@+id/session_goal_input"
@@ -121,6 +148,7 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="@string/optional"
+            android:autofillHints="@string/optional"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -135,6 +163,18 @@
             android:text="@string/save_session"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/session_start_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:enabled="false"
+            android:text="@string/start_session"
+            android:textSize="@dimen/button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
