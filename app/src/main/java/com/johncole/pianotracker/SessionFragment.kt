@@ -13,6 +13,7 @@ import com.johncole.pianotracker.dialogs.TimePickerFragment
 import com.johncole.pianotracker.utilities.InjectorUtils
 import com.johncole.pianotracker.viewmodels.SessionViewModel
 
+
 class SessionFragment : Fragment() {
 
     private lateinit var binding: FragmentSessionBinding

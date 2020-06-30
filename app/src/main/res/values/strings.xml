@@ -38,14 +38,19 @@
     <string name="minutes_length">%d minutes</string>
     <string name="hours_length">%d hours</string>
     <string name="seconds_length">%d seconds</string>
+
+
     <string name="no_sessions_yet">You have no sessions yet!</string>
     <string name="add_session">Add Session</string>
-    <string name="date">Date:</string>
+    <string name="date_input">Date</string>
     <string name="session_name">Session Name:</string>
     <string name="how_long_session">Length of session:</string>
     <string name="session_goal">Session Goal:</string>
     <string name="required">REQUIRED</string>
     <string name="optional">OPTIONAL</string>
     <string name="save_session">Save Session</string>
-    <string name="time">Time:</string>
+    <string name="time_input">Time</string>
+    <string name="length_input">Length</string>
+    <string name="goal_input">Goal</string>
+    <string name="session_duration_hint">HH:MM</string>
 </resources>

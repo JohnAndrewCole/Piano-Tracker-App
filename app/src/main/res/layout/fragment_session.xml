@@ -15,144 +15,67 @@
         android:layout_height="match_parent"
         tools:context=".SessionFragment">
 
-        <TextView
-            android:id="@+id/session_date_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/date"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/session_date_edit_text"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <EditText
             android:id="@+id/session_date_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:autofillHints="@string/optional"
+            android:autofillHints="@string/date_input"
             android:ems="10"
             android:focusable="false"
-            android:hint="@string/required"
+            android:hint="@string/date_input"
             android:inputType="date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/session_date_text_view"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/session_time_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/time"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/session_time_edit_text"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/session_time_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:autofillHints="@string/optional"
+            android:autofillHints="@string/time_input"
             android:ems="10"
             android:focusable="false"
-            android:hint="@string/optional"
+            android:hint="@string/time_input"
             android:inputType="date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/session_time_text_view"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/session_date_edit_text" />
 
-        <TextView
-            android:id="@+id/session_name_text_view"
+        <com.vicmikhailau.maskededittext.MaskedEditText
+            android:id="@+id/session_duration_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/session_name"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/session_name_input"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/session_name_input"
-            android:layout_width="107dp"
-            android:layout_height="52dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:autofillHints="OPTIONAL"
+            android:hint="@string/session_duration_hint"
+            android:autofillHints="@string/session_duration_hint"
+            android:inputType="time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text"
+            app:mask="##:##" />
+
+        <EditText
+            android:id="@+id/session_goal_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
-            android:hint="@string/optional"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.382"
-            app:layout_constraintStart_toEndOf="@+id/session_name_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text" />
-
-        <TextView
-            android:id="@+id/session_length_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/how_long_session"
-            android:textAlignment="textStart"
-            android:textSize="30sp"
-            android:textStyle="bold"
+            android:hint="@string/goal_input"
+            android:autofillHints="@string/goal_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_name_input" />
-
-        <EditText
-            android:id="@+id/session_length_edit_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:autofillHints="OPTIONAL"
-            android:ems="10"
-            android:hint="@string/optional"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_length_text_view" />
-
-        <TextView
-            android:id="@+id/session_goal_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/session_goal"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_length_edit_text" />
-
-        <EditText
-            android:id="@+id/session_goal_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:hint="@string/optional"
-            android:autofillHints="@string/optional"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_goal_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/session_duration_edit_text" />
 
         <Button
             android:id="@+id/session_save_button"
