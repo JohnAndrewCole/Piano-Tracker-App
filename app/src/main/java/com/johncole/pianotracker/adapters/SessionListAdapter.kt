@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.johncole.pianotracker.R
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.databinding.ListItemSessionBinding
-import com.johncole.pianotracker.utilities.convertDurationToFormatted
 
 class SessionListAdapter : ListAdapter<Session, SessionListAdapter.ViewHolder>(SessionDiffCallback()){
 
@@ -38,8 +37,6 @@ class SessionListAdapter : ListAdapter<Session, SessionListAdapter.ViewHolder>(S
         fun bind(item: Session) {
             val res = itemView.context.resources
             sessionDate.text = item.date.toString()
-            sessionLength.text = convertDurationToFormatted(item.sessionLength, res)
-            sessionName.text = item.sessionName
         }
     }
 

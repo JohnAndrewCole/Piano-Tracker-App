@@ -13,9 +13,6 @@ class SessionListViewModel internal constructor(
     val sessions: LiveData<List<Session>> =
         sessionRepository.getAllSessions()
 
-
-    val newTestItem: Session = Session(Calendar.getInstance(), 560, "Test Session", "To Test Database")
-
     companion object {
         private val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.US)
     }

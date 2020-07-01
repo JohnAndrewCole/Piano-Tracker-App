@@ -9,27 +9,37 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.johncole.pianotracker.utilities.InjectorUtils
 import com.johncole.pianotracker.viewmodels.SessionViewModel
-import java.util.*
+import java.time.LocalTime
+
+/**
+ * See the [DatePickerFragment] for details on this implementation.
+ */
+private const val EXTRA_TIME = "date"
 
 class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
+
+    private lateinit var localTime: LocalTime
 
     private val viewModel: SessionViewModel by activityViewModels {
         InjectorUtils.provideSessionViewModelFactory(requireContext())
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        localTime = arguments?.getSerializable(EXTRA_TIME) as LocalTime? ?: LocalTime.now()
+
         // Use the current time as the default values for the picker
-        val c = Calendar.getInstance()
-        val hour = c.get(Calendar.HOUR_OF_DAY)
-        val minute = c.get(Calendar.MINUTE)
+        val hour = localTime.hour
+        val minute = localTime.minute
 
         // Create a new instance of TimePickerDialog and return it
         return TimePickerDialog(activity, this, hour, minute, DateFormat.is24HourFormat(activity))
     }
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
+
         view.setIs24HourView(true)
-        val newTime = "$hourOfDay:$minute"
-        viewModel.setStartTime(newTime)
+        localTime = LocalTime.of(hourOfDay, minute)
+        viewModel.setStartTime(localTime)
     }
 }

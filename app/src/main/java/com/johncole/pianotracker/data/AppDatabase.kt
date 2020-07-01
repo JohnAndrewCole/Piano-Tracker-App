@@ -10,7 +10,7 @@ import com.johncole.pianotracker.utilities.DATABASE_NAME
 /**
  * The Room database for this app
  */
-@Database(entities = [Session::class, PracticeActivity::class], version = 1, exportSchema = false)
+@Database(entities = [Session::class, PracticeActivity::class], version = 3, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun sessionDao(): SessionDao
@@ -30,7 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
         // Create the database. See this article for more details:
         // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
+            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).fallbackToDestructiveMigration().build()
         }
     }
 }

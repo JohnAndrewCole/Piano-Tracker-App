@@ -11,6 +11,8 @@ import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
 import com.johncole.pianotracker.dialogs.TimePickerFragment
 import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.utilities.convertDateToFormattedString
+import com.johncole.pianotracker.utilities.convertTimeToFormattedString
 import com.johncole.pianotracker.viewmodels.SessionViewModel
 
 
@@ -28,11 +30,11 @@ class SessionFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.sessionDate.observe(viewLifecycleOwner, Observer { newDate ->
-            binding.sessionDateEditText.setText(newDate)
+            binding.sessionDateEditText.setText(convertDateToFormattedString(newDate))
         })
 
-        viewModel.sessionStartTime.observe(viewLifecycleOwner, Observer { newDate ->
-            binding.sessionTimeEditText.setText(newDate)
+        viewModel.sessionStartTime.observe(viewLifecycleOwner, Observer { newTime ->
+            binding.sessionTimeEditText.setText(convertTimeToFormattedString(newTime))
         })
 
         binding.sessionDateEditText.setOnClickListener {
@@ -43,6 +45,12 @@ class SessionFragment : Fragment() {
             TimePickerFragment().show(parentFragmentManager,"timePicker")
         }
 
+        binding.sessionSaveButton.setOnClickListener { onSave() }
+
         return binding.root
+    }
+
+    private fun onSave() {
+        viewModel.storeSession()
     }
 }
