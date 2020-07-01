@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
 import com.johncole.pianotracker.dialogs.TimePickerFragment
@@ -45,12 +46,15 @@ class SessionFragment : Fragment() {
             TimePickerFragment().show(parentFragmentManager,"timePicker")
         }
 
-        binding.sessionSaveButton.setOnClickListener { onSave() }
-
+        binding.sessionSaveButton.setOnClickListener {
+            onSave()
+        }
         return binding.root
     }
 
     private fun onSave() {
         viewModel.storeSession()
+        // TODO: Validate that the session was successfully saved before navigating back to SessionListViewModel
+        view?.findNavController()?.navigate(R.id.action_sessionFragment_to_sessionListFragment)
     }
 }

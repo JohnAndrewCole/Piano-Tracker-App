@@ -54,7 +54,6 @@ dependencies {
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    implementation "com.vicmikhailau:MaskedEditText:$maskedEditTextVersion"
 
     // Testing dependencies
     testImplementation "junit:junit:$junitVersion"

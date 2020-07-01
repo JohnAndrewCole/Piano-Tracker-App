@@ -47,21 +47,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/session_date_edit_text" />
 
-        <com.vicmikhailau.maskededittext.MaskedEditText
-            android:id="@+id/session_duration_edit_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/session_duration_hint"
-            android:autofillHints="@string/session_duration_hint"
-            android:inputType="time"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text"
-            app:mask="##:##" />
-
         <EditText
             android:id="@+id/session_goal_edit_text"
             android:layout_width="wrap_content"
@@ -69,13 +54,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/goal_input"
             android:autofillHints="@string/goal_input"
+            android:ems="10"
+            android:hint="@string/goal_input"
+            android:inputType="textPersonName"
+            android:text="@={viewModel.sessionGoal}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_duration_edit_text" />
+            app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text" />
 
         <Button
             android:id="@+id/session_save_button"

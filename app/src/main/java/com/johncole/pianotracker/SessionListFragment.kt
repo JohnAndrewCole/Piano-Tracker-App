@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.johncole.pianotracker.adapters.SessionListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionListBinding
@@ -38,9 +37,9 @@ class SessionListFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: SessionListAdapter, binding: FragmentSessionListBinding) {
-        viewModel.sessions.observe(viewLifecycleOwner) { result ->
-            binding.hasSessions = !result.isNullOrEmpty()
-            adapter.submitList(result)
-        }
+//        viewModel.sessions.observe(viewLifecycleOwner) { result ->
+//            binding.hasSessions = !result.isNullOrEmpty()
+//            adapter.submitList(result)
+//        }
     }
 }

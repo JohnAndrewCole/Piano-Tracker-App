@@ -9,7 +9,7 @@ import java.time.LocalTime
 
 @Entity(
     tableName = "session",
-    indices = [Index("session_date"), Index ("session_length")]
+    indices = [Index("session_date")]
 )
 data class Session(
     /**
@@ -21,11 +21,6 @@ data class Session(
      * Sets the starting time of the [Session].
      */
     @ColumnInfo(name = "session_start_time") val startTime: LocalTime? = LocalTime.now(),
-
-    /**
-     * Indicates the length of the [Session], measured in seconds.
-     */
-    @ColumnInfo(name = "session_length") val sessionLength: Long = 0,
 
     /**
      * Indicates an optional goal for the [Session]

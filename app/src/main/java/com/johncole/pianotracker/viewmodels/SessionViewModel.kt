@@ -4,8 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.johncole.pianotracker.data.PracticeActivityRepository
+import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -22,6 +25,8 @@ private val practiceActivityRepository: PracticeActivityRepository
     val sessionStartTime: LiveData<LocalTime>
         get() = _sessionStartTime
 
+    var sessionGoal = MutableLiveData<String>()
+
     fun setDate(date: LocalDate) {
         _sessionDate.value = date
     }
@@ -31,13 +36,13 @@ private val practiceActivityRepository: PracticeActivityRepository
     }
 
     fun storeSession() {
-//        val goal = "The fox jumped"
-//        val length = 2490L
-//        val session = Session(_sessionDate.value, _sessionStartTime.value, length, goal)
-//        viewModelScope.launch {
-//            val id = sessionRepository.createNewSession(session)
-//            Log.i("SessionViewModel", "Shit has been saved brosef. ID is $id")
-//        }
-        Log.i("SessionViewModel", "Fix this shit brosef")
+
+        // Why tf this isn't accepting sessionLength.value????
+        val session = Session(sessionDate.value, sessionStartTime.value, sessionGoal.value)
+
+        viewModelScope.launch {
+            val id = sessionRepository.createNewSession(session)
+            Log.i("SessionViewModel", "Shit has been saved brosef. ID is $id")
+        }
     }
 }

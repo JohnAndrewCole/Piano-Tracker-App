@@ -25,7 +25,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun timeToTimestamp(time: LocalTime): Long? {
-        return time.toSecondOfDay().toLong()
+    fun timeToTimestamp(startTime: LocalTime): Long? {
+        return startTime.toSecondOfDay().toLong()
     }
 }

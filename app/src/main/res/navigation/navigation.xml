@@ -11,13 +11,19 @@
         android:label="SessionListFragment" >
         <action
             android:id="@+id/action_sessionListFragment_to_sessionFragment"
-            app:destination="@id/sessionFragment" />
+            app:destination="@id/sessionFragment"
+            app:enterAnim="@anim/fragment_fade_enter" />
     </fragment>
     <fragment
         android:id="@+id/sessionFragment"
         android:name="com.johncole.pianotracker.SessionFragment"
         android:label="fragment_session"
-        tools:layout="@layout/fragment_session" />
+        tools:layout="@layout/fragment_session" >
+        <action
+            android:id="@+id/action_sessionFragment_to_sessionListFragment"
+            app:destination="@id/sessionListFragment"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
     <fragment
         android:id="@+id/statsFragment"
         android:name="com.johncole.pianotracker.StatsFragment"
