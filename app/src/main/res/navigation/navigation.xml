@@ -22,7 +22,9 @@
         <action
             android:id="@+id/action_sessionFragment_to_sessionListFragment"
             app:destination="@id/sessionListFragment"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/sessionListFragment"
+            app:popUpToInclusive="false" />
         <argument
             android:name="isViewingSession"
             app:argType="boolean"

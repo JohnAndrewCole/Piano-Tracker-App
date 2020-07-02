@@ -29,8 +29,9 @@ class SessionListFragment : Fragment() {
         val adapter = SessionListAdapter()
         binding.sessionListRecyclerView.adapter = adapter
 
-        binding.fabNewSession.setOnClickListener {view : View ->
-            view.findNavController().navigate(R.id.action_sessionListFragment_to_sessionFragment)
+        binding.fabNewSession.setOnClickListener { view ->
+            view.findNavController()
+                .navigate(SessionListFragmentDirections.actionSessionListFragmentToSessionFragment(false, -1))
         }
 
         subscribeUi(adapter, binding)

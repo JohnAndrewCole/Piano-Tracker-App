@@ -19,14 +19,19 @@ import com.johncole.pianotracker.viewmodels.SessionViewModel
 
 class SessionFragment : Fragment() {
 
-    private lateinit var binding: FragmentSessionBinding
+    private var _binding: FragmentSessionBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
 
     private val viewModel: SessionViewModel by activityViewModels {
         InjectorUtils.provideSessionViewModelFactory(requireContext())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentSessionBinding.inflate(inflater, container, false)
+        _binding = FragmentSessionBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this;
 
         binding.viewModel = viewModel
 
@@ -36,6 +41,10 @@ class SessionFragment : Fragment() {
 
         viewModel.sessionStartTime.observe(viewLifecycleOwner, Observer { newTime ->
             binding.sessionTimeEditText.setText(convertTimeToFormattedString(newTime))
+        })
+
+        viewModel.sessionGoal.observe(viewLifecycleOwner, Observer { goal ->
+            viewModel.setSessionGoal(goal)
         })
 
         // TODO: Add ability to save duration
@@ -58,6 +67,12 @@ class SessionFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.viewModelStore?.clear();
+        _binding = null
     }
 
     private fun onSave() {

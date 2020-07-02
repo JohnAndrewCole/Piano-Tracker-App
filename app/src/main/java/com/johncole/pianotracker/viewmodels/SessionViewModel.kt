@@ -1,6 +1,5 @@
 package com.johncole.pianotracker.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,7 +24,16 @@ private val practiceActivityRepository: PracticeActivityRepository
     val sessionStartTime: LiveData<LocalTime>
         get() = _sessionStartTime
 
-    var sessionGoal = MutableLiveData<String>()
+    private val _sessionGoal = MutableLiveData<String>()
+    val sessionGoal: MutableLiveData<String>
+        get() = _sessionGoal
+
+    fun setSessionGoal(goal: String) {
+        if (goal != sessionGoal.value) {
+            _sessionGoal.value = goal
+        }
+        return
+    }
 
     fun setDate(date: LocalDate) {
         _sessionDate.value = date
@@ -40,7 +48,7 @@ private val practiceActivityRepository: PracticeActivityRepository
             val session = sessionRepository.getSessionById(sessionId)
             _sessionDate.value = LocalDate.parse(session.date)
             _sessionStartTime.value = LocalTime.parse(session.startTime)
-            sessionGoal.value = session.sessionGoal
+            _sessionGoal.value = session.sessionGoal
         }
     }
 
@@ -50,7 +58,10 @@ private val practiceActivityRepository: PracticeActivityRepository
 
         viewModelScope.launch {
             val id = sessionRepository.createNewSession(session)
-            Log.i("SessionViewModel", "Shit has been saved brosef. ID is $id")
         }
+    }
+
+    fun clearBindings() {
+        _sessionGoal.value = ""
     }
 }
