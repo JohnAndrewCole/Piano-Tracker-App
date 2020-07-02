@@ -23,7 +23,12 @@ data class Session(
     /**
      * Indicates an optional goal for the [Session]
      */
-    @ColumnInfo(name="session_goal") val sessionGoal: String? = null
+    @ColumnInfo(name = "session_goal") val sessionGoal: String? = null,
+
+    /**
+     * The duration of a session, measured in seconds
+     */
+    @ColumnInfo(name = "session_duration") val sessionDuration: Long? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

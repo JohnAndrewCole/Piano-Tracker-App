@@ -31,7 +31,7 @@ class SessionFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSessionBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this;
+        binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
 
@@ -47,7 +47,15 @@ class SessionFragment : Fragment() {
             viewModel.setSessionGoal(goal)
         })
 
-        // TODO: Add ability to save duration
+        binding.sessionHourPicker.let {
+            it.minValue = 0
+            it.maxValue = 24
+        }
+
+        binding.sessionMinutePicker.let {
+            it.minValue = 0
+            it.maxValue = 59
+        }
 
         binding.sessionDateEditText.setOnClickListener {
             DatePickerFragment().show(parentFragmentManager,"datePicker")
@@ -58,7 +66,9 @@ class SessionFragment : Fragment() {
         }
 
         binding.sessionSaveButton.setOnClickListener {
-            onSave()
+            viewModel.storeSession()
+            // TODO: Validate that the session was successfully saved before navigating back to SessionListViewModel
+            view?.findNavController()?.navigate(R.id.action_sessionFragment_to_sessionListFragment)
         }
 
         val args = SessionFragmentArgs.fromBundle(requireArguments())
@@ -71,13 +81,7 @@ class SessionFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        activity?.viewModelStore?.clear();
+        activity?.viewModelStore?.clear()
         _binding = null
-    }
-
-    private fun onSave() {
-        viewModel.storeSession()
-        // TODO: Validate that the session was successfully saved before navigating back to SessionListViewModel
-        view?.findNavController()?.navigate(R.id.action_sessionFragment_to_sessionListFragment)
     }
 }

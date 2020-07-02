@@ -11,9 +11,9 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
 
-class SessionViewModel (
-private val sessionRepository: SessionRepository,
-private val practiceActivityRepository: PracticeActivityRepository
+class SessionViewModel(
+    private val sessionRepository: SessionRepository,
+    private val practiceActivityRepository: PracticeActivityRepository
 ) : ViewModel() {
 
     private val _sessionDate = MutableLiveData<LocalDate>()
@@ -54,10 +54,14 @@ private val practiceActivityRepository: PracticeActivityRepository
 
     fun storeSession() {
 
-        val session = Session(sessionDate.value.toString(), sessionStartTime.value.toString(), sessionGoal.value)
+        val session = Session(
+            sessionDate.value.toString(),
+            sessionStartTime.value.toString(),
+            sessionGoal.value
+        )
 
         viewModelScope.launch {
-            val id = sessionRepository.createNewSession(session)
+            sessionRepository.createNewSession(session)
         }
     }
 

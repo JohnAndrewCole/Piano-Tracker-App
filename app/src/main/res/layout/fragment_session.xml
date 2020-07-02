@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.SessionViewModel" />
@@ -85,39 +86,40 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-<!--        <EditText-->
-<!--            android:id="@+id/session_hour_duration_edit_text"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="number"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/guideline"-->
-<!--            app:layout_constraintHorizontal_bias="0.682"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/session_minute_duration_edit_text"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="number"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/guideline"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />-->
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <NumberPicker
+            android:id="@+id/session_hour_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />
+
+        <NumberPicker
+            android:id="@+id/session_minute_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />
+
+        <TextView
+            android:id="@+id/duration_colon"
+            android:layout_width="9dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="80dp"
+            android:text="@string/duration_colon"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/session_minute_picker" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
