@@ -23,6 +23,13 @@
             android:id="@+id/action_sessionFragment_to_sessionListFragment"
             app:destination="@id/sessionListFragment"
             app:exitAnim="@anim/fragment_fade_exit" />
+        <argument
+            android:name="isViewingSession"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="sessionId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"

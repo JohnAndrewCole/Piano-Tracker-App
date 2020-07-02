@@ -35,6 +35,15 @@ private val practiceActivityRepository: PracticeActivityRepository
         _sessionStartTime.value = newTime
     }
 
+    fun getSessionById(sessionId: Long) {
+        viewModelScope.launch {
+            val session = sessionRepository.getSessionById(sessionId)
+            _sessionDate.value = LocalDate.parse(session.date)
+            _sessionStartTime.value = LocalTime.parse(session.startTime)
+            sessionGoal.value = session.sessionGoal
+        }
+    }
+
     fun storeSession() {
 
         val session = Session(sessionDate.value.toString(), sessionStartTime.value.toString(), sessionGoal.value)

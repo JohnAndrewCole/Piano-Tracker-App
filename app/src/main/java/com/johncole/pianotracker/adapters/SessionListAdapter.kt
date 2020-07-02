@@ -1,12 +1,15 @@
 package com.johncole.pianotracker.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.johncole.pianotracker.R
+import com.johncole.pianotracker.SessionListFragmentDirections
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.databinding.ListItemSessionBinding
 
@@ -14,19 +17,21 @@ class SessionListAdapter : ListAdapter<Session, SessionListAdapter.ViewHolder>(S
 
     class ViewHolder(private val binding: ListItemSessionBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        //TODO: Implement navigation
-//        init {
-//            binding.setClickListener { view ->
-//                binding.viewModel?.sessionId?.let { sessionId ->
-//                    navigateToSession(sessionId, view)
-//                }
-//            }
-//        }
-//
-//        private fun navigateToSession(sessionId: Long, view: View) {
-//            val direction = NavHostFragment.(plantId)
-//            view.findNavController().navigate(direction)
-//        }
+        init {
+            binding.setClickListener {
+                binding.session?.let { session ->
+                    navigationToSession(session, it)
+                }
+            }
+        }
+
+        private fun navigationToSession(
+            session: Session,
+            view: View
+        ) {
+            view.findNavController()
+                .navigate(SessionListFragmentDirections.actionSessionListFragmentToSessionFragment(true, session.sessionId))
+        }
 
         fun bind(item: Session) {
             binding.session = item

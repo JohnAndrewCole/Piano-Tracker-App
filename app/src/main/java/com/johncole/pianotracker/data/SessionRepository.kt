@@ -4,6 +4,10 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
 
     fun getAllSessions() = sessionDao.getAllSessions()
 
+    suspend fun getSessionById(sessionId: Long): Session {
+        return sessionDao.getSessionById(sessionId)
+    }
+
     suspend fun createNewSession(session: Session): Long {
         return sessionDao.createNewSession(session)
     }

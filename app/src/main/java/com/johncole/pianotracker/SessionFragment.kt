@@ -51,6 +51,12 @@ class SessionFragment : Fragment() {
         binding.sessionSaveButton.setOnClickListener {
             onSave()
         }
+
+        val args = SessionFragmentArgs.fromBundle(requireArguments())
+        if (args.isViewingSession) {
+            viewModel.getSessionById(args.sessionId)
+        }
+
         return binding.root
     }
 
