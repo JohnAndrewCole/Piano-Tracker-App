@@ -2,7 +2,7 @@ package com.johncole.pianotracker.data
 
 class SessionRepository private constructor(private val sessionDao: SessionDao) {
 
-//    fun getAllSessions() = sessionDao.getAllSessions()
+    fun getAllSessions() = sessionDao.getAllSessions()
 
     suspend fun createNewSession(session: Session): Long {
         return sessionDao.createNewSession(session)

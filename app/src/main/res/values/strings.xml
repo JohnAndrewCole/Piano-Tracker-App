@@ -53,4 +53,5 @@
     <string name="length_input">Length</string>
     <string name="goal_input">Goal</string>
     <string name="session_duration_hint">HH:MM</string>
+    <string name="duration">Duration:</string>
 </resources>

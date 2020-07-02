@@ -2,7 +2,6 @@ package com.johncole.pianotracker.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,10 +13,6 @@ import com.johncole.pianotracker.databinding.ListItemSessionBinding
 class SessionListAdapter : ListAdapter<Session, SessionListAdapter.ViewHolder>(SessionDiffCallback()){
 
     class ViewHolder(private val binding: ListItemSessionBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        private val sessionDate: TextView = binding.sessionDateTextView
-        private val sessionLength: TextView = binding.sessionLengthTextView
-        private val sessionName: TextView = binding.sessionNameTextView
 
         //TODO: Implement navigation
 //        init {
@@ -33,10 +28,9 @@ class SessionListAdapter : ListAdapter<Session, SessionListAdapter.ViewHolder>(S
 //            view.findNavController().navigate(direction)
 //        }
 
-        //TODO: Use converters for these
         fun bind(item: Session) {
-            val res = itemView.context.resources
-            sessionDate.text = item.date.toString()
+            binding.session = item
+            binding.executePendingBindings()
         }
     }
 

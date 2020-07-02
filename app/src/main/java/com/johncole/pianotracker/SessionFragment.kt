@@ -38,6 +38,8 @@ class SessionFragment : Fragment() {
             binding.sessionTimeEditText.setText(convertTimeToFormattedString(newTime))
         })
 
+        // TODO: Add ability to save duration
+
         binding.sessionDateEditText.setOnClickListener {
             DatePickerFragment().show(parentFragmentManager,"datePicker")
         }

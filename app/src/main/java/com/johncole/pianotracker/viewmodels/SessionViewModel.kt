@@ -37,8 +37,7 @@ private val practiceActivityRepository: PracticeActivityRepository
 
     fun storeSession() {
 
-        // Why tf this isn't accepting sessionLength.value????
-        val session = Session(sessionDate.value, sessionStartTime.value, sessionGoal.value)
+        val session = Session(sessionDate.value.toString(), sessionStartTime.value.toString(), sessionGoal.value)
 
         viewModelScope.launch {
             val id = sessionRepository.createNewSession(session)

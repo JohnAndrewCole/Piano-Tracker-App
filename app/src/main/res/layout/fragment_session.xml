@@ -85,5 +85,39 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+<!--        <EditText-->
+<!--            android:id="@+id/session_hour_duration_edit_text"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="number"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/guideline"-->
+<!--            app:layout_constraintHorizontal_bias="0.682"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/session_minute_duration_edit_text"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="number"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/guideline"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />-->
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

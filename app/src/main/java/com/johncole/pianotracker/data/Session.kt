@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.time.LocalDate
-import java.time.LocalTime
 
 @Entity(
     tableName = "session",
@@ -15,12 +13,12 @@ data class Session(
     /**
      * Sets the date of the [Session].
      */
-    @ColumnInfo(name = "session_date") val date: LocalDate? = LocalDate.now(),
+    @ColumnInfo(name = "session_date") val date: String? = null,
 
     /**
      * Sets the starting time of the [Session].
      */
-    @ColumnInfo(name = "session_start_time") val startTime: LocalTime? = LocalTime.now(),
+    @ColumnInfo(name = "session_start_time") val startTime: String? = null,
 
     /**
      * Indicates an optional goal for the [Session]

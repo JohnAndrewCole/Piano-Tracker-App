@@ -7,9 +7,15 @@
         <variable
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.SessionListViewModel" />
+
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="session"
+            type="com.johncole.pianotracker.data.Session" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,26 +33,29 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:sessionDateString="@{session}"
             tools:text="20th June 2020" />
 
         <TextView
-            android:id="@+id/session_length_text_view"
+            android:id="@+id/session_start_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/session_date_text_view"
             app:layout_constraintTop_toBottomOf="@+id/session_date_text_view"
+            app:sessionTimeString="@{session}"
             tools:text="01:28:30" />
 
         <TextView
-            android:id="@+id/session_name_text_view"
+            android:id="@+id/session_goal_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/session_length_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/session_length_text_view"
+            app:sessionGoalString="@{session}"
+            app:layout_constraintStart_toStartOf="@+id/session_start_time_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/session_start_time_text_view"
             tools:text="Practiced chords, pedaling and lea..." />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

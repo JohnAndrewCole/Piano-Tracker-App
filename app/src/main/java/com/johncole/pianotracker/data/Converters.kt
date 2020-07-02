@@ -3,29 +3,28 @@ package com.johncole.pianotracker.data
 import androidx.room.TypeConverter
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.ZoneId
 
 /**
  * Type converters to allow Room to reference complex data types.
  */
 class Converters {
     @TypeConverter
-    fun dateFromTimestamp(value: Long?): LocalDate? {
-        return value?.let { LocalDate.ofEpochDay(it) }
+    fun dateFromTimestamp(value: String?): LocalDate? {
+        return LocalDate.parse(value)
     }
 
     @TypeConverter
-    fun timeFromTimestamp(value: Long?): LocalTime? {
-        return value?.let { LocalTime.ofSecondOfDay(it) }
+    fun timeFromTimestamp(value: String?): LocalTime? {
+        return LocalTime.parse(value)
     }
 
     @TypeConverter
-    fun dateToTimestamp(date: LocalDate?): Long? {
-        return date?.atStartOfDay(ZoneId.systemDefault())?.toInstant()?.toEpochMilli()
+    fun dateToTimestamp(date: LocalDate?): String? {
+        return date.toString()
     }
 
     @TypeConverter
-    fun timeToTimestamp(startTime: LocalTime): Long? {
-        return startTime.toSecondOfDay().toLong()
+    fun timeToTimestamp(startTime: LocalTime): String? {
+        return startTime.toString()
     }
 }
