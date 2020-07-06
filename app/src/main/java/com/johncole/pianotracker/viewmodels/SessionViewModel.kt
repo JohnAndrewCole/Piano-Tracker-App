@@ -73,7 +73,6 @@ class SessionViewModel(
     }
 
     fun storeSession() {
-
         val session = Session(
             sessionDate.value.toString(),
             sessionStartTime.value.toString(),
@@ -84,9 +83,5 @@ class SessionViewModel(
         viewModelScope.launch {
             sessionRepository.createNewSession(session)
         }
-    }
-
-    fun clearBindings() {
-        _sessionGoal.value = ""
     }
 }

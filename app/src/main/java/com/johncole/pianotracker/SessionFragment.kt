@@ -82,7 +82,6 @@ class SessionFragment : Fragment() {
 
         binding.sessionSaveButton.setOnClickListener {
             viewModel.storeSession()
-            // TODO: Validate that the session was successfully saved before navigating back to SessionListViewModel
             view?.findNavController()?.navigate(R.id.action_sessionFragment_to_sessionListFragment)
         }
 
