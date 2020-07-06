@@ -12,6 +12,10 @@
         <variable
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.SessionViewModel" />
+
+        <variable
+            name="hasPracticeActivities"
+            type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -125,6 +129,38 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/empty_practice_activity_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="@string/no_practice_activities"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="18sp"
+            app:isGone="@{hasPracticeActivities}"
+            app:layout_constraintBottom_toBottomOf="@+id/practice_activity_list"
+            app:layout_constraintEnd_toEndOf="@+id/practice_activity_list"
+            app:layout_constraintStart_toStartOf="@+id/practice_activity_list"
+            app:layout_constraintTop_toTopOf="@+id/practice_activity_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/practice_activity_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/session_save_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/duration_colon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

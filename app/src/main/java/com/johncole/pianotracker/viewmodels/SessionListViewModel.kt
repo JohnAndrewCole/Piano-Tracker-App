@@ -10,4 +10,5 @@ class SessionListViewModel internal constructor(
 ) : ViewModel() {
     val sessions: LiveData<List<Session>> =
         sessionRepository.getAllSessions()
+
 }

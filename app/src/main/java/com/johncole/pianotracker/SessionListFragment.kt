@@ -29,19 +29,21 @@ class SessionListFragment : Fragment() {
         val adapter = SessionListAdapter()
         binding.sessionListRecyclerView.adapter = adapter
 
-        binding.fabNewSession.setOnClickListener { view ->
-            view.findNavController()
-                .navigate(SessionListFragmentDirections.actionSessionListFragmentToSessionFragment(false, -1))
-        }
-
-        subscribeUi(adapter, binding)
-        return binding.root
-    }
-
-    private fun subscribeUi(adapter: SessionListAdapter, binding: FragmentSessionListBinding) {
         viewModel.sessions.observe(viewLifecycleOwner) { result ->
             binding.hasSessions = !result.isNullOrEmpty()
             adapter.submitList(result)
         }
+
+        binding.fabNewSession.setOnClickListener { view ->
+            view.findNavController()
+                .navigate(
+                    SessionListFragmentDirections.actionSessionListFragmentToSessionFragment(
+                        false,
+                        -1
+                    )
+                )
+        }
+
+        return binding.root
     }
 }

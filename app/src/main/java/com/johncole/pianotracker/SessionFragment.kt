@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.findNavController
+import com.johncole.pianotracker.adapters.PracticeActivityListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
 import com.johncole.pianotracker.dialogs.TimePickerFragment
@@ -16,7 +18,6 @@ import com.johncole.pianotracker.utilities.convertDateToFormattedString
 import com.johncole.pianotracker.utilities.convertTimeToFormattedString
 import com.johncole.pianotracker.viewmodels.SessionViewModel
 
-
 class SessionFragment : Fragment() {
 
     private var _binding: FragmentSessionBinding? = null
@@ -24,7 +25,6 @@ class SessionFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
 
     private val viewModel: SessionViewModel by activityViewModels {
         InjectorUtils.provideSessionViewModelFactory(requireContext())
@@ -38,6 +38,21 @@ class SessionFragment : Fragment() {
         _binding = FragmentSessionBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        val adapter = PracticeActivityListAdapter()
+        binding.practiceActivityList.adapter = adapter
+
+        val args = SessionFragmentArgs.fromBundle(requireArguments())
+        if (args.isViewingSession) {
+            viewModel.getSessionById(args.sessionId)
+            viewModel.getPracticeActivities(args.sessionId)
+        }
+
+        //region LiveData Observers
+
+        viewModel.practiceActivities.observe(viewLifecycleOwner) { result ->
+            binding.hasPracticeActivities = !result.isNullOrEmpty()
+            adapter.submitList(result)
+        }
 
         viewModel.sessionDate.observe(viewLifecycleOwner, Observer { newDate ->
             binding.sessionDateEditText.setText(convertDateToFormattedString(newDate))
@@ -48,12 +63,29 @@ class SessionFragment : Fragment() {
             binding.sessionTimeEditText.setText(convertTimeToFormattedString(newTime))
         })
 
+        viewModel.sessionHours.observe(viewLifecycleOwner, Observer { hours ->
+            binding.sessionHourPicker.value = hours
+        })
+
+        viewModel.sessionMinutes.observe(viewLifecycleOwner, Observer { minutes ->
+            binding.sessionMinutePicker.value = minutes
+        })
+
+        //endregion
+
+        //region Bindings
+
         binding.sessionDateEditText.setOnClickListener {
             DatePickerFragment().show(parentFragmentManager, "datePicker")
         }
 
         binding.sessionTimeEditText.setOnClickListener {
             TimePickerFragment().show(parentFragmentManager, "timePicker")
+        }
+
+        binding.emptyPracticeActivityList.setOnClickListener {
+            view?.findNavController()
+                ?.navigate(R.id.action_sessionFragment_to_newPracticeActivityDialogFragment)
         }
 
         binding.sessionHourPicker.let {
@@ -64,10 +96,6 @@ class SessionFragment : Fragment() {
             }
         }
 
-        viewModel.sessionHours.observe(viewLifecycleOwner, Observer { hours ->
-            binding.sessionHourPicker.value = hours
-        })
-
         binding.sessionMinutePicker.let {
             it.minValue = 0
             it.maxValue = 59
@@ -76,19 +104,12 @@ class SessionFragment : Fragment() {
             }
         }
 
-        viewModel.sessionMinutes.observe(viewLifecycleOwner, Observer { minutes ->
-            binding.sessionMinutePicker.value = minutes
-        })
-
         binding.sessionSaveButton.setOnClickListener {
             viewModel.storeSession()
             view?.findNavController()?.navigate(R.id.action_sessionFragment_to_sessionListFragment)
         }
 
-        val args = SessionFragmentArgs.fromBundle(requireArguments())
-        if (args.isViewingSession) {
-            viewModel.getSessionById(args.sessionId)
-        }
+        //endregion
 
         return binding.root
     }

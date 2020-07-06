@@ -32,6 +32,11 @@
         <argument
             android:name="sessionId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_sessionFragment_to_newPracticeActivityDialogFragment"
+            app:destination="@id/newPracticeActivityDialogFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
@@ -42,4 +47,19 @@
         android:id="@+id/settingsFragment"
         android:name="com.johncole.pianotracker.SettingsFragment"
         android:label="SettingsFragment" />
+    <dialog
+        android:id="@+id/newPracticeActivityDialogFragment"
+        android:name="com.johncole.pianotracker.dialogs.NewPracticeActivityDialogFragment"
+        android:label="NewPracticeActivityDialogFragment" >
+        <argument
+            android:name="isViewingPracticeActivity"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_newPracticeActivityDialogFragment_to_sessionFragment"
+            app:destination="@id/sessionFragment" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+    </dialog>
 </navigation>

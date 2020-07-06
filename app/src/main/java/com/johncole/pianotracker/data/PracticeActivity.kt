@@ -1,6 +1,9 @@
 package com.johncole.pianotracker.data
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
 /**
  * [PracticeActivity] represents a single defined part of a practice session. It includes
@@ -12,27 +15,57 @@ import androidx.room.*
  */
 @Entity(
     tableName = "practice_activity",
-    foreignKeys = [ForeignKey(entity = Session::class, parentColumns = ["id"], childColumns = ["session_id"])
-    ],
     indices = [Index("session_id")]
 )
 data class PracticeActivity(
-    @ColumnInfo(name = "session_id") var sessionId: Long,
-
-    @ColumnInfo(name = "practice_activity_type") var practiceActivityType: String,
-
-    @ColumnInfo(name = "technical_work_type") var technicalWorkType: String?,
-
-    @ColumnInfo(name = "key") var key: String?,
-
-    @ColumnInfo(name = "bpm") var bpm: String?,
-
-    @ColumnInfo(name = "notes") var notes: String?,
+    /**
+     * Sets the session ID of the [PracticeActivity].
+     * This is a REQUIRED field.
+     */
+    @ColumnInfo(name = "session_id") var sessionId: String,
 
     /**
-     * Indicates the length of the [PracticeActivity], measured in seconds.
+     * Sets the type of [PracticeActivity], i.e. Technical Work, Improvisation, etc.
+     * This is a REQUIRED field.
      */
-    @ColumnInfo(name = "length") var length: Long? = null
+    @ColumnInfo(name = "practice_activity_type") var practiceActivityType: String,
+
+    /**
+     * Describes the type of technical work done. This is only required when the
+     * practice activity type is set to "Technical Work". Otherwise, it will be
+     * null.
+     * When the [practiceActivityType] is set to "Technical Work", this is a REQUIRED
+     * type. Otherwise, this field will be set to NULL.
+     */
+    @ColumnInfo(name = "technical_work_type") var technicalWorkType: String? = null,
+
+    /**
+     * Describes the key of the [PracticeActivity]. A user will not always be
+     * practicing with a certain key in mind and, as such, this is a nullable field.
+     * This is an OPTIONAL field.
+     */
+    @ColumnInfo(name = "key") var key: String? = null,
+
+    /**
+     * The BPM of the [PracticeActivity]. This is nullable for the same reasoning
+     * as making the [key] field nullable.
+     * This is an OPTIONAL field.
+     */
+    @ColumnInfo(name = "bpm") var bpm: String? = null,
+
+    /**
+     * Stores any notes that the user records to describe the [PracticeActivity].
+     * This is an OPTIONAL field.
+     */
+    @ColumnInfo(name = "notes") var notes: String? = null,
+
+    /**
+     * Indicates the length of the [PracticeActivity], measured in seconds. This
+     * is nullable at first, and will only be set when the user begins timing
+     * a [Session].
+     * This is an OPTIONAL field.
+     */
+    @ColumnInfo(name = "length") var length: String? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

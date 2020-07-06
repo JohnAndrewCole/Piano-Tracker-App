@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.johncole.pianotracker.data.PracticeActivity
 import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
@@ -18,6 +19,14 @@ class SessionViewModel(
     private val sessionRepository: SessionRepository,
     private val practiceActivityRepository: PracticeActivityRepository
 ) : ViewModel() {
+
+    //region Properties
+
+    //region LiveData Properties
+
+    private val _practiceActivities = MutableLiveData<List<PracticeActivity>>()
+    val practiceActivities: LiveData<List<PracticeActivity>>
+        get() = _practiceActivities
 
     private val _sessionDate = MutableLiveData<LocalDate>()
     val sessionDate: LiveData<LocalDate>
@@ -39,6 +48,14 @@ class SessionViewModel(
     val sessionMinutes: MutableLiveData<Int>
         get() = _sessionMinutes
 
+    //endregion
+
+    //endregion
+
+    //region Functions
+
+    //region Property-setting Functions
+
     fun setSessionHours(newHours: Int) {
         if (newHours != sessionHours.value) {
             _sessionHours.value = newHours
@@ -57,6 +74,20 @@ class SessionViewModel(
 
     fun setStartTime(newTime: LocalTime) {
         _sessionStartTime.value = newTime
+    }
+
+    //endregion
+
+    //region Database Functions
+
+    fun getPracticeActivities(sessionId: Long) {
+        if (sessionId >= 0) {
+            viewModelScope.launch {
+                _practiceActivities.value =
+                    practiceActivityRepository.getPracticeActivitiesBySessionId(sessionId).value
+            }
+        }
+        return
     }
 
     fun getSessionById(sessionId: Long) {
@@ -84,4 +115,8 @@ class SessionViewModel(
             sessionRepository.createNewSession(session)
         }
     }
+
+    //endregion
+
+    //endregion
 }

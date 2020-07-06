@@ -41,6 +41,7 @@
 
 
     <string name="no_sessions_yet">You have no sessions yet!</string>
+    <string name="no_practice_activities">No practice activities added. Click here to add more.</string>
     <string name="add_session">Add Session</string>
     <string name="date_input">Date</string>
     <string name="session_name">Session Name:</string>
