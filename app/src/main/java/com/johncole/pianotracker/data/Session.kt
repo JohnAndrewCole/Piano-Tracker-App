@@ -12,23 +12,27 @@ import androidx.room.PrimaryKey
 data class Session(
     /**
      * Sets the date of the [Session].
+     * This is a REQUIRED field.
      */
-    @ColumnInfo(name = "session_date") val date: String? = null,
+    @ColumnInfo(name = "session_date") val date: String,
 
     /**
      * Sets the starting time of the [Session].
+     * This is an OPTIONAL field.
      */
     @ColumnInfo(name = "session_start_time") val startTime: String? = null,
 
     /**
      * Indicates an optional goal for the [Session]
+     * This is an OPTIONAL field.
      */
     @ColumnInfo(name = "session_goal") val sessionGoal: String? = null,
 
     /**
-     * The duration of a session, measured in seconds
+     * The duration of a [Session], measured in minutes
+     * This is an OPTIONAL field.
      */
-    @ColumnInfo(name = "session_duration") val sessionDuration: Long? = null
+    @ColumnInfo(name = "session_duration") val sessionDuration: String? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

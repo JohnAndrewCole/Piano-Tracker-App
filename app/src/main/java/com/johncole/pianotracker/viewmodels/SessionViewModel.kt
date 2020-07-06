@@ -7,6 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
+import com.johncole.pianotracker.utilities.convertDurationToString
+import com.johncole.pianotracker.utilities.convertStringDurationToHours
+import com.johncole.pianotracker.utilities.convertStringDurationToMinutes
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
@@ -28,11 +31,24 @@ class SessionViewModel(
     val sessionGoal: MutableLiveData<String>
         get() = _sessionGoal
 
-    fun setSessionGoal(goal: String) {
-        if (goal != sessionGoal.value) {
-            _sessionGoal.value = goal
+    private val _sessionHours = MutableLiveData<Int>()
+    val sessionHours: MutableLiveData<Int>
+        get() = _sessionHours
+
+    private val _sessionMinutes = MutableLiveData<Int>()
+    val sessionMinutes: MutableLiveData<Int>
+        get() = _sessionMinutes
+
+    fun setSessionHours(newHours: Int) {
+        if (newHours != sessionHours.value) {
+            _sessionHours.value = newHours
         }
-        return
+    }
+
+    fun setSessionMinutes(newMinutes: Int) {
+        if (newMinutes != sessionMinutes.value) {
+            _sessionMinutes.value = newMinutes
+        }
     }
 
     fun setDate(date: LocalDate) {
@@ -49,6 +65,10 @@ class SessionViewModel(
             _sessionDate.value = LocalDate.parse(session.date)
             _sessionStartTime.value = LocalTime.parse(session.startTime)
             _sessionGoal.value = session.sessionGoal
+            if (session.sessionDuration != null) {
+                _sessionHours.value = convertStringDurationToHours(session.sessionDuration)
+                _sessionMinutes.value = convertStringDurationToMinutes(session.sessionDuration)
+            }
         }
     }
 
@@ -57,7 +77,8 @@ class SessionViewModel(
         val session = Session(
             sessionDate.value.toString(),
             sessionStartTime.value.toString(),
-            sessionGoal.value
+            sessionGoal.value,
+            convertDurationToString(sessionHours.value!!, sessionMinutes.value!!)
         )
 
         viewModelScope.launch {
