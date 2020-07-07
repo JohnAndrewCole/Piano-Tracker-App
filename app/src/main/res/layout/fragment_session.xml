@@ -134,7 +134,18 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/practice_activity_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:isGone="@{isCreatingSession}"
+            app:layout_constraintBottom_toTopOf="@+id/session_save_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/session_minute_picker" />
+
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
@@ -160,13 +171,6 @@
                 android:textSize="18sp"
                 app:isGone="@{hasPracticeActivities}" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/practice_activity_list"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

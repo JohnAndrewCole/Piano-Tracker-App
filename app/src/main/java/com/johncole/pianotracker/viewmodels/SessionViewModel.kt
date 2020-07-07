@@ -22,12 +22,14 @@ class SessionViewModel(
 
     //region Properties
 
+    var sessionId: Long = 0
+    val practiceActivities: LiveData<List<PracticeActivity>> = practiceActivityRepository.getPracticeActivitiesBySessionId(sessionId)
 
     //region LiveData Properties
 
-    private val _practiceActivities = MutableLiveData<List<PracticeActivity>>()
-    val practiceActivities: LiveData<List<PracticeActivity>>
-        get() = _practiceActivities
+//    private val _practiceActivities = MutableLiveData<List<PracticeActivity>>()
+//    val practiceActivities: LiveData<List<PracticeActivity>>
+//        get() = _practiceActivities
 
     private val _sessionDate = MutableLiveData<LocalDate>()
     val sessionDate: LiveData<LocalDate>
@@ -81,15 +83,12 @@ class SessionViewModel(
 
     //region Database Functions
 
-    fun getPracticeActivities(sessionId: Long) {
-        if (sessionId >= 0) {
-            viewModelScope.launch {
-                _practiceActivities.value =
-                    practiceActivityRepository.getPracticeActivitiesBySessionId(sessionId).value
-            }
-        }
-        return
-    }
+//    fun getPracticeActivities(sessionId: Long) {
+//        if (sessionId >= 1) {
+//                _practiceActivities.value = practiceActivityRepository.getPracticeActivitiesBySessionId(sessionId.toString()).value
+//        }
+//        return
+//    }
 
     fun getSessionById(sessionId: Long) {
         viewModelScope.launch {

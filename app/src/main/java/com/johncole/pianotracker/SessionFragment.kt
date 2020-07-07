@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.johncole.pianotracker.adapters.PracticeActivityListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
@@ -40,6 +40,7 @@ class SessionFragment : Fragment() {
         binding.viewModel = viewModel
 
         val adapter = PracticeActivityListAdapter()
+        binding.practiceActivityList.layoutManager = LinearLayoutManager(requireContext())
         binding.practiceActivityList.adapter = adapter
 
         binding.isCreatingSession = true
@@ -47,16 +48,16 @@ class SessionFragment : Fragment() {
         val args = SessionFragmentArgs.fromBundle(requireArguments())
         if (args.isViewingSession) {
             viewModel.getSessionById(args.sessionId)
-            viewModel.getPracticeActivities(args.sessionId)
+            viewModel.sessionId = args.sessionId
             binding.isCreatingSession = false
         }
 
         //region LiveData Observers
 
-        viewModel.practiceActivities.observe(viewLifecycleOwner) { result ->
+        viewModel.practiceActivities.observe(viewLifecycleOwner, Observer { result ->
             binding.hasPracticeActivities = !result.isNullOrEmpty()
             adapter.submitList(result)
-        }
+        })
 
         viewModel.sessionDate.observe(viewLifecycleOwner, Observer { newDate ->
             binding.sessionDateEditText.setText(convertDateToFormattedString(newDate))
