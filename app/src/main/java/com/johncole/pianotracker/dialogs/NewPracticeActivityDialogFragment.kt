@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import com.johncole.pianotracker.R
 import com.johncole.pianotracker.databinding.DialogNewPracticeActivityBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
@@ -37,7 +38,14 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
             null,
             false
         )
+
         binding.viewModel = viewModel
+
+        val args = NewPracticeActivityDialogFragmentArgs.fromBundle(requireArguments())
+        viewModel.sessionId = args.sessionId.toString()
+        if (args.isViewingPracticeActivity) {
+            viewModel.getPracticeActivity()
+        }
 
         val dialog = activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -45,6 +53,14 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
             builder.setView(binding.root)
                 // Add action buttons
                 .setPositiveButton(R.string.save) { _, _ ->
+                    view?.findNavController()
+                        ?.navigate(
+                            NewPracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
+                                true,
+                                args.sessionId,
+                                true
+                            )
+                        )
                     viewModel.savePracticeActivity()
                     dialog?.dismiss()
                 }
@@ -88,6 +104,9 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
                     if (selectedItem.toString() == "Technical Work") {
                         binding.spinnerSelectTechnicalWorkType.visibility = View.VISIBLE
                         binding.txtVSelectTechnicalWorkType.visibility = View.VISIBLE
+                    } else if (selectedItem.toString() != "Technical Work") {
+                        binding.spinnerSelectTechnicalWorkType.visibility = View.GONE
+                        binding.txtVSelectTechnicalWorkType.visibility = View.GONE
                     }
                 }
             }

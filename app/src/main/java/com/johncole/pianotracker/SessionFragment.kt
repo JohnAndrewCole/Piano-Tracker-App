@@ -38,13 +38,17 @@ class SessionFragment : Fragment() {
         _binding = FragmentSessionBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
         val adapter = PracticeActivityListAdapter()
         binding.practiceActivityList.adapter = adapter
+
+        binding.isCreatingSession = true
 
         val args = SessionFragmentArgs.fromBundle(requireArguments())
         if (args.isViewingSession) {
             viewModel.getSessionById(args.sessionId)
             viewModel.getPracticeActivities(args.sessionId)
+            binding.isCreatingSession = false
         }
 
         //region LiveData Observers
@@ -85,7 +89,12 @@ class SessionFragment : Fragment() {
 
         binding.emptyPracticeActivityList.setOnClickListener {
             view?.findNavController()
-                ?.navigate(R.id.action_sessionFragment_to_newPracticeActivityDialogFragment)
+                ?.navigate(
+                    SessionFragmentDirections.actionSessionFragmentToNewPracticeActivityDialogFragment(
+                        false,
+                        args.sessionId
+                    )
+                )
         }
 
         binding.sessionHourPicker.let {

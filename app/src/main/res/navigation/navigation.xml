@@ -37,6 +37,10 @@
             app:destination="@id/newPracticeActivityDialogFragment"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
             app:exitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="wasPracticeActivityAdded"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
@@ -60,6 +64,6 @@
             app:destination="@id/sessionFragment" />
         <argument
             android:name="sessionId"
-            app:argType="string" />
+            app:argType="long" />
     </dialog>
 </navigation>

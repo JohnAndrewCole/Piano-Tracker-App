@@ -22,6 +22,7 @@ class SessionViewModel(
 
     //region Properties
 
+
     //region LiveData Properties
 
     private val _practiceActivities = MutableLiveData<List<PracticeActivity>>()

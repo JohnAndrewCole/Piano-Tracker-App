@@ -19,7 +19,7 @@ buildscript {
         materialVersion = '1.1.0'
         navigationVersion = '2.3.0'
         recyclerViewVersion = '1.1.0'
-        roomVersion = '2.2.5'
+        roomVersion = '2.3.0-alpha01'
         testExtJunit = '1.1.1'
     }
 

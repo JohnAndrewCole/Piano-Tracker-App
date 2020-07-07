@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.SessionListViewModel" />
 
         <variable
             name="clickListener"
-            type="android.view.View.OnClickListener"/>
+            type="android.view.View.OnClickListener" />
 
         <variable
             name="session"
@@ -53,9 +54,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="12sp"
-            app:sessionGoalString="@{session}"
             app:layout_constraintStart_toStartOf="@+id/session_start_time_text_view"
             app:layout_constraintTop_toBottomOf="@+id/session_start_time_text_view"
+            app:sessionGoalString="@{session}"
             tools:text="Practiced chords, pedaling and lea..." />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

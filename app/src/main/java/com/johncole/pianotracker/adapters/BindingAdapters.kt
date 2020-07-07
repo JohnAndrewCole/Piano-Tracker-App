@@ -3,6 +3,7 @@ package com.johncole.pianotracker.adapters
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.johncole.pianotracker.data.PracticeActivity
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.utilities.convertDateToFormattedString
 import com.johncole.pianotracker.utilities.convertTimeToFormattedString
@@ -18,17 +19,40 @@ fun bindIsGone(view: View, isGone: Boolean) {
     }
 }
 
+// region Session List Binding Adapters
+
 @BindingAdapter("sessionDateString")
 fun TextView.setStartDateString(item: Session) {
-    text = item.date?.let { convertDateToFormattedString(LocalDate.parse(it)) }
+    text = convertDateToFormattedString(LocalDate.parse(item.date))
 }
 
 @BindingAdapter("sessionTimeString")
 fun TextView.setStartTimeString(item: Session) {
-    text = item.startTime?.let { convertTimeToFormattedString(LocalTime.parse(it)) }
+    text = convertTimeToFormattedString(LocalTime.parse(item.startTime))
 }
 
 @BindingAdapter("sessionGoalString")
 fun TextView.setGoalString(item: Session) {
     text = item.sessionGoal
 }
+
+// endregion
+
+// region Practice Activity List Binding Adapters
+
+@BindingAdapter("practiceActivityName")
+fun TextView.setPracticeActivityName(item: PracticeActivity) {
+    text = item.practiceActivityType
+}
+
+@BindingAdapter("practiceActivityKey")
+fun TextView.setPracticeActivityKey(item: PracticeActivity) {
+    text = item.key
+}
+
+@BindingAdapter("practiceActivityBpm")
+fun TextView.setPracticeActivityBpm(item: PracticeActivity) {
+    text = item.bpm
+}
+
+// endregion

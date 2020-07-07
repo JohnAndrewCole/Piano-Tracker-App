@@ -12,7 +12,7 @@ class PracticeActivityViewModel(
 
     // region Properties
 
-    var sessionId = 0
+    var sessionId: String = "-1"
     var practiceActivityType: String = ""
     var technicalWorkType: String? = null
     var keySelected: String? = null
@@ -26,7 +26,7 @@ class PracticeActivityViewModel(
     fun savePracticeActivity() {
 
         val newPracticeActivity = PracticeActivity(
-            sessionId.toString(),
+            sessionId,
             practiceActivityType,
             technicalWorkType,
             keySelected,
@@ -37,6 +37,11 @@ class PracticeActivityViewModel(
         viewModelScope.launch {
             practiceActivityRepository.insertNewPracticeActivity(newPracticeActivity)
         }
+    }
+
+    // TODO: Fetch practice activity details
+    fun getPracticeActivity() {
+
     }
 
     // endregion
