@@ -46,9 +46,10 @@ class SessionFragment : Fragment() {
         binding.isCreatingSession = true
 
         val args = SessionFragmentArgs.fromBundle(requireArguments())
+        viewModel.sessionId = args.sessionId
         if (args.isViewingSession) {
-            viewModel.getSessionById(args.sessionId)
             viewModel.sessionId = args.sessionId
+            viewModel.getSessionById(args.sessionId)
             binding.isCreatingSession = false
         }
 
