@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.PracticeActivityViewModel" />
@@ -132,8 +133,8 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:min="20"
             android:max="200"
+            android:min="20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -151,8 +152,8 @@
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
             android:maxLength="280"
-            android:textSize="@dimen/paragraph_text"
             android:text="@={viewModel.notes}"
+            android:textSize="@dimen/paragraph_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seekBar_bpm" />
