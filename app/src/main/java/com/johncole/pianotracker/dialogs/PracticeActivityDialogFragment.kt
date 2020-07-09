@@ -4,23 +4,24 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.johncole.pianotracker.R
-import com.johncole.pianotracker.databinding.DialogNewPracticeActivityBinding
+import com.johncole.pianotracker.databinding.DialogPracticeActivityBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
 import com.johncole.pianotracker.viewmodels.PracticeActivityViewModel
 
-class NewPracticeActivityDialogFragment : DialogFragment() {
+class PracticeActivityDialogFragment : DialogFragment() {
 
-    private var _binding: DialogNewPracticeActivityBinding? = null
+    private var _binding: DialogPracticeActivityBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,19 +33,13 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        _binding = DataBindingUtil.inflate(
-            LayoutInflater.from(context),
-            R.layout.dialog_new_practice_activity,
-            null,
-            false
-        )
-
+        _binding = DialogPracticeActivityBinding.inflate(LayoutInflater.from(context), null, false)
         binding.viewModel = viewModel
 
-        val args = NewPracticeActivityDialogFragmentArgs.fromBundle(requireArguments())
+        val args = PracticeActivityDialogFragmentArgs.fromBundle(requireArguments())
         viewModel.sessionId = args.sessionId.toString()
         if (args.isViewingPracticeActivity) {
-            viewModel.getPracticeActivity()
+            viewModel.getPracticeActivityById(args.practiceActivityId)
         }
 
         val dialog = activity?.let {
@@ -53,9 +48,9 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
             builder.setView(binding.root)
                 // Add action buttons
                 .setPositiveButton(R.string.save) { _, _ ->
-                    view?.findNavController()
-                        ?.navigate(
-                            NewPracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
+                    findNavController(requireParentFragment())
+                        .navigate(
+                            PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
                                 true,
                                 args.sessionId,
                                 true
@@ -71,6 +66,8 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
 
         // region Bindings
+
+        // region Spinner Set-up
 
         binding.spinnerSelectPracticeActivity.let {
 
@@ -100,7 +97,7 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
                 ) {
                     // An item was selected. You can retrieve the selected item using
                     val selectedItem = parent.getItemAtPosition(pos)
-                    viewModel.practiceActivityType = selectedItem.toString()
+                    viewModel.practiceActivityType.value = selectedItem.toString()
                     if (selectedItem.toString() == "Technical Work") {
                         binding.spinnerSelectTechnicalWorkType.visibility = View.VISIBLE
                         binding.txtVSelectTechnicalWorkType.visibility = View.VISIBLE
@@ -135,7 +132,7 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
                 ) {
                     // An item was selected. You can retrieve the selected item using
                     val selectedItem = parent.getItemAtPosition(pos)
-                    viewModel.technicalWorkType = selectedItem.toString()
+                    viewModel.technicalWorkType.value = selectedItem.toString()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -148,7 +145,6 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
         binding.spinnerSelectKey.let {
 
             // Create an ArrayAdapter using the string array and a default spinner layout
-
             ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.key_array,
@@ -169,7 +165,7 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
                 ) {
                     // An item was selected. You can retrieve the selected item using
                     val selectedItem = parent.getItemAtPosition(pos)
-                    viewModel.keySelected = selectedItem.toString()
+                    viewModel.keySelected.value = selectedItem.toString()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -177,6 +173,10 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
                 }
             }
         }
+
+        // endregion
+
+        // region SeekBars
 
         binding.seekBarBpm.let {
             val bpmTextView = binding.txtVBpmDisplay
@@ -187,7 +187,7 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
             it.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                     bpmProgress = seek.progress
-                    viewModel.bpmSelected = bpmProgress
+                    viewModel.bpmSelected.value = bpmProgress.toString()
                     bpmTextView.text = getString(R.string.seek_bar_bpm_display, bpmProgress)
                 }
 
@@ -201,9 +201,85 @@ class NewPracticeActivityDialogFragment : DialogFragment() {
             })
         }
 
+        // endregion
+
         //endregion
 
         return dialog
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        binding.lifecycleOwner = this
+
+        viewModel.practiceActivityType.observe(viewLifecycleOwner, Observer { practiceActivityType ->
+            binding.spinnerSelectPracticeActivity.let {
+                if (!practiceActivityType.isNullOrEmpty()) {
+                    when (practiceActivityType) {
+                        "Technical Work" -> it.setSelection(0)
+                        "Playing for Fun" -> it.setSelection(1)
+                        "Working on a Piece" -> it.setSelection(2)
+                        "Improvising" -> it.setSelection(3)
+                        "Composing" -> it.setSelection(4)
+                        else -> it.setSelection(0)
+                    }
+                }
+            }
+        })
+
+        viewModel.technicalWorkType.observe(viewLifecycleOwner, Observer { technicalWorkType ->
+
+            binding.spinnerSelectTechnicalWorkType.let{
+                if (!technicalWorkType.isNullOrEmpty()) {
+                    when (technicalWorkType) {
+                        "Scales" -> it.setSelection(0)
+                        "Modes" -> it.setSelection(1)
+                        "Chords" -> it.setSelection(2)
+                        "Rhythm" -> it.setSelection(3)
+                        "Sheet Reading" -> it.setSelection(4)
+                        "Ear Training" -> it.setSelection(5)
+                        else -> it.setSelection(0)
+                    }
+                }
+            }
+        })
+
+        viewModel.keySelected.observe(viewLifecycleOwner, Observer { keySelected ->
+
+            binding.spinnerSelectKey.let {
+                if (!keySelected.isNullOrEmpty()) {
+                    when (keySelected) {
+                        "C" -> it.setSelection(0)
+                        "G" -> it.setSelection(1)
+                        "D" -> it.setSelection(2)
+                        "A" -> it.setSelection(3)
+                        "E" -> it.setSelection(4)
+                        "B" -> it.setSelection(5)
+                        "G♭" -> it.setSelection(6)
+                        "D♭" -> it.setSelection(7)
+                        "A♭" -> it.setSelection(8)
+                        "E♭" -> it.setSelection(9)
+                        "B♭" -> it.setSelection(10)
+                        "F" -> it.setSelection(11)
+                        "NA" -> it.setSelection(12)
+                        else -> it.setSelection(12)
+                    }
+                }
+            }
+        })
+
+        viewModel.bpmSelected.observe(viewLifecycleOwner, Observer { bpmSelected ->
+
+            if (!bpmSelected.isNullOrEmpty()) {
+                binding.seekBarBpm.progress = bpmSelected.toInt()
+            }
+        })
+
+        return binding.root
     }
 
     override fun onDestroyView() {

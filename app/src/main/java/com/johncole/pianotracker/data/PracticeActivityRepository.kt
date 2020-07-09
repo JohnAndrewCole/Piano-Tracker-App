@@ -8,6 +8,10 @@ class PracticeActivityRepository private constructor(private val practiceActivit
         return practiceActivityDao.getPracticeActivitiesBySessionId(sessionId)
     }
 
+    suspend fun getPracticeActivityById(practiceActivityId: Long): PracticeActivity {
+        return practiceActivityDao.getPracticeActivityById(practiceActivityId)
+    }
+
     suspend fun insertNewPracticeActivity(newPracticeActivity: PracticeActivity) {
         practiceActivityDao.insertNewPracticeActivity(newPracticeActivity)
     }

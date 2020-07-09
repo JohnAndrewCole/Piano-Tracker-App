@@ -92,9 +92,10 @@ class SessionFragment : Fragment() {
         binding.emptyPracticeActivityList.setOnClickListener {
             view?.findNavController()
                 ?.navigate(
-                    SessionFragmentDirections.actionSessionFragmentToNewPracticeActivityDialogFragment(
+                    SessionFragmentDirections.actionSessionFragmentToPracticeActivityDialogFragment(
                         false,
-                        args.sessionId
+                        args.sessionId,
+                        0
                     )
                 )
         }

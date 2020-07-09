@@ -36,9 +36,10 @@ class PracticeActivityListAdapter :
         ) {
             view.findNavController()
                 .navigate(
-                    SessionFragmentDirections.actionSessionFragmentToNewPracticeActivityDialogFragment(
+                    SessionFragmentDirections.actionSessionFragmentToPracticeActivityDialogFragment(
                         true,
-                        practiceActivity.sessionId.toLong()
+                        practiceActivity.sessionId.toLong(),
+                        practiceActivity.practiceActivityId
                     )
                 )
         }

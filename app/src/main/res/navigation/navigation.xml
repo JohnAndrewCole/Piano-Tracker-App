@@ -11,8 +11,7 @@
         android:label="SessionListFragment" >
         <action
             android:id="@+id/action_sessionListFragment_to_sessionFragment"
-            app:destination="@id/sessionFragment"
-            app:enterAnim="@anim/fragment_fade_enter" />
+            app:destination="@id/sessionFragment" />
     </fragment>
     <fragment
         android:id="@+id/sessionFragment"
@@ -22,7 +21,6 @@
         <action
             android:id="@+id/action_sessionFragment_to_sessionListFragment"
             app:destination="@id/sessionListFragment"
-            app:exitAnim="@anim/fragment_fade_exit"
             app:popUpTo="@id/sessionListFragment"
             app:popUpToInclusive="false" />
         <argument
@@ -33,8 +31,8 @@
             android:name="sessionId"
             app:argType="long" />
         <action
-            android:id="@+id/action_sessionFragment_to_newPracticeActivityDialogFragment"
-            app:destination="@id/newPracticeActivityDialogFragment"
+            android:id="@+id/action_sessionFragment_to_PracticeActivityDialogFragment"
+            app:destination="@id/PracticeActivityDialogFragment"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
             app:exitAnim="@anim/nav_default_pop_exit_anim" />
         <argument
@@ -52,18 +50,21 @@
         android:name="com.johncole.pianotracker.SettingsFragment"
         android:label="SettingsFragment" />
     <dialog
-        android:id="@+id/newPracticeActivityDialogFragment"
-        android:name="com.johncole.pianotracker.dialogs.NewPracticeActivityDialogFragment"
-        android:label="NewPracticeActivityDialogFragment" >
+        android:id="@+id/PracticeActivityDialogFragment"
+        android:name="com.johncole.pianotracker.dialogs.PracticeActivityDialogFragment"
+        android:label="PracticeActivityDialogFragment">
         <argument
             android:name="isViewingPracticeActivity"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
         <action
             android:id="@+id/action_newPracticeActivityDialogFragment_to_sessionFragment"
             app:destination="@id/sessionFragment" />
         <argument
             android:name="sessionId"
+            app:argType="long" />
+        <argument
+            android:name="practiceActivityId"
             app:argType="long" />
     </dialog>
 </navigation>
