@@ -45,12 +45,12 @@ class SessionViewModel(
     val sessionGoal: MutableLiveData<String>
         get() = _sessionGoal
 
-    private val _sessionHours = MutableLiveData<Int>()
-    val sessionHours: MutableLiveData<Int>
+    private val _sessionHours = MutableLiveData<String>()
+    val sessionHours: MutableLiveData<String>
         get() = _sessionHours
 
-    private val _sessionMinutes = MutableLiveData<Int>()
-    val sessionMinutes: MutableLiveData<Int>
+    private val _sessionMinutes = MutableLiveData<String>()
+    val sessionMinutes: MutableLiveData<String>
         get() = _sessionMinutes
 
     //endregion
@@ -58,18 +58,6 @@ class SessionViewModel(
     //region Functions
 
     //region Property-setting Functions
-
-    fun setSessionHours(newHours: Int) {
-        if (newHours != sessionHours.value) {
-            _sessionHours.value = newHours
-        }
-    }
-
-    fun setSessionMinutes(newMinutes: Int) {
-        if (newMinutes != sessionMinutes.value) {
-            _sessionMinutes.value = newMinutes
-        }
-    }
 
     fun setDate(date: LocalDate) {
         _sessionDate.value = date

@@ -1,6 +1,7 @@
 package com.johncole.pianotracker
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
 import com.johncole.pianotracker.dialogs.TimePickerFragment
 import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.utilities.TimeInputFilterMinMax
 import com.johncole.pianotracker.utilities.convertDateToFormattedString
 import com.johncole.pianotracker.utilities.convertTimeToFormattedString
 import com.johncole.pianotracker.viewmodels.SessionViewModel
@@ -69,14 +71,6 @@ class SessionFragment : Fragment() {
             binding.sessionTimeEditText.setText(convertTimeToFormattedString(newTime))
         })
 
-        viewModel.sessionHours.observe(viewLifecycleOwner, Observer { hours ->
-            binding.sessionHourPicker.value = hours
-        })
-
-        viewModel.sessionMinutes.observe(viewLifecycleOwner, Observer { minutes ->
-            binding.sessionMinutePicker.value = minutes
-        })
-
         //endregion
 
         //region Bindings
@@ -89,7 +83,7 @@ class SessionFragment : Fragment() {
             TimePickerFragment().show(parentFragmentManager, "timePicker")
         }
 
-        binding.emptyPracticeActivityList.setOnClickListener {
+        binding.btnAddPracticeActivity.setOnClickListener {
             view?.findNavController()
                 ?.navigate(
                     SessionFragmentDirections.actionSessionFragmentToPracticeActivityDialogFragment(
@@ -100,21 +94,8 @@ class SessionFragment : Fragment() {
                 )
         }
 
-        binding.sessionHourPicker.let {
-            it.minValue = 0
-            it.maxValue = 24
-            it.setOnValueChangedListener { _, _, newVal ->
-                viewModel.setSessionHours(newVal)
-            }
-        }
-
-        binding.sessionMinutePicker.let {
-            it.minValue = 0
-            it.maxValue = 59
-            it.setOnValueChangedListener { _, _, newVal ->
-                viewModel.setSessionMinutes(newVal)
-            }
-        }
+        binding.txtEHours.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 24.0F))
+        binding.txtEMinutes.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 59.0F))
 
         binding.sessionSaveButton.setOnClickListener {
             viewModel.storeSession()

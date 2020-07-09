@@ -1,5 +1,8 @@
 package com.johncole.pianotracker.utilities
 
+import android.text.InputFilter
+import android.text.Spanned
+import com.johncole.pianotracker.SessionFragment
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -40,27 +43,53 @@ fun convertTimeToFormattedString(time: LocalTime): String {
  * @return returns a string conversion of the int value of the minutes summed
  * with the hours converted to minutes
  */
-fun convertDurationToString(hours: Int, minutes: Int): String {
-    val hoursToMinutes = hours * 60
-    val durationInMinutes = hoursToMinutes + minutes
+fun convertDurationToString(hours: String, minutes: String): String {
+    val hoursToMinutes = hours.toInt() * 60
+    val durationInMinutes = hoursToMinutes + minutes.toInt()
     return durationInMinutes.toString()
 }
 
-/**
- * Takes a string value, representing the duration of a session as measured in minutes,
- * and returns a list of integers, representing the hours and minutes spent.
- * @param length the duration of the session, measured in minutes
- * @return returns a list of integers, where the 0 index is the hours and the 1 index
- * is the minutes spent on the session.
- */
-fun convertStringDurationToHours(length: String): Int {
+fun convertStringDurationToHours(length: String): String {
     val hours = length.toInt() / 60
     if (hours < 1) {
-        return 0
+        return 0.toString()
     }
-    return hours
+    return hours.toString()
 }
 
-fun convertStringDurationToMinutes(length: String): Int {
-    return length.toInt() % 60
+fun convertStringDurationToMinutes(length: String): String {
+    return (length.toInt() % 60).toString()
+}
+
+
+/**
+ * This class provides the filter used in the [SessionFragment] to limit the user's
+ * input to between a minimum and maximum value (so that a number greater than 60
+ * minutes isn't possible).
+ * Taken from a StackOverflow answer at
+ * https://stackoverflow.com/questions/53758285/how-to-set-input-type-and-format-in-edittext-using-kotlin
+ */
+class TimeInputFilterMinMax(min:Float, max:Float): InputFilter {
+    private var min:Float = 0.0F
+    private var max:Float = 0.0F
+
+    init{
+        this.min = min
+        this.max = max
+    }
+
+    override fun filter(source:CharSequence, start:Int, end:Int, dest: Spanned, dstart:Int, dend:Int): CharSequence? {
+        try
+        {
+            val input = (dest.subSequence(0, dstart).toString() + source + dest.subSequence(dend, dest.length)).toFloat()
+            if (isInRange(min, max, input))
+                return null
+        }
+        catch (nfe:NumberFormatException) {}
+        return ""
+    }
+
+    private fun isInRange(a:Float, b:Float, c:Float):Boolean {
+        return if (b > a) c in a..b else c in b..a
+    }
 }

@@ -48,6 +48,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
             builder.setView(binding.root)
                 // Add action buttons
                 .setPositiveButton(R.string.save) { _, _ ->
+                    viewModel.savePracticeActivity()
                     findNavController(requireParentFragment())
                         .navigate(
                             PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
@@ -56,11 +57,16 @@ class PracticeActivityDialogFragment : DialogFragment() {
                                 true
                             )
                         )
-                    viewModel.savePracticeActivity()
-                    dialog?.dismiss()
                 }
                 .setNegativeButton(R.string.cancel) { _, _ ->
-                    dialog?.dismiss()
+                    findNavController(requireParentFragment())
+                        .navigate(
+                            PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
+                                true,
+                                args.sessionId,
+                                false
+                            )
+                        )
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
@@ -216,6 +222,8 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         binding.lifecycleOwner = this
 
+        // region ViewModel Observers
+
         viewModel.practiceActivityType.observe(viewLifecycleOwner, Observer { practiceActivityType ->
             binding.spinnerSelectPracticeActivity.let {
                 if (!practiceActivityType.isNullOrEmpty()) {
@@ -279,11 +287,13 @@ class PracticeActivityDialogFragment : DialogFragment() {
             }
         })
 
+        // endregion
+
         return binding.root
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 }
