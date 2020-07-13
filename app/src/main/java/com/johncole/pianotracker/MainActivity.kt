@@ -3,7 +3,9 @@ package com.johncole.pianotracker
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.johncole.pianotracker.databinding.ActivityMainBinding
@@ -23,9 +25,16 @@ class MainActivity : AppCompatActivity() {
          * and: https://issuetracker.google.com/issues/142847973
          */
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment?
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment?
         val navController = navHostFragment!!.navController
+        NavigationUI.setupActionBarWithNavController(this, navController)
 
         navView.setupWithNavController(navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.navHostFragment)
+        return navController.navigateUp()
     }
 }

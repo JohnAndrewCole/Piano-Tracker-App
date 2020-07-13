@@ -97,6 +97,12 @@ class SessionViewModel(
         }
     }
 
+    fun deleteSession(sessionId: Long) {
+        viewModelScope.launch {
+            sessionRepository.deleteSession(sessionId)
+        }
+    }
+
     //endregion
 
     //endregion

@@ -2,9 +2,7 @@ package com.johncole.pianotracker
 
 import android.os.Bundle
 import android.text.InputFilter
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -50,6 +48,7 @@ class SessionFragment : Fragment() {
         val args = SessionFragmentArgs.fromBundle(requireArguments())
         viewModel.sessionId = args.sessionId
         if (args.isViewingSession) {
+            setHasOptionsMenu(true)
             viewModel.sessionId = args.sessionId
             viewModel.getSessionById(args.sessionId)
             binding.isCreatingSession = false
@@ -97,14 +96,33 @@ class SessionFragment : Fragment() {
         binding.txtEHours.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 24.0F))
         binding.txtEMinutes.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 59.0F))
 
-        binding.sessionSaveButton.setOnClickListener {
+        binding.btnSaveSession.setOnClickListener {
             viewModel.storeSession()
-            view?.findNavController()?.navigate(R.id.action_sessionFragment_to_sessionListFragment)
+            view?.findNavController()
+                ?.navigate(
+                    SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
+                )
         }
 
         //endregion
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.options_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.title == "Delete" && viewModel.sessionId > 0) {
+            viewModel.deleteSession(viewModel.sessionId)
+            view?.findNavController()
+                ?.navigate(
+                    SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
+                )
+        }
+        return false
     }
 
     override fun onDestroyView() {

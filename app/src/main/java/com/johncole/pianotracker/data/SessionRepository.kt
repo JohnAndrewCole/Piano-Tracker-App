@@ -12,10 +12,15 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
         return sessionDao.createNewSession(session)
     }
 
+    suspend fun deleteSession(sessionId: Long) {
+        sessionDao.deleteBySessionId(sessionId)
+    }
+
     companion object {
 
         // For Singleton instantiation
-        @Volatile private var instance: SessionRepository? = null
+        @Volatile
+        private var instance: SessionRepository? = null
 
         fun getInstance(sessionDao: SessionDao) =
             instance ?: synchronized(this) {
