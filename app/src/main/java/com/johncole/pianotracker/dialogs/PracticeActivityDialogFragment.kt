@@ -50,8 +50,9 @@ class PracticeActivityDialogFragment : DialogFragment() {
                 .setPositiveButton(R.string.save) { _, _ ->
                     if (args.isViewingPracticeActivity) {
                         viewModel.updatePracticeActivity()
+                    } else {
+                        viewModel.savePracticeActivity()
                     }
-                    viewModel.savePracticeActivity()
                     findNavController(requireParentFragment())
                         .navigate(
                             PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(

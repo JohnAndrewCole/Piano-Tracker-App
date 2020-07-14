@@ -16,8 +16,24 @@ class PracticeActivityRepository private constructor(private val practiceActivit
         practiceActivityDao.insertNewPracticeActivity(newPracticeActivity)
     }
 
-    suspend fun updatePracticeActivity(practiceActivity: PracticeActivity) {
-        practiceActivityDao.updatePracticeActivity(practiceActivity)
+    suspend fun updatePracticeActivity(
+        practiceActivityId: Long,
+        sessionId: String,
+        practiceActivityType: String,
+        technicalWorkType: String,
+        key: String,
+        bpm: String,
+        notes: String
+    ) {
+        practiceActivityDao.updateSession(
+            practiceActivityId,
+            sessionId,
+            practiceActivityType,
+            technicalWorkType,
+            key,
+            bpm,
+            notes
+        )
     }
 
     suspend fun deletePracticeActivityById(practiceActivityId: Long) {

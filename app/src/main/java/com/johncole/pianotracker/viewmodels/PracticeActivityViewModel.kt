@@ -90,7 +90,15 @@ class PracticeActivityViewModel(
 
     fun updatePracticeActivity() {
         viewModelScope.launch {
-            practiceActivityRepository.updatePracticeActivity(_practiceActivity)
+            practiceActivityRepository.updatePracticeActivity(
+                practiceActivityId,
+                sessionId.toString(),
+                practiceActivityType.value!!,
+                technicalWorkType.value!!,
+                keySelected.value!!,
+                bpmSelected.value!!,
+                notes.value!!
+            )
         }
     }
 

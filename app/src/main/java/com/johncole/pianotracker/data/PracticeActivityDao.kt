@@ -1,7 +1,9 @@
 package com.johncole.pianotracker.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 
 @Dao
 interface PracticeActivityDao {
@@ -18,8 +20,16 @@ interface PracticeActivityDao {
     @Query("DELETE FROM practice_activity WHERE session_id = :sessionId")
     suspend fun deletePracticeActivitiesBySessionId(sessionId: Long)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updatePracticeActivity(practiceActivity: PracticeActivity)
+    @Query("UPDATE practice_activity SET session_id = :sessionId, practice_activity_type = :practiceActivityType, technical_work_type = :technicalWorkType, key = :key, bpm = :bpm, notes = :notes WHERE id = :practiceActivityId")
+    suspend fun updateSession(
+        practiceActivityId: Long,
+        sessionId: String,
+        practiceActivityType: String,
+        technicalWorkType: String,
+        key: String,
+        bpm: String,
+        notes: String
+    )
 
     @Insert
     suspend fun insertNewPracticeActivity(newPracticeActivity: PracticeActivity)
