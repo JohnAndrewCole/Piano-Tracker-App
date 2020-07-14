@@ -11,30 +11,7 @@
         android:label="@string/your_sessions">
         <action
             android:id="@+id/action_sessionListFragment_to_sessionFragment"
-            app:destination="@id/sessionFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/sessionFragment"
-        android:name="com.johncole.pianotracker.SessionFragment"
-        android:label="@string/viewing_session"
-        tools:layout="@layout/fragment_session">
-        <action
-            android:id="@+id/action_sessionFragment_to_sessionListFragment"
-            app:destination="@id/sessionListFragment"
-            app:popUpTo="@id/sessionListFragment"
-            app:popUpToInclusive="true" />
-        <argument
-            android:name="isViewingSession"
-            android:defaultValue="false"
-            app:argType="boolean" />
-        <argument
-            android:name="sessionId"
-            app:argType="long" />
-        <action
-            android:id="@+id/action_sessionFragment_to_PracticeActivityDialogFragment"
-            app:destination="@id/PracticeActivityDialogFragment"
-            app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:exitAnim="@anim/nav_default_pop_exit_anim" />
+            app:destination="@id/sessionNavigation" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
@@ -45,24 +22,59 @@
         android:id="@+id/settingsFragment"
         android:name="com.johncole.pianotracker.SettingsFragment"
         android:label="@string/settings" />
-    <dialog
-        android:id="@+id/PracticeActivityDialogFragment"
-        android:name="com.johncole.pianotracker.dialogs.PracticeActivityDialogFragment"
-        android:label="PracticeActivityDialogFragment">
+    <navigation
+        android:id="@+id/sessionNavigation"
+        app:startDestination="@id/sessionFragment">
+
         <argument
-            android:name="isViewingPracticeActivity"
+            android:name="isViewingSession"
             android:defaultValue="false"
             app:argType="boolean" />
-        <action
-            android:id="@+id/action_newPracticeActivityDialogFragment_to_sessionFragment"
-            app:destination="@id/sessionFragment"
-            app:popUpTo="@id/sessionFragment"
-            app:popUpToInclusive="true" />
         <argument
             android:name="sessionId"
             app:argType="long" />
-        <argument
-            android:name="practiceActivityId"
-            app:argType="long" />
-    </dialog>
+
+        <fragment
+            android:id="@+id/sessionFragment"
+            android:name="com.johncole.pianotracker.SessionFragment"
+            android:label="@string/viewing_session"
+            tools:layout="@layout/fragment_session">
+            <argument
+                android:name="isViewingSession"
+                android:defaultValue="false"
+                app:argType="boolean" />
+            <argument
+                android:name="sessionId"
+                app:argType="long" />
+            <action
+                android:id="@+id/action_sessionFragment_to_PracticeActivityDialogFragment"
+                app:destination="@id/PracticeActivityDialogFragment" />
+        </fragment>
+
+        <dialog
+            android:id="@+id/PracticeActivityDialogFragment"
+            android:name="com.johncole.pianotracker.dialogs.PracticeActivityDialogFragment"
+            android:label="PracticeActivityDialogFragment">
+            <argument
+                android:name="isViewingPracticeActivity"
+                android:defaultValue="false"
+                app:argType="boolean" />
+            <argument
+                android:name="sessionId"
+                app:argType="long" />
+            <argument
+                android:name="practiceActivityId"
+                app:argType="long" />
+            <action
+                android:id="@+id/action_PracticeActivityDialogFragment_to_sessionFragment"
+                app:destination="@id/sessionFragment"
+                app:popUpTo="@id/sessionFragment"
+                app:popUpToInclusive="true" />
+        </dialog>
+        <action
+            android:id="@+id/action_sessionFragment_to_sessionListFragment"
+            app:destination="@id/sessionListFragment"
+            app:popUpTo="@id/sessionListFragment"
+            app:popUpToInclusive="true" />
+    </navigation>
 </navigation>

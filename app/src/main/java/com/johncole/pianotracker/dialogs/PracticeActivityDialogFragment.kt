@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.johncole.pianotracker.R
@@ -26,7 +26,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel: PracticeActivityViewModel by activityViewModels {
+    private val viewModel: PracticeActivityViewModel by viewModels {
         InjectorUtils.providePracticeActivityViewModelFactory(requireContext())
     }
 
@@ -55,7 +55,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
                     }
                     findNavController(requireParentFragment())
                         .navigate(
-                            PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
+                            PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
                                 true,
                                 viewModel.sessionId
                             )
@@ -65,7 +65,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
                     viewModel.deleteByPracticeActivityId()
                     findNavController(requireParentFragment())
                         .navigate(
-                            PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
+                            PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
                                 true,
                                 viewModel.sessionId
                             )
@@ -74,7 +74,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
                 .setNegativeButton(R.string.cancel) { _, _ ->
                     findNavController(requireParentFragment())
                         .navigate(
-                            PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
+                            PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
                                 true,
                                 viewModel.sessionId
                             )
