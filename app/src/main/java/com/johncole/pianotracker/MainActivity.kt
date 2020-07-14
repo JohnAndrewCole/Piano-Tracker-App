@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -24,12 +25,18 @@ class MainActivity : AppCompatActivity() {
          * See: https://stackoverflow.com/questions/59275009/fragmentcontainerview-using-findnavcontroller
          * and: https://issuetracker.google.com/issues/142847973
          */
+        val navController =
+            (supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment?)!!.navController
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment?
-        val navController = navHostFragment!!.navController
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        val appBarConfiguration = AppBarConfiguration
+            .Builder(
+                R.id.sessionListFragment,
+                R.id.statsFragment,
+                R.id.settingsFragment
+            )
+            .build()
 
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
