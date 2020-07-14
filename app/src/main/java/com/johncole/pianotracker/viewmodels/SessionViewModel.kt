@@ -97,6 +97,18 @@ class SessionViewModel(
         }
     }
 
+    fun updateSession() {
+        viewModelScope.launch {
+            sessionRepository.updateSession(
+                sessionId,
+                sessionDate.value.toString(),
+                sessionStartTime.value.toString(),
+                sessionGoal.value!!,
+                convertDurationToString(sessionHours.value!!, sessionMinutes.value!!)
+            )
+        }
+    }
+
     fun deleteSession() {
         viewModelScope.launch {
             sessionRepository.deleteSession(sessionId)

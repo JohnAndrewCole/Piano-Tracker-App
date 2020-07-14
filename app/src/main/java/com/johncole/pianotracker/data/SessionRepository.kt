@@ -12,6 +12,22 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
         return sessionDao.insertSession(session)
     }
 
+    suspend fun updateSession(
+        sessionId: Long,
+        sessionDate: String,
+        sessionStartTime: String,
+        sessionGoal: String,
+        sessionDuration: String
+    ) {
+        sessionDao.updateSession(
+            sessionId,
+            sessionDate,
+            sessionStartTime,
+            sessionGoal,
+            sessionDuration
+        )
+    }
+
     suspend fun deleteSession(sessionId: Long) {
         sessionDao.deleteBySessionId(sessionId)
     }

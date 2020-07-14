@@ -97,7 +97,11 @@ class SessionFragment : Fragment() {
         binding.txtEMinutes.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 59.0F))
 
         binding.btnSaveSession.setOnClickListener {
-            viewModel.insertSession()
+            if (args.isViewingSession) {
+                viewModel.updateSession()
+            } else {
+                viewModel.insertSession()
+            }
             view?.findNavController()
                 ?.navigate(
                     SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
