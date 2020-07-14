@@ -8,8 +8,8 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
         return sessionDao.getSessionById(sessionId)
     }
 
-    suspend fun createNewSession(session: Session): Long {
-        return sessionDao.createNewSession(session)
+    suspend fun insertSession(session: Session): Long {
+        return sessionDao.insertSession(session)
     }
 
     suspend fun deleteSession(sessionId: Long) {

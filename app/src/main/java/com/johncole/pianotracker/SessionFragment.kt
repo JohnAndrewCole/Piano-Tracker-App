@@ -50,7 +50,7 @@ class SessionFragment : Fragment() {
         if (args.isViewingSession) {
             setHasOptionsMenu(true)
             viewModel.sessionId = args.sessionId
-            viewModel.getSessionById(args.sessionId)
+            viewModel.getSessionById()
             binding.isCreatingSession = false
         }
 
@@ -97,7 +97,7 @@ class SessionFragment : Fragment() {
         binding.txtEMinutes.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 59.0F))
 
         binding.btnSaveSession.setOnClickListener {
-            viewModel.storeSession()
+            viewModel.insertSession()
             view?.findNavController()
                 ?.navigate(
                     SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
@@ -116,7 +116,7 @@ class SessionFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.title == "Delete" && viewModel.sessionId > 0) {
-            viewModel.deleteSession(viewModel.sessionId)
+            viewModel.deleteSession()
             view?.findNavController()
                 ?.navigate(
                     SessionFragmentDirections.actionSessionFragmentToSessionListFragment()

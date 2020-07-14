@@ -16,10 +16,23 @@ class PracticeActivityRepository private constructor(private val practiceActivit
         practiceActivityDao.insertNewPracticeActivity(newPracticeActivity)
     }
 
+    suspend fun updatePracticeActivity(practiceActivity: PracticeActivity) {
+        practiceActivityDao.updatePracticeActivity(practiceActivity)
+    }
+
+    suspend fun deletePracticeActivityById(practiceActivityId: Long) {
+        practiceActivityDao.deletePracticeActivityById(practiceActivityId)
+    }
+
+    suspend fun deletePracticeActivitiesBySessionId(sessionId: Long) {
+        practiceActivityDao.deletePracticeActivitiesBySessionId(sessionId)
+    }
+
     companion object {
 
         // For Singleton instantiation
-        @Volatile private var instance: PracticeActivityRepository? = null
+        @Volatile
+        private var instance: PracticeActivityRepository? = null
 
         fun getInstance(practiceActivityDao: PracticeActivityDao) =
             instance ?: synchronized(this) {

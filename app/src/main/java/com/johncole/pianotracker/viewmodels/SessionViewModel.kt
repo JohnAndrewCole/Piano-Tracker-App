@@ -71,7 +71,7 @@ class SessionViewModel(
 
     //region Database Functions
 
-    fun getSessionById(sessionId: Long) {
+    fun getSessionById() {
         viewModelScope.launch {
             val session = sessionRepository.getSessionById(sessionId)
             _sessionDate.value = LocalDate.parse(session.date)
@@ -84,7 +84,7 @@ class SessionViewModel(
         }
     }
 
-    fun storeSession() {
+    fun insertSession() {
         val session = Session(
             sessionDate.value.toString(),
             sessionStartTime.value.toString(),
@@ -93,13 +93,14 @@ class SessionViewModel(
         )
 
         viewModelScope.launch {
-            sessionRepository.createNewSession(session)
+            sessionRepository.insertSession(session)
         }
     }
 
-    fun deleteSession(sessionId: Long) {
+    fun deleteSession() {
         viewModelScope.launch {
             sessionRepository.deleteSession(sessionId)
+            practiceActivityRepository.deletePracticeActivitiesBySessionId(sessionId)
         }
     }
 

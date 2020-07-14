@@ -13,7 +13,11 @@ class PracticeActivityViewModel(
 
     // region Properties
 
-    var sessionId: String = "-1"
+    private lateinit var _practiceActivity: PracticeActivity
+
+    var practiceActivityId: Long = 0
+
+    var sessionId: Long = 0
 
     //region LiveData
 
@@ -41,12 +45,12 @@ class PracticeActivityViewModel(
 
     // endregion
 
-    // region Functions
+    // region Database Functions
 
     fun savePracticeActivity() {
 
         val newPracticeActivity = PracticeActivity(
-            sessionId,
+            sessionId.toString(),
             practiceActivityType.value!!,
             technicalWorkType.value!!,
             keySelected.value!!,
@@ -59,28 +63,40 @@ class PracticeActivityViewModel(
         }
     }
 
-    fun getPracticeActivityById(practiceActivityId: Long) {
-
+    fun getPracticeActivityById() {
         viewModelScope.launch {
-            val result = practiceActivityRepository.getPracticeActivityById(practiceActivityId)
+            _practiceActivity =
+                practiceActivityRepository.getPracticeActivityById(practiceActivityId)
 
-            _practiceActivityType.value = result.practiceActivityType
+            _practiceActivityType.value = _practiceActivity.practiceActivityType
 
-            if (!result.technicalWorkType.isNullOrEmpty()) {
-                _technicalWorkType.value = result.technicalWorkType
+            if (!_practiceActivity.technicalWorkType.isNullOrEmpty()) {
+                _technicalWorkType.value = _practiceActivity.technicalWorkType
             }
 
-            if (!result.key.isNullOrEmpty()) {
-                _keySelected.value = result.key
+            if (!_practiceActivity.key.isNullOrEmpty()) {
+                _keySelected.value = _practiceActivity.key
             }
 
-            if (!result.bpm.isNullOrEmpty()) {
-                _bpmSelected.value = result.bpm
+            if (!_practiceActivity.bpm.isNullOrEmpty()) {
+                _bpmSelected.value = _practiceActivity.bpm
             }
 
-            if (!result.notes.isNullOrEmpty()) {
-                _notes.value = result.notes
+            if (!_practiceActivity.notes.isNullOrEmpty()) {
+                _notes.value = _practiceActivity.notes
             }
+        }
+    }
+
+    fun updatePracticeActivity() {
+        viewModelScope.launch {
+            practiceActivityRepository.updatePracticeActivity(_practiceActivity)
+        }
+    }
+
+    fun deleteByPracticeActivityId() {
+        viewModelScope.launch {
+            practiceActivityRepository.deletePracticeActivityById(practiceActivityId)
         }
     }
 

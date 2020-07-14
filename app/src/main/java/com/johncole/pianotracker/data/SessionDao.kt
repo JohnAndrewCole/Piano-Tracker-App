@@ -18,5 +18,5 @@ interface SessionDao {
     suspend fun deleteBySessionId(sessionId: Long)
 
     @Insert
-    suspend fun createNewSession(session: Session): Long
+    suspend fun insertSession(session: Session): Long
 }

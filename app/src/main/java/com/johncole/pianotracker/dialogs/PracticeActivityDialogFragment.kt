@@ -22,7 +22,6 @@ import com.johncole.pianotracker.viewmodels.PracticeActivityViewModel
 class PracticeActivityDialogFragment : DialogFragment() {
 
     private var _binding: DialogPracticeActivityBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -37,9 +36,10 @@ class PracticeActivityDialogFragment : DialogFragment() {
         binding.viewModel = viewModel
 
         val args = PracticeActivityDialogFragmentArgs.fromBundle(requireArguments())
-        viewModel.sessionId = args.sessionId.toString()
+        viewModel.sessionId = args.sessionId
         if (args.isViewingPracticeActivity) {
-            viewModel.getPracticeActivityById(args.practiceActivityId)
+            viewModel.practiceActivityId = args.practiceActivityId
+            viewModel.getPracticeActivityById()
         }
 
         val dialog = activity?.let {
@@ -48,13 +48,25 @@ class PracticeActivityDialogFragment : DialogFragment() {
             builder.setView(binding.root)
                 // Add action buttons
                 .setPositiveButton(R.string.save) { _, _ ->
+                    if (args.isViewingPracticeActivity) {
+                        viewModel.updatePracticeActivity()
+                    }
                     viewModel.savePracticeActivity()
                     findNavController(requireParentFragment())
                         .navigate(
                             PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
                                 true,
-                                args.sessionId,
-                                true
+                                viewModel.sessionId
+                            )
+                        )
+                }
+                .setNeutralButton("Delete") { _, _ ->
+                    viewModel.deleteByPracticeActivityId()
+                    findNavController(requireParentFragment())
+                        .navigate(
+                            PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
+                                true,
+                                viewModel.sessionId
                             )
                         )
                 }
@@ -63,8 +75,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
                         .navigate(
                             PracticeActivityDialogFragmentDirections.actionNewPracticeActivityDialogFragmentToSessionFragment(
                                 true,
-                                args.sessionId,
-                                false
+                                viewModel.sessionId
                             )
                         )
                 }
@@ -72,6 +83,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
 
         // region Bindings
+
 
         // region Spinner Set-up
 

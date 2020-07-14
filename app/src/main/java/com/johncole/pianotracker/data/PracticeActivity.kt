@@ -19,7 +19,8 @@ import androidx.room.PrimaryKey
 )
 data class PracticeActivity(
     /**
-     * Sets the session ID of the [PracticeActivity].
+     * Sets the session ID of the [PracticeActivity]. This allows the app to
+     * figure out which [PracticeActivity]s should be displayed in a [Session].
      * This is a REQUIRED field.
      */
     @ColumnInfo(name = "session_id") var sessionId: String,
