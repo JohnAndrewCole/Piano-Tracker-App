@@ -22,7 +22,7 @@
             android:id="@+id/action_sessionFragment_to_sessionListFragment"
             app:destination="@id/sessionListFragment"
             app:popUpTo="@id/sessionListFragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="true" />
         <argument
             android:name="isViewingSession"
             android:defaultValue="false"
@@ -55,7 +55,9 @@
             app:argType="boolean" />
         <action
             android:id="@+id/action_newPracticeActivityDialogFragment_to_sessionFragment"
-            app:destination="@id/sessionFragment" />
+            app:destination="@id/sessionFragment"
+            app:popUpTo="@id/sessionFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="sessionId"
             app:argType="long" />
