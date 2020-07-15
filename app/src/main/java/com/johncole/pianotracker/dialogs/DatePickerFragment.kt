@@ -5,7 +5,8 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
+import androidx.navigation.navGraphViewModels
+import com.johncole.pianotracker.R
 import com.johncole.pianotracker.utilities.InjectorUtils
 import com.johncole.pianotracker.viewmodels.SessionViewModel
 import java.time.LocalDate
@@ -23,7 +24,7 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
 
     private lateinit var localDate: LocalDate
 
-    private val viewModel: SessionViewModel by activityViewModels {
+    private val viewModel: SessionViewModel by navGraphViewModels(R.id.sessionNavigation) {
         InjectorUtils.provideSessionViewModelFactory(requireContext())
     }
 

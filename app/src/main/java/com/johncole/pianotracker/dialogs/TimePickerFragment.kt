@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.text.format.DateFormat
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
+import androidx.navigation.navGraphViewModels
+import com.johncole.pianotracker.R
 import com.johncole.pianotracker.utilities.InjectorUtils
 import com.johncole.pianotracker.viewmodels.SessionViewModel
 import java.time.LocalTime
@@ -20,7 +21,7 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
 
     private lateinit var localTime: LocalTime
 
-    private val viewModel: SessionViewModel by activityViewModels {
+    private val viewModel: SessionViewModel by navGraphViewModels(R.id.sessionNavigation) {
         InjectorUtils.provideSessionViewModelFactory(requireContext())
     }
 
