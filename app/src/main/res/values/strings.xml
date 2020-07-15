@@ -30,6 +30,7 @@
     <string name="cancel">Cancel</string>
     <string name="add_a_practice_activity">Add a practice activity</string>
     <string name="new_practice_activity">New Practice Activity</string>
+    <string name="practice_activity">Practice Activity</string>
     <string name="technical_work_type">Technical Work Type:</string>
     <string name="seek_bar_bpm_display">%1$d BPM</string>
     <string name="bpm">BPM</string>
@@ -38,7 +39,6 @@
     <string name="minutes_length">%d minutes</string>
     <string name="hours_length">%d hours</string>
     <string name="seconds_length">%d seconds</string>
-
 
     <string name="no_sessions_yet">You have no sessions yet!</string>
     <string name="no_practice_activities">No practice activities added. Click here to add more.</string>

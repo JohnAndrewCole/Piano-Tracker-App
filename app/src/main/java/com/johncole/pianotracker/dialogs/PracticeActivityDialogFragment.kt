@@ -85,6 +85,11 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         // region Bindings
 
+        if (args.isViewingPracticeActivity) {
+            binding.txtVPracticeActivityTitle.text = getString(R.string.practice_activity)
+        } else {
+            binding.txtVPracticeActivityTitle.text = getString(R.string.new_practice_activity)
+        }
 
         // region Spinner Set-up
 
