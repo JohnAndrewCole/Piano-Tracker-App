@@ -15,9 +15,9 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
     suspend fun updateSession(
         sessionId: Long,
         sessionDate: String,
-        sessionStartTime: String,
-        sessionGoal: String,
-        sessionDuration: String
+        sessionStartTime: String?,
+        sessionGoal: String?,
+        sessionDuration: String?
     ) {
         sessionDao.updateSession(
             sessionId,

@@ -43,10 +43,18 @@ fun convertTimeToFormattedString(time: LocalTime): String {
  * @return returns a string conversion of the int value of the minutes summed
  * with the hours converted to minutes
  */
-fun convertDurationToString(hours: String, minutes: String): String {
-    val hoursToMinutes = hours.toInt() * 60
-    val durationInMinutes = hoursToMinutes + minutes.toInt()
-    return durationInMinutes.toString()
+fun convertDurationToString(hours: String?, minutes: String?): String? {
+    if (minutes.isNullOrEmpty() && hours.isNullOrEmpty()) {
+        return null
+    } else if (!hours.isNullOrEmpty() && minutes.isNullOrEmpty()) {
+        return (hours.toInt() * 60).toString()
+    } else if (hours.isNullOrEmpty() && !minutes.isNullOrEmpty()) {
+        return minutes
+    } else if (!hours.isNullOrEmpty() && !minutes.isNullOrEmpty()) {
+        val hoursToMinutes = hours.toInt() * 60
+        return (hoursToMinutes + minutes.toInt()).toString()
+    }
+    return null
 }
 
 fun convertStringDurationToHours(length: String): String {
@@ -69,27 +77,36 @@ fun convertStringDurationToMinutes(length: String): String {
  * Taken from a StackOverflow answer at
  * https://stackoverflow.com/questions/53758285/how-to-set-input-type-and-format-in-edittext-using-kotlin
  */
-class TimeInputFilterMinMax(min:Float, max:Float): InputFilter {
-    private var min:Float = 0.0F
-    private var max:Float = 0.0F
+class TimeInputFilterMinMax(min: Float, max: Float) : InputFilter {
+    private var min: Float = 0.0F
+    private var max: Float = 0.0F
 
-    init{
+    init {
         this.min = min
         this.max = max
     }
 
-    override fun filter(source:CharSequence, start:Int, end:Int, dest: Spanned, dstart:Int, dend:Int): CharSequence? {
-        try
-        {
-            val input = (dest.subSequence(0, dstart).toString() + source + dest.subSequence(dend, dest.length)).toFloat()
+    override fun filter(
+        source: CharSequence,
+        start: Int,
+        end: Int,
+        dest: Spanned,
+        dstart: Int,
+        dend: Int
+    ): CharSequence? {
+        try {
+            val input = (dest.subSequence(0, dstart).toString() + source + dest.subSequence(
+                dend,
+                dest.length
+            )).toFloat()
             if (isInRange(min, max, input))
                 return null
+        } catch (nfe: NumberFormatException) {
         }
-        catch (nfe:NumberFormatException) {}
         return ""
     }
 
-    private fun isInRange(a:Float, b:Float, c:Float):Boolean {
+    private fun isInRange(a: Float, b: Float, c: Float): Boolean {
         return if (b > a) c in a..b else c in b..a
     }
 }

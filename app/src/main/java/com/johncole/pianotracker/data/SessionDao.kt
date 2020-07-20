@@ -21,9 +21,9 @@ interface SessionDao {
     suspend fun updateSession(
         sessionId: Long,
         sessionDate: String,
-        sessionStartTime: String,
-        sessionGoal: String,
-        sessionDuration: String
+        sessionStartTime: String?,
+        sessionGoal: String?,
+        sessionDuration: String?
     )
 
     @Insert

@@ -3,6 +3,7 @@ package com.johncole.pianotracker.adapters
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.johncole.pianotracker.R
 import com.johncole.pianotracker.data.PracticeActivity
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.utilities.convertDateToFormattedString
@@ -28,12 +29,20 @@ fun TextView.setStartDateString(item: Session) {
 
 @BindingAdapter("sessionTimeString")
 fun TextView.setStartTimeString(item: Session) {
-    text = convertTimeToFormattedString(LocalTime.parse(item.startTime))
+    text = if (item.startTime.isNullOrEmpty()) {
+        context.getString(R.string.no_start_time_set)
+    } else {
+        convertTimeToFormattedString(LocalTime.parse(item.startTime))
+    }
 }
 
 @BindingAdapter("sessionGoalString")
 fun TextView.setGoalString(item: Session) {
-    text = item.sessionGoal
+    text = if (item.sessionGoal.isNullOrEmpty()) {
+        context.getString(R.string.no_goal_set)
+    } else {
+        item.sessionGoal
+    }
 }
 
 // endregion

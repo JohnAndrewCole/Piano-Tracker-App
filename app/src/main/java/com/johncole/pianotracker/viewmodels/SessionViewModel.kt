@@ -75,7 +75,8 @@ class SessionViewModel(
         viewModelScope.launch {
             val session = sessionRepository.getSessionById(sessionId)
             _sessionDate.value = LocalDate.parse(session.date)
-            _sessionStartTime.value = LocalTime.parse(session.startTime)
+            _sessionStartTime.value =
+                if (session.startTime != null) LocalTime.parse(session.startTime) else null
             _sessionGoal.value = session.sessionGoal
             if (session.sessionDuration != null) {
                 _sessionHours.value = convertStringDurationToHours(session.sessionDuration)
@@ -85,11 +86,15 @@ class SessionViewModel(
     }
 
     fun insertSession() {
+
+        val newSessionStartTime =
+            if (sessionStartTime.value != null) sessionStartTime.value.toString() else null
+
         val session = Session(
             sessionDate.value.toString(),
-            sessionStartTime.value.toString(),
+            newSessionStartTime,
             sessionGoal.value,
-            convertDurationToString(sessionHours.value!!, sessionMinutes.value!!)
+            convertDurationToString(sessionHours.value, sessionMinutes.value)
         )
 
         viewModelScope.launch {
@@ -103,8 +108,8 @@ class SessionViewModel(
                 sessionId,
                 sessionDate.value.toString(),
                 sessionStartTime.value.toString(),
-                sessionGoal.value!!,
-                convertDurationToString(sessionHours.value!!, sessionMinutes.value!!)
+                sessionGoal.value,
+                convertDurationToString(sessionHours.value, sessionMinutes.value)
             )
         }
     }

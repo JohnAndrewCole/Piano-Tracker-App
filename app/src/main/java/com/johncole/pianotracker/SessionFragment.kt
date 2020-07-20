@@ -66,7 +66,9 @@ class SessionFragment : Fragment() {
         })
 
         viewModel.sessionStartTime.observe(viewLifecycleOwner, Observer { newTime ->
-            binding.sessionTimeEditText.setText(convertTimeToFormattedString(newTime))
+            if (newTime != null) {
+                binding.sessionTimeEditText.setText(convertTimeToFormattedString(newTime))
+            }
         })
 
         //endregion
