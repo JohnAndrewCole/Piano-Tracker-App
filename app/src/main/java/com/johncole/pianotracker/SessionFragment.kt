@@ -20,6 +20,7 @@ import com.johncole.pianotracker.viewmodels.SessionViewModel
 
 class SessionFragment : Fragment() {
 
+    // TODO: Look at removing this maybe, now that this is scoped to navGraphViewModels
     private var _binding: FragmentSessionBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.

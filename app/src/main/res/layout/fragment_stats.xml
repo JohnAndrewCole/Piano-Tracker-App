@@ -2,15 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.johncole.pianotracker.viewmodels.StatsViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/statsFragmentConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".StatsFragment">
 
-        <TextView
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/overTimeLineChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:text="Hello" />
+            android:layout_height="match_parent" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

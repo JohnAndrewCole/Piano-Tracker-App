@@ -7,6 +7,7 @@ import com.johncole.pianotracker.data.SessionRepository
 import com.johncole.pianotracker.viewmodels.PracticeActivityViewModelFactory
 import com.johncole.pianotracker.viewmodels.SessionListViewModelFactory
 import com.johncole.pianotracker.viewmodels.SessionViewModelFactory
+import com.johncole.pianotracker.viewmodels.StatsViewModelFactory
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.
@@ -24,14 +25,24 @@ object InjectorUtils {
     }
 
     fun provideSessionViewModelFactory(context: Context): SessionViewModelFactory {
-        return SessionViewModelFactory(getSessionRepository(context), getPracticeActivityRepository(context))
+        return SessionViewModelFactory(
+            getSessionRepository(context),
+            getPracticeActivityRepository(context)
+        )
     }
 
-    fun provideSessionListViewModelFactory(context: Context) : SessionListViewModelFactory {
+    fun provideSessionListViewModelFactory(context: Context): SessionListViewModelFactory {
         return SessionListViewModelFactory(getSessionRepository(context))
     }
 
-    fun providePracticeActivityViewModelFactory(context: Context) : PracticeActivityViewModelFactory {
+    fun providePracticeActivityViewModelFactory(context: Context): PracticeActivityViewModelFactory {
         return PracticeActivityViewModelFactory(getPracticeActivityRepository(context))
+    }
+
+    fun provideStatsViewModel(context: Context): StatsViewModelFactory {
+        return StatsViewModelFactory(
+            getSessionRepository(context),
+            getPracticeActivityRepository(context)
+        )
     }
 }
