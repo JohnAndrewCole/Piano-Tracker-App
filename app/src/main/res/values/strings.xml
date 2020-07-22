@@ -65,4 +65,7 @@
     <string name="delete">Delete</string>
     <string name="no_start_time_set">No Start Time Set</string>
     <string name="no_goal_set">No Goal Set</string>
+
+    <string name="stats_over_time">Your stats over time:</string>
+    <string name="detailed_breakdown">Detailed Breakdown:</string>
 </resources>
