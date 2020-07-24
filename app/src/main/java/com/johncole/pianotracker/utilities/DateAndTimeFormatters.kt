@@ -63,29 +63,27 @@ fun convertLocalDateToUnixTimestamp(date: LocalDate): Long {
  * @return returns a string conversion of the int value of the minutes summed
  * with the hours converted to minutes
  */
-fun convertDurationToString(hours: String?, minutes: String?): String? {
-    if (minutes.isNullOrEmpty() && hours.isNullOrEmpty()) {
-        return null
-    } else if (!hours.isNullOrEmpty() && minutes.isNullOrEmpty()) {
-        return (hours.toInt() * 60).toString()
+fun convertHoursAndMinutesToDurationLong(hours: String?, minutes: String?): Long {
+    if (!hours.isNullOrEmpty() && minutes.isNullOrEmpty()) {
+        return (hours.toInt() * 60).toLong()
     } else if (hours.isNullOrEmpty() && !minutes.isNullOrEmpty()) {
-        return minutes
+        return minutes.toLong()
     } else if (!hours.isNullOrEmpty() && !minutes.isNullOrEmpty()) {
         val hoursToMinutes = hours.toInt() * 60
-        return (hoursToMinutes + minutes.toInt()).toString()
+        return (hoursToMinutes + minutes.toInt()).toLong()
     }
-    return null
+    return 0
 }
 
-fun convertStringDurationToHours(length: String): String {
-    val hours = length.toInt() / 60
+fun convertLongDurationToHours(length: Long): String {
+    val hours = length / 60
     if (hours < 1) {
         return 0.toString()
     }
     return hours.toString()
 }
 
-fun convertStringDurationToMinutes(length: String): String {
+fun convertLongDurationToMinutes(length: Long): String {
     return (length.toInt() % 60).toString()
 }
 

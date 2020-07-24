@@ -8,10 +8,10 @@ import com.johncole.pianotracker.data.PracticeActivity
 import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
-import com.johncole.pianotracker.utilities.convertDurationToString
+import com.johncole.pianotracker.utilities.convertHoursAndMinutesToDurationLong
 import com.johncole.pianotracker.utilities.convertLocalDateToUnixTimestamp
-import com.johncole.pianotracker.utilities.convertStringDurationToHours
-import com.johncole.pianotracker.utilities.convertStringDurationToMinutes
+import com.johncole.pianotracker.utilities.convertLongDurationToHours
+import com.johncole.pianotracker.utilities.convertLongDurationToMinutes
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
@@ -79,10 +79,8 @@ class SessionViewModel(
             _sessionStartTime.value =
                 if (session.startTime != null) LocalTime.parse(session.startTime) else null
             _sessionGoal.value = session.sessionGoal
-            if (session.sessionDuration != null) {
-                _sessionHours.value = convertStringDurationToHours(session.sessionDuration)
-                _sessionMinutes.value = convertStringDurationToMinutes(session.sessionDuration)
-            }
+            _sessionHours.value = convertLongDurationToHours(session.sessionDuration)
+            _sessionMinutes.value = convertLongDurationToMinutes(session.sessionDuration)
         }
     }
 
@@ -96,7 +94,7 @@ class SessionViewModel(
             convertLocalDateToUnixTimestamp(sessionDate.value!!),
             newSessionStartTime,
             sessionGoal.value,
-            convertDurationToString(sessionHours.value, sessionMinutes.value)
+            convertHoursAndMinutesToDurationLong(sessionHours.value, sessionMinutes.value)
         )
 
         viewModelScope.launch {
@@ -105,14 +103,18 @@ class SessionViewModel(
     }
 
     fun updateSession() {
+
+        val newSessionStartTime =
+            if (sessionStartTime.value != null) sessionStartTime.value.toString() else null
+
         viewModelScope.launch {
             sessionRepository.updateSession(
                 sessionId,
                 sessionDate.value.toString(),
                 convertLocalDateToUnixTimestamp(sessionDate.value!!),
-                sessionStartTime.value.toString(),
+                newSessionStartTime,
                 sessionGoal.value,
-                convertDurationToString(sessionHours.value, sessionMinutes.value)
+                convertHoursAndMinutesToDurationLong(sessionHours.value, sessionMinutes.value)
             )
         }
     }

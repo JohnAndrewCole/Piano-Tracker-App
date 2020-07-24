@@ -4,8 +4,8 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
 
     fun getAllSessions() = sessionDao.getAllSessions()
 
-    suspend fun getAllSessionsBeforePresent(currentDateTime: String) {
-
+    suspend fun getAllSessionsBeforePresent(currentDate: Long): List<Session> {
+        return sessionDao.getSessionsBeforeCurrentDate(currentDate)
     }
 
     suspend fun getSessionById(sessionId: Long): Session {
@@ -22,7 +22,7 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
         sessionDateTimestamp: Long,
         sessionStartTime: String?,
         sessionGoal: String?,
-        sessionDuration: String?
+        sessionDuration: Long
     ) {
         sessionDao.updateSession(
             sessionId,

@@ -35,10 +35,12 @@ data class Session(
     @ColumnInfo(name = "session_goal") val sessionGoal: String? = null,
 
     /**
-     * The duration of a [Session], measured in minutes
-     * This is an OPTIONAL field.
+     * The duration of a [Session], measured in minutes.
+     * This is a REQUIRED field. If the user supplies
+     * no length or records no length, it will be set
+     * to 0.
      */
-    @ColumnInfo(name = "session_duration") val sessionDuration: String? = null
+    @ColumnInfo(name = "session_duration") val sessionDuration: Long
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

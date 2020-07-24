@@ -30,16 +30,23 @@ class StatsFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        viewModel.getAllSessionsBeforePresent()
+
         // region Line Chart
 
         val lineChart = binding.overTimeLineChart
 
         val values: ArrayList<Entry> = ArrayList()
-        values.add(Entry(1F, 1.5F))
-        values.add(Entry(1.4F, 2F))
-        values.add(Entry(2F, 1F))
+        for (session in viewModel.listOfSessionsBeforeCurrentDate) {
+            values.add(
+                Entry(
+                    session.sessionDateTimestamp.toFloat(),
+                    session.sessionDuration.toFloat()
+                )
+            )
+        }
 
-        val dataSet = LineDataSet(values, "ThisIsALabel") // add entries to data set
+        val dataSet = LineDataSet(values, "Time series")
         dataSet.color = Color.DKGRAY
         dataSet.valueTextColor = Color.RED
         dataSet.valueTextSize = 12F
