@@ -4,6 +4,10 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
 
     fun getAllSessions() = sessionDao.getAllSessions()
 
+    suspend fun getAllSessionsBeforePresent(currentDateTime: String) {
+
+    }
+
     suspend fun getSessionById(sessionId: Long): Session {
         return sessionDao.getSessionById(sessionId)
     }
@@ -15,6 +19,7 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
     suspend fun updateSession(
         sessionId: Long,
         sessionDate: String,
+        sessionDateTimestamp: Long,
         sessionStartTime: String?,
         sessionGoal: String?,
         sessionDuration: String?
@@ -22,6 +27,7 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
         sessionDao.updateSession(
             sessionId,
             sessionDate,
+            sessionDateTimestamp,
             sessionStartTime,
             sessionGoal,
             sessionDuration
@@ -30,6 +36,10 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
 
     suspend fun deleteSession(sessionId: Long) {
         sessionDao.deleteBySessionId(sessionId)
+    }
+
+    suspend fun deleteAllSessions() {
+        sessionDao.deleteAllSessions()
     }
 
     companion object {

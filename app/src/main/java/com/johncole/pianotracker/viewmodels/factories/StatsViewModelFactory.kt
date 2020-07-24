@@ -1,9 +1,10 @@
-package com.johncole.pianotracker.viewmodels
+package com.johncole.pianotracker.viewmodels.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.SessionRepository
+import com.johncole.pianotracker.viewmodels.StatsViewModel
 
 /**
  * Factory for creating a [StatsViewModel] with a constructor that takes a
@@ -16,6 +17,9 @@ class StatsViewModelFactory(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return StatsViewModel(sessionRepository, practiceActivityRepository) as T
+        return StatsViewModel(
+            sessionRepository,
+            practiceActivityRepository
+        ) as T
     }
 }

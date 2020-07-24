@@ -5,6 +5,7 @@ import android.text.Spanned
 import com.johncole.pianotracker.SessionFragment
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 /**
@@ -34,6 +35,25 @@ fun convertTimeToFormattedString(time: LocalTime): String {
     val formatter = DateTimeFormatter.ofPattern("HH:mm")
     return time.format(formatter)
 }
+
+/**
+ * This converts a LocalDate into a UnixTimestamp
+ */
+fun convertLocalDateToUnixTimestamp(date: LocalDate): Long {
+    val zoneId = ZoneId.systemDefault() // or: ZoneId.of("Europe/Oslo")
+    return date.atStartOfDay(zoneId).toEpochSecond()
+}
+
+// TODO: Figure out whether you need this for times, i.e.
+//  Do you need to retrieve times for any data visualisation?
+
+/**
+ * This converts a LocalDateTime into a UnixTimestamp
+ */
+//fun convertLocalDateTimeToUnixTimestamp(time: LocalDateTime): Long {
+//    val zoneId = ZoneId.systemDefault() // or: ZoneId.of("Europe/Oslo")
+//    return time.atZone(zoneId).toEpochSecond()
+//}
 
 /**
  * Converts two numbers representing a duration, in hours and minutes, to a string
@@ -68,7 +88,6 @@ fun convertStringDurationToHours(length: String): String {
 fun convertStringDurationToMinutes(length: String): String {
     return (length.toInt() % 60).toString()
 }
-
 
 /**
  * This class provides the filter used in the [SessionFragment] to limit the user's

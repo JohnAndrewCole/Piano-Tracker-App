@@ -4,10 +4,7 @@ import android.content.Context
 import com.johncole.pianotracker.data.AppDatabase
 import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.SessionRepository
-import com.johncole.pianotracker.viewmodels.PracticeActivityViewModelFactory
-import com.johncole.pianotracker.viewmodels.SessionListViewModelFactory
-import com.johncole.pianotracker.viewmodels.SessionViewModelFactory
-import com.johncole.pianotracker.viewmodels.StatsViewModelFactory
+import com.johncole.pianotracker.viewmodels.factories.*
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.
@@ -32,15 +29,26 @@ object InjectorUtils {
     }
 
     fun provideSessionListViewModelFactory(context: Context): SessionListViewModelFactory {
-        return SessionListViewModelFactory(getSessionRepository(context))
+        return SessionListViewModelFactory(
+            getSessionRepository(context)
+        )
     }
 
     fun providePracticeActivityViewModelFactory(context: Context): PracticeActivityViewModelFactory {
-        return PracticeActivityViewModelFactory(getPracticeActivityRepository(context))
+        return PracticeActivityViewModelFactory(
+            getPracticeActivityRepository(context)
+        )
     }
 
     fun provideStatsViewModel(context: Context): StatsViewModelFactory {
         return StatsViewModelFactory(
+            getSessionRepository(context),
+            getPracticeActivityRepository(context)
+        )
+    }
+
+    fun provideSettingsViewModel(context: Context): SettingsViewModelFactory {
+        return SettingsViewModelFactory(
             getSessionRepository(context),
             getPracticeActivityRepository(context)
         )

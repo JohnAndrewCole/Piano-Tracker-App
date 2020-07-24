@@ -33,4 +33,7 @@ interface PracticeActivityDao {
 
     @Insert
     suspend fun insertNewPracticeActivity(newPracticeActivity: PracticeActivity)
+
+    @Query("DELETE FROM practice_activity")
+    suspend fun deleteAllPracticeActivities()
 }

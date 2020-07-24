@@ -9,6 +9,7 @@ import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
 import com.johncole.pianotracker.utilities.convertDurationToString
+import com.johncole.pianotracker.utilities.convertLocalDateToUnixTimestamp
 import com.johncole.pianotracker.utilities.convertStringDurationToHours
 import com.johncole.pianotracker.utilities.convertStringDurationToMinutes
 import kotlinx.coroutines.launch
@@ -92,6 +93,7 @@ class SessionViewModel(
 
         val session = Session(
             sessionDate.value.toString(),
+            convertLocalDateToUnixTimestamp(sessionDate.value!!),
             newSessionStartTime,
             sessionGoal.value,
             convertDurationToString(sessionHours.value, sessionMinutes.value)
@@ -107,6 +109,7 @@ class SessionViewModel(
             sessionRepository.updateSession(
                 sessionId,
                 sessionDate.value.toString(),
+                convertLocalDateToUnixTimestamp(sessionDate.value!!),
                 sessionStartTime.value.toString(),
                 sessionGoal.value,
                 convertDurationToString(sessionHours.value, sessionMinutes.value)

@@ -68,4 +68,6 @@
 
     <string name="stats_over_time">Your stats over time:</string>
     <string name="detailed_breakdown">Detailed Breakdown:</string>
+    <string name="clear_out_database">Delete all your saved records:</string>
+    <string name="warning_cannot_undo">Be careful! You cannot undo this.</string>
 </resources>

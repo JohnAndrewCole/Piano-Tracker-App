@@ -17,6 +17,12 @@ data class Session(
     @ColumnInfo(name = "session_date") val date: String,
 
     /**
+     * The Unix Timestamp of the date of the [Session].
+     * This is a REQUIRED field.
+     */
+    @ColumnInfo(name = "session_date_timestamp") val sessionDateTimestamp: Long,
+
+    /**
      * Sets the starting time of the [Session].
      * This is an OPTIONAL field.
      */

@@ -17,14 +17,18 @@ interface SessionDao {
     @Query("DELETE FROM session WHERE id = :sessionId")
     suspend fun deleteBySessionId(sessionId: Long)
 
-    @Query("UPDATE session SET session_date = :sessionDate, session_start_time = :sessionStartTime, session_goal = :sessionGoal, session_duration = :sessionDuration WHERE id = :sessionId")
+    @Query("UPDATE session SET session_date = :sessionDate, session_date_timestamp = :sessionDateTimestamp, session_start_time = :sessionStartTime, session_goal = :sessionGoal, session_duration = :sessionDuration WHERE id = :sessionId")
     suspend fun updateSession(
         sessionId: Long,
         sessionDate: String,
+        sessionDateTimestamp: Long,
         sessionStartTime: String?,
         sessionGoal: String?,
         sessionDuration: String?
     )
+
+    @Query("DELETE FROM session")
+    suspend fun deleteAllSessions()
 
     @Insert
     suspend fun insertSession(session: Session): Long
