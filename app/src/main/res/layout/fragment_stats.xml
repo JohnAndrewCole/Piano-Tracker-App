@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.johncole.pianotracker.viewmodels.StatsViewModel" />
+            type="com.johncole.pianotracker.viewmodels.HomeScreensViewModel" />
     </data>
 
 

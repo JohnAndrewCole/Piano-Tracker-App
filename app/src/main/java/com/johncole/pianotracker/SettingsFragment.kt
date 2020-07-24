@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.johncole.pianotracker.databinding.FragmentSettingsBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
-import com.johncole.pianotracker.viewmodels.SettingsViewModel
+import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
 
 class SettingsFragment : Fragment() {
 
-    private val viewModel: SettingsViewModel by viewModels {
-        InjectorUtils.provideSettingsViewModel(requireContext())
+    private val viewModel: HomeScreensViewModel by activityViewModels {
+        InjectorUtils.provideHomeScreensViewModelFactory(requireContext())
     }
 
     override fun onCreateView(

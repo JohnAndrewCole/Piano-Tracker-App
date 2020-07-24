@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.johncole.pianotracker.adapters.SessionListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionListBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
-import com.johncole.pianotracker.viewmodels.SessionListViewModel
+import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
 
 class SessionListFragment : Fragment() {
 
     private lateinit var binding: FragmentSessionListBinding
 
-    private val viewModel: SessionListViewModel by viewModels {
-        InjectorUtils.provideSessionListViewModelFactory(requireContext())
+    private val viewModel: HomeScreensViewModel by activityViewModels {
+        InjectorUtils.provideHomeScreensViewModelFactory(requireContext())
     }
 
     override fun onCreateView(

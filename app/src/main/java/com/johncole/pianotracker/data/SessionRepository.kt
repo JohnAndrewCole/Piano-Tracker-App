@@ -4,9 +4,8 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
 
     fun getAllSessions() = sessionDao.getAllSessions()
 
-    suspend fun getAllSessionsBeforePresent(currentDate: Long): List<Session> {
-        return sessionDao.getSessionsBeforeCurrentDate(currentDate)
-    }
+    fun getAllSessionsBeforePresent(currentDate: Long) =
+        sessionDao.getSessionsBeforeCurrentDate(currentDate)
 
     suspend fun getSessionById(sessionId: Long): Session {
         return sessionDao.getSessionById(sessionId)
