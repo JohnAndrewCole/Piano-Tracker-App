@@ -11,14 +11,14 @@ import androidx.navigation.findNavController
 import com.johncole.pianotracker.adapters.SessionListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionListBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
-import com.johncole.pianotracker.viewmodels.SessionListViewModel
+import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
 
 class SessionListFragment : Fragment() {
 
     private lateinit var binding: FragmentSessionListBinding
 
-    private val viewModel: SessionListViewModel by viewModels {
-        InjectorUtils.provideSessionListViewModelFactory(requireContext())
+    private val viewModel: HomeScreensViewModel by viewModels {
+        InjectorUtils.provideHomeScreensViewModelFactory(requireContext())
     }
 
     override fun onCreateView(

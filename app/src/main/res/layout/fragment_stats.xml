@@ -1,16 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.johncole.pianotracker.viewmodels.HomeScreensViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/stats_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".StatsFragment">
+        android:fillViewport="true">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsFragmentConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:text="Hello" />
+            tools:context=".StatsFragment">
 
-    </FrameLayout>
+            <TextView
+                android:id="@+id/txt_v_stats_over_time_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/stats_over_time"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/spn_stats_duration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:entries="@array/stats_duration_array"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_v_stats_over_time_heading"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/overTimeLineChart"
+                android:layout_width="0dp"
+                android:layout_height="380dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_v_stats_over_time_heading">
+
+            </com.github.mikephil.charting.charts.LineChart>
+
+            <TextView
+                android:id="@+id/txt_v_detailed_breakdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/detailed_breakdown"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/overTimeLineChart" />
+
+            <TextView
+                android:id="@+id/txt_v_day_most_practiced_on"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:scrollHorizontally="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt_v_detailed_breakdown"
+                app:layout_constraintTop_toBottomOf="@+id/txt_v_detailed_breakdown"
+                tools:text="Day most practiced on" />
+
+            <TextView
+                android:id="@+id/txt_v_time_most_practiced_at"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:scrollHorizontally="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt_v_day_most_practiced_on"
+                app:layout_constraintTop_toBottomOf="@+id/txt_v_day_most_practiced_on"
+                tools:text="Time most practiced at:" />
+
+            <TextView
+                android:id="@+id/txt_v_most_practiced_activity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:scrollHorizontally="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt_v_time_most_practiced_at"
+                app:layout_constraintTop_toBottomOf="@+id/txt_v_time_most_practiced_at"
+                tools:text="Most practiced activity" />
+
+            <TextView
+                android:id="@+id/txt_v_average_session_duration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:scrollHorizontally="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt_v_most_practiced_activity"
+                app:layout_constraintTop_toBottomOf="@+id/txt_v_most_practiced_activity"
+                tools:text="You have spent an average of 14 hours practicing over the past year" />
+
+            <TextView
+                android:id="@+id/txt_v_total_time_spent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:scrollHorizontally="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/txt_v_average_session_duration"
+                app:layout_constraintTop_toBottomOf="@id/txt_v_average_session_duration"
+                tools:text="You have spent a total of hours practicing" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

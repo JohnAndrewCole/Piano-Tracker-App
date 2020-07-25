@@ -2,10 +2,17 @@ package com.johncole.pianotracker.utilities
 
 import android.text.InputFilter
 import android.text.Spanned
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.johncole.pianotracker.SessionFragment
+import com.johncole.pianotracker.StatsFragment
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+
+
+
+
 
 /**
  * Convert a LocalDate into a string format
@@ -36,6 +43,21 @@ fun convertTimeToFormattedString(time: LocalTime): String {
 }
 
 /**
+ * This converts a LocalDate into a long representing the number of days since
+ * the Epoch.
+ */
+fun convertLocalDateToEpochDay(date: LocalDate): Long {
+    return date.toEpochDay()
+}
+
+/**
+ * This converts a long value representing days since the Epoch into a LocalDate.
+ */
+fun convertEpochDayToLocalDate(epochDay: Long): LocalDate {
+    return LocalDate.ofEpochDay(epochDay)
+}
+
+/**
  * Converts two numbers representing a duration, in hours and minutes, to a string
  * representing the total duration in minutes. This is for database storage.
  * @param hours the hours captured in the hour number picker
@@ -43,32 +65,31 @@ fun convertTimeToFormattedString(time: LocalTime): String {
  * @return returns a string conversion of the int value of the minutes summed
  * with the hours converted to minutes
  */
-fun convertDurationToString(hours: String?, minutes: String?): String? {
-    if (minutes.isNullOrEmpty() && hours.isNullOrEmpty()) {
+fun convertHoursAndMinutesToDurationLong(hours: String?, minutes: String?): Long? {
+    if (hours.isNullOrEmpty() && minutes.isNullOrEmpty()) {
         return null
     } else if (!hours.isNullOrEmpty() && minutes.isNullOrEmpty()) {
-        return (hours.toInt() * 60).toString()
+        return (hours.toInt() * 60).toLong()
     } else if (hours.isNullOrEmpty() && !minutes.isNullOrEmpty()) {
-        return minutes
+        return minutes.toLong()
     } else if (!hours.isNullOrEmpty() && !minutes.isNullOrEmpty()) {
         val hoursToMinutes = hours.toInt() * 60
-        return (hoursToMinutes + minutes.toInt()).toString()
+        return (hoursToMinutes + minutes.toInt()).toLong()
     }
     return null
 }
 
-fun convertStringDurationToHours(length: String): String {
-    val hours = length.toInt() / 60
+fun convertLongDurationToHours(length: Long): String {
+    val hours = length / 60
     if (hours < 1) {
         return 0.toString()
     }
     return hours.toString()
 }
 
-fun convertStringDurationToMinutes(length: String): String {
+fun convertLongDurationToMinutes(length: Long): String {
     return (length.toInt() % 60).toString()
 }
-
 
 /**
  * This class provides the filter used in the [SessionFragment] to limit the user's
@@ -108,5 +129,16 @@ class TimeInputFilterMinMax(min: Float, max: Float) : InputFilter {
 
     private fun isInRange(a: Float, b: Float, c: Float): Boolean {
         return if (b > a) c in a..b else c in b..a
+    }
+}
+
+/**
+ * This class provides the filter used in the [StatsFragment] to convert a Unix timestamp
+ * to a string date-time.
+ */
+class DateValueFormatter : ValueFormatter() {
+
+    override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+        return LocalDate.ofEpochDay(value.toLong()).toString()
     }
 }

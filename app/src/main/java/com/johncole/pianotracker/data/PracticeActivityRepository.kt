@@ -44,6 +44,10 @@ class PracticeActivityRepository private constructor(private val practiceActivit
         practiceActivityDao.deletePracticeActivitiesBySessionId(sessionId)
     }
 
+    suspend fun deleteAllPracticeActivities() {
+        practiceActivityDao.deleteAllPracticeActivities()
+    }
+
     companion object {
 
         // For Singleton instantiation

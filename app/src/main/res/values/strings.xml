@@ -65,4 +65,15 @@
     <string name="delete">Delete</string>
     <string name="no_start_time_set">No Start Time Set</string>
     <string name="no_goal_set">No Goal Set</string>
+
+    <string name="stats_over_time">Your stats over time:</string>
+    <string name="detailed_breakdown">Detailed Breakdown:</string>
+    <string name="clear_out_database">Delete all your saved records:</string>
+    <string name="warning_cannot_undo">Be careful! You cannot undo this.</string>
+
+    <string name="day_of_week_most_practiced_on">Your favourite day of the week to practice on is %1$s.</string>
+    <string name="time_most_practiced_at">Your favourite time to practice at is %1$s.</string>
+    <string name="favourite_practice_activity">Your most practiced activity is %1$s.</string>
+    <string name="average_session_time_spent_practicing">You have spent an average of %1$s practicing %2$s.</string>
+    <string name="total_time_spent_playing">You have spent a total of %1$s playing the piano.</string>
 </resources>

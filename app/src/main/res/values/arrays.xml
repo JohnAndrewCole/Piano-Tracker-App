@@ -9,4 +9,47 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <!-- Practice Activity Dialog -->
+    <string-array name="key_array">
+        <item>C</item>
+        <item>G</item>
+        <item>D</item>
+        <item>A</item>
+        <item>E</item>
+        <item>B</item>
+        <item>G♭</item>
+        <item>D♭</item>
+        <item>A♭</item>
+        <item>E♭</item>
+        <item>B♭</item>
+        <item>F</item>
+        <item>NA</item>
+    </string-array>
+
+    <string-array name="practice_type_array">
+        <item>Technical Work</item>
+        <item>Playing for Fun</item>
+        <item>Working on a Piece</item>
+        <item>Improvising</item>
+        <item>Composing</item>
+    </string-array>
+
+    <string-array name="technical_work_type_array">
+        <item>Scales</item>
+        <item>Modes</item>
+        <item>Chords</item>
+        <item>Rhythm</item>
+        <item>Sheet Reading</item>
+        <item>Ear Training</item>
+    </string-array>
+
+    <!-- Stats Screen -->
+    <string-array name="stats_duration_array">
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+        <item>All</item>
+    </string-array>
+
 </resources>
