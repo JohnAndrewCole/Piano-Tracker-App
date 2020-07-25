@@ -65,8 +65,10 @@ fun convertEpochDayToLocalDate(epochDay: Long): LocalDate {
  * @return returns a string conversion of the int value of the minutes summed
  * with the hours converted to minutes
  */
-fun convertHoursAndMinutesToDurationLong(hours: String?, minutes: String?): Long {
-    if (!hours.isNullOrEmpty() && minutes.isNullOrEmpty()) {
+fun convertHoursAndMinutesToDurationLong(hours: String?, minutes: String?): Long? {
+    if (hours.isNullOrEmpty() && minutes.isNullOrEmpty()) {
+        return null
+    } else if (!hours.isNullOrEmpty() && minutes.isNullOrEmpty()) {
         return (hours.toInt() * 60).toLong()
     } else if (hours.isNullOrEmpty() && !minutes.isNullOrEmpty()) {
         return minutes.toLong()
@@ -74,7 +76,7 @@ fun convertHoursAndMinutesToDurationLong(hours: String?, minutes: String?): Long
         val hoursToMinutes = hours.toInt() * 60
         return (hoursToMinutes + minutes.toInt()).toLong()
     }
-    return 0
+    return null
 }
 
 fun convertLongDurationToHours(length: Long): String {

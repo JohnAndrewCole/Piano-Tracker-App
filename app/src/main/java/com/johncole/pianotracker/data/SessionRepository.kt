@@ -23,7 +23,7 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
         sessionDateTimestamp: Long,
         sessionStartTime: String?,
         sessionGoal: String?,
-        sessionDuration: Long
+        sessionDuration: Long?
     ) {
         sessionDao.updateSession(
             sessionId,

@@ -49,12 +49,21 @@ class StatsFragment : Fragment() {
             }
 
             for (session in sessionsBeforeCurrentDate) {
-                values.add(
-                    Entry(
-                        session.sessionDateTimestamp.toFloat(),
-                        (session.sessionDuration / 60).toFloat()
+                if (session.sessionDuration == null) {
+                    values.add(
+                        Entry(
+                            session.sessionDateTimestamp.toFloat(),
+                            0F
+                        )
                     )
-                )
+                } else {
+                    values.add(
+                        Entry(
+                            session.sessionDateTimestamp.toFloat(),
+                            (session.sessionDuration / 60).toFloat()
+                        )
+                    )
+                }
             }
             dataSet.notifyDataSetChanged()
 

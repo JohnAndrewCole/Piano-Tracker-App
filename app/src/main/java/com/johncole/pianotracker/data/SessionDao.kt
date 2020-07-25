@@ -27,7 +27,7 @@ interface SessionDao {
         sessionDateTimestamp: Long,
         sessionStartTime: String?,
         sessionGoal: String?,
-        sessionDuration: Long
+        sessionDuration: Long?
     )
 
     @Query("DELETE FROM session")

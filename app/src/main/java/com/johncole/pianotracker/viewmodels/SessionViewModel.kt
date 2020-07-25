@@ -79,8 +79,10 @@ class SessionViewModel(
             _sessionStartTime.value =
                 if (session.startTime != null) LocalTime.parse(session.startTime) else null
             _sessionGoal.value = session.sessionGoal
-            _sessionHours.value = convertLongDurationToHours(session.sessionDuration)
-            _sessionMinutes.value = convertLongDurationToMinutes(session.sessionDuration)
+            session.sessionDuration?.let {
+                convertLongDurationToHours(it)
+                convertLongDurationToMinutes(it)
+            }
         }
     }
 

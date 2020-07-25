@@ -40,7 +40,7 @@ data class Session(
      * no length or records no length, it will be set
      * to 0.
      */
-    @ColumnInfo(name = "session_duration") val sessionDuration: Long
+    @ColumnInfo(name = "session_duration") val sessionDuration: Long? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
