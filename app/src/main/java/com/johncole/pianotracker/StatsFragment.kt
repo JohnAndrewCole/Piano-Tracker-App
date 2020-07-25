@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -34,9 +36,10 @@ class StatsFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val lineChart = binding.overTimeLineChart
+        viewModel.getSessionsToBeDisplayed()
 
-        viewModel.listOfSessionsBeforeCurrentDate.observe(viewLifecycleOwner) { sessionsBeforeCurrentDate ->
+        // Observer for line chart.
+        viewModel.sessionsToBeDisplayed.observe(viewLifecycleOwner) { sessionsBeforeCurrentDate ->
 
             val values = arrayListOf<Entry>()
 
@@ -67,7 +70,7 @@ class StatsFragment : Fragment() {
             }
             dataSet.notifyDataSetChanged()
 
-            lineChart.apply {
+            binding.overTimeLineChart.apply {
 
                 xAxis.apply {
                     valueFormatter = DateValueFormatter()
@@ -77,9 +80,9 @@ class StatsFragment : Fragment() {
 
                     axisLeft.apply {
                         axisLineColor = Color.BLUE
-                        axisMinimum = 0f
-                        axisMaximum = 6f
-                        granularity = 0.5f
+//                        axisMinimum = 0f
+//                        axisMaximum = 6f
+//                        granularity = 0.5f
                     }
 
                     legend.isEnabled = false
@@ -91,6 +94,73 @@ class StatsFragment : Fragment() {
                 }
             }
         }
+
+        // Setting binding for spinner that sets duration over which to view stats.
+        binding.spnStatsDuration.let {
+
+            // Create an ArrayAdapter using the string array and a default spinner layout
+            ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.stats_duration_array,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                it.adapter = adapter
+            }
+
+            it.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Another interface callback
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    pos: Int,
+                    id: Long
+                ) {
+                    // An item was selected. You can retrieve the selected item using
+                    val selectedItem = parent.getItemAtPosition(pos)
+                    viewModel.durationOfStats.value = selectedItem.toString()
+                    viewModel.getSessionsToBeDisplayed()
+
+                    // TODO: Get these from data! Results will vary according to the duration set by the spinner.
+
+                    val mostPracticedDay = "Tuesday"
+                    binding.txtVDayMostPracticedOn.text =
+                        getString(R.string.day_of_week_most_practiced_on, mostPracticedDay)
+
+                    val mostPracticedTime = "10:30 AM"
+                    binding.txtVTimeMostPracticedAt.text =
+                        getString(R.string.time_most_practiced_at, mostPracticedTime)
+
+                    val mostPracticedActivity = "Scales"
+                    binding.txtVMostPracticedActivity.text =
+                        getString(R.string.favourite_practice_activity, mostPracticedActivity)
+
+                    val averageDurationTime = "1 hour 15 minutes"
+                    val forThePast = if (selectedItem.toString() == "All") {
+                        "since you started using this app!"
+                    } else {
+                        "for the past ${selectedItem.toString().toLowerCase(Locale.ROOT)}"
+                    }
+                    binding.txtVAverageSessionDuration.text = getString(
+                        R.string.average_session_time_spent_practicing,
+                        averageDurationTime,
+                        forThePast
+                    )
+
+                    val totalTimeSpentPlaying = "30 hours"
+                    binding.txtVTotalTimeSpent.text =
+                        getString(R.string.total_time_spent_playing, totalTimeSpentPlaying)
+
+                }
+            }
+        }
+
 
         return binding.root
     }

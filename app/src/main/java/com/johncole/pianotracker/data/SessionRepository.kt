@@ -1,13 +1,11 @@
 package com.johncole.pianotracker.data
 
-import androidx.lifecycle.LiveData
-
 class SessionRepository private constructor(private val sessionDao: SessionDao) {
 
     fun getAllSessions() = sessionDao.getAllSessions()
 
-    fun getAllSessionsBeforePresent(currentDate: Long): LiveData<List<Session>> =
-        sessionDao.getSessionsBeforeCurrentDate(currentDate)
+    suspend fun getAllSessionsInRange(startEpochDay: Long, currentEpochDay: Long): List<Session> =
+        sessionDao.getAllSessionsInRange(startEpochDay, currentEpochDay)
 
     suspend fun getSessionById(sessionId: Long): Session {
         return sessionDao.getSessionById(sessionId)
