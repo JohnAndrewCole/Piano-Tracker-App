@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
-import com.johncole.pianotracker.utilities.convertLocalDateToUnixTimestamp
+import com.johncole.pianotracker.utilities.convertLocalDateToEpochDay
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -17,32 +17,19 @@ class HomeScreensViewModel(
 
     // region Properties
 
+    // region Live Data
+
     val sessions: LiveData<List<Session>> =
         sessionRepository.getAllSessions()
 
-    // region Live Data
-
-    val listOfSessionsBeforeCurrentDate: LiveData<List<Session>>
-        get() {
-            return sessionRepository.getAllSessionsBeforePresent(
-                convertLocalDateToUnixTimestamp(
-                    LocalDate.now()
-                )
-            )
-        }
+    var listOfSessionsBeforeCurrentDate: LiveData<List<Session>> =
+        sessionRepository.getAllSessionsBeforePresent(convertLocalDateToEpochDay(LocalDate.now()))
 
     // endregion
 
     // endregion
 
     // region Database Functions
-
-//    fun getAllSessionsBeforePresent() {
-//        val currentDate = convertLocalDateToUnixTimestamp(LocalDate.now())
-//        viewModelScope.launch {
-//            listOfSessionsBeforeCurrentDate = sessionRepository.getAllSessionsBeforePresent(currentDate)
-//        }
-//    }
 
     fun deleteAllRecords() {
         viewModelScope.launch {
@@ -51,6 +38,13 @@ class HomeScreensViewModel(
         }
     }
 
+//    fun getAllSessionsBeforePresent() {
+//        viewModelScope.launch {
+//            listOfSessionsBeforeCurrentDate = sessionRepository.getAllSessionsBeforePresent(
+//                convertLocalDateToEpochDay(LocalDate.now())
+//            )
+//        }
+//    }
 
     // endregion
 }

@@ -17,7 +17,7 @@ data class Session(
     @ColumnInfo(name = "session_date") val date: String,
 
     /**
-     * The Unix Timestamp of the date of the [Session].
+     * The Epoch day of the date of the [Session], measured in days.
      * This is a REQUIRED field.
      */
     @ColumnInfo(name = "session_date_timestamp") val sessionDateTimestamp: Long,

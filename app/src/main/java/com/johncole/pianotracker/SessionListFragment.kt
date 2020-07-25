@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.johncole.pianotracker.adapters.SessionListAdapter
@@ -17,7 +17,7 @@ class SessionListFragment : Fragment() {
 
     private lateinit var binding: FragmentSessionListBinding
 
-    private val viewModel: HomeScreensViewModel by activityViewModels {
+    private val viewModel: HomeScreensViewModel by viewModels {
         InjectorUtils.provideHomeScreensViewModelFactory(requireContext())
     }
 

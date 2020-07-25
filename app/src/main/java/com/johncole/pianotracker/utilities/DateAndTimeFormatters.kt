@@ -2,11 +2,17 @@ package com.johncole.pianotracker.utilities
 
 import android.text.InputFilter
 import android.text.Spanned
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.johncole.pianotracker.SessionFragment
+import com.johncole.pianotracker.StatsFragment
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+
+
+
+
 
 /**
  * Convert a LocalDate into a string format
@@ -37,23 +43,19 @@ fun convertTimeToFormattedString(time: LocalTime): String {
 }
 
 /**
- * This converts a LocalDate into a UnixTimestamp
+ * This converts a LocalDate into a long representing the number of days since
+ * the Epoch.
  */
-fun convertLocalDateToUnixTimestamp(date: LocalDate): Long {
-    val zoneId = ZoneId.systemDefault() // or: ZoneId.of("Europe/Oslo")
-    return date.atStartOfDay(zoneId).toEpochSecond()
+fun convertLocalDateToEpochDay(date: LocalDate): Long {
+    return date.toEpochDay()
 }
 
-// TODO: Figure out whether you need this for times, i.e.
-//  Do you need to retrieve times for any data visualisation?
-
 /**
- * This converts a LocalDateTime into a UnixTimestamp
+ * This converts a long value representing days since the Epoch into a LocalDate.
  */
-//fun convertLocalDateTimeToUnixTimestamp(time: LocalDateTime): Long {
-//    val zoneId = ZoneId.systemDefault() // or: ZoneId.of("Europe/Oslo")
-//    return time.atZone(zoneId).toEpochSecond()
-//}
+fun convertEpochDayToLocalDate(epochDay: Long): LocalDate {
+    return LocalDate.ofEpochDay(epochDay)
+}
 
 /**
  * Converts two numbers representing a duration, in hours and minutes, to a string
@@ -125,5 +127,16 @@ class TimeInputFilterMinMax(min: Float, max: Float) : InputFilter {
 
     private fun isInRange(a: Float, b: Float, c: Float): Boolean {
         return if (b > a) c in a..b else c in b..a
+    }
+}
+
+/**
+ * This class provides the filter used in the [StatsFragment] to convert a Unix timestamp
+ * to a string date-time.
+ */
+class DateValueFormatter : ValueFormatter() {
+
+    override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+        return LocalDate.ofEpochDay(value.toLong()).toString()
     }
 }

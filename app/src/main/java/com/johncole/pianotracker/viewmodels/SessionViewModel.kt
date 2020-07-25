@@ -9,7 +9,7 @@ import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
 import com.johncole.pianotracker.utilities.convertHoursAndMinutesToDurationLong
-import com.johncole.pianotracker.utilities.convertLocalDateToUnixTimestamp
+import com.johncole.pianotracker.utilities.convertLocalDateToEpochDay
 import com.johncole.pianotracker.utilities.convertLongDurationToHours
 import com.johncole.pianotracker.utilities.convertLongDurationToMinutes
 import kotlinx.coroutines.launch
@@ -91,7 +91,7 @@ class SessionViewModel(
 
         val session = Session(
             sessionDate.value.toString(),
-            convertLocalDateToUnixTimestamp(sessionDate.value!!),
+            convertLocalDateToEpochDay(sessionDate.value!!),
             newSessionStartTime,
             sessionGoal.value,
             convertHoursAndMinutesToDurationLong(sessionHours.value, sessionMinutes.value)
@@ -111,7 +111,7 @@ class SessionViewModel(
             sessionRepository.updateSession(
                 sessionId,
                 sessionDate.value.toString(),
-                convertLocalDateToUnixTimestamp(sessionDate.value!!),
+                convertLocalDateToEpochDay(sessionDate.value!!),
                 newSessionStartTime,
                 sessionGoal.value,
                 convertHoursAndMinutesToDurationLong(sessionHours.value, sessionMinutes.value)

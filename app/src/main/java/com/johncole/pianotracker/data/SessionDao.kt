@@ -14,7 +14,7 @@ interface SessionDao {
     @Query("SELECT * FROM session WHERE id = :sessionId LIMIT 1")
     suspend fun getSessionById(sessionId: Long): Session
 
-    @Query("SELECT * FROM session WHERE session_date_timestamp < :currentDate")
+    @Query("SELECT * FROM session WHERE session_date_timestamp < :currentDate ORDER BY session_date_timestamp ASC")
     fun getSessionsBeforeCurrentDate(currentDate: Long): LiveData<List<Session>>
 
     @Query("DELETE FROM session WHERE id = :sessionId")
