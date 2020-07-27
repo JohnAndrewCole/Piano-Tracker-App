@@ -6,9 +6,11 @@ package com.johncole.pianotracker.utilities
 
 const val DATABASE_NAME = "piano-tracker-database"
 
-// These constants are used when setting the granularity of the line chart's x axis dates in the
-// stats screen.
-const val DAY_GRANULARITY = 1F
-const val MONTH_GRANULARITY = 5F
-const val YEAR_GRANULARITY = 30F
-const val ALL_GRANULARITY = 180F
+// These constants are used when determining the length of time over which to search
+// for results from the database.
+enum class ResultsRange(val resultsRangeLength: Long) {
+    Week(7),
+    Month(31),
+    Year(365),
+    All(0)
+}

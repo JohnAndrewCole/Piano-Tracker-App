@@ -47,6 +47,8 @@ class StatsFragment : Fragment() {
         // Observer for line chart.
         viewModel.sessionsToBeDisplayed.observe(viewLifecycleOwner) { sessionsBeforeCurrentDate ->
 
+            viewModel.getTimeStatsForCurrentSessions()
+
             val values = arrayListOf<Entry>()
 
             Collections.sort(values, EntryXComparator())
@@ -145,41 +147,9 @@ class StatsFragment : Fragment() {
                     val selectedItem = parent.getItemAtPosition(pos)
                     viewModel.durationOfStats.value = selectedItem.toString()
                     viewModel.getSessionsToBeDisplayed()
-
-                    // TODO: Get these from data! Results will vary according to the duration set by the spinner.
-
-                    val mostPracticedDay = "Tuesday"
-                    binding.txtVDayMostPracticedOn.text =
-                        getString(R.string.day_of_week_most_practiced_on, mostPracticedDay)
-
-                    val mostPracticedTime = "10:30 AM"
-                    binding.txtVTimeMostPracticedAt.text =
-                        getString(R.string.time_most_practiced_at, mostPracticedTime)
-
-                    val mostPracticedActivity = "Scales"
-                    binding.txtVMostPracticedActivity.text =
-                        getString(R.string.favourite_practice_activity, mostPracticedActivity)
-
-                    val averageDurationTime = "1 hour 15 minutes"
-                    val forThePast = if (selectedItem.toString() == "All") {
-                        "since you started using this app"
-                    } else {
-                        "for the past ${selectedItem.toString().toLowerCase(Locale.ROOT)}"
-                    }
-                    binding.txtVAverageSessionDuration.text = getString(
-                        R.string.average_session_time_spent_practicing,
-                        averageDurationTime,
-                        forThePast
-                    )
-
-                    val totalTimeSpentPlaying = "30 hours"
-                    binding.txtVTotalTimeSpent.text =
-                        getString(R.string.total_time_spent_playing, totalTimeSpentPlaying)
-
                 }
             }
         }
-
 
         return binding.root
     }

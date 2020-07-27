@@ -99,6 +99,25 @@ fun convertLongDurationToMinutes(length: Long): String {
     return (length.toInt() % 60).toString()
 }
 
+fun convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration: Long): String {
+    var hours = convertLongDurationToHours(totalDuration)
+    var minutes = convertLongDurationToMinutes(totalDuration)
+
+    if (hours == "1") {
+        hours = "1 hr"
+    } else {
+        hours = "$hours hrs"
+    }
+
+    if (minutes == "1") {
+        minutes = "1 min"
+    } else {
+        minutes = "$minutes mins"
+    }
+
+    return "$hours $minutes"
+}
+
 /**
  * This class provides the filter used in the [SessionFragment] to limit the user's
  * input to between a minimum and maximum value (so that a number greater than 60

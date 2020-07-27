@@ -17,6 +17,12 @@ interface SessionDao {
     @Query("SELECT * FROM session WHERE session_date_timestamp BETWEEN :startEpochDay and :currentEpochDay ORDER BY session_date_timestamp ASC")
     suspend fun getAllSessionsInRange(startEpochDay: Long, currentEpochDay: Long): List<Session>
 
+    @Query("SELECT session_duration FROM session WHERE session_duration IS NOT NULL BETWEEN :startEpochDay and :currentEpochDay")
+    suspend fun getDurationsOfAllSessionsInRange(
+        startEpochDay: Long,
+        currentEpochDay: Long
+    ): List<Long>?
+
     @Query("DELETE FROM session WHERE id = :sessionId")
     suspend fun deleteBySessionId(sessionId: Long)
 

@@ -7,7 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
+import com.johncole.pianotracker.utilities.ResultsRange
 import com.johncole.pianotracker.utilities.convertLocalDateToEpochDay
+import com.johncole.pianotracker.utilities.convertTotalLongDurationToHoursAndMinutesFormattedString
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -23,7 +25,21 @@ class HomeScreensViewModel(
             return convertLocalDateToEpochDay(LocalDate.now()).toFloat()
         }
 
+    private val currentEpochDay = convertLocalDateToEpochDay(LocalDate.now())
+
     // region Live Data
+
+    private val _totalTimeSpentPracticing = MutableLiveData<String>()
+    val totalTimeSpentPracticing: MutableLiveData<String>
+        get() = _totalTimeSpentPracticing
+
+    private val _averageDurationOfSessions = MutableLiveData<String>()
+    val averageDurationOfSessions: MutableLiveData<String>
+        get() = _averageDurationOfSessions
+
+    private val _favouritePracticeTime = MutableLiveData<String>()
+    val favouritePracticeTime: MutableLiveData<String>
+        get() = _favouritePracticeTime
 
     val sessions: LiveData<List<Session>> =
         sessionRepository.getAllSessions()
@@ -42,6 +58,23 @@ class HomeScreensViewModel(
 
     // region Functions
 
+    fun getTimeStatsForCurrentSessions() {
+        var totalDuration = 0L
+        var averageDuration = "0 hrs 0 mins"
+        if (!sessionsToBeDisplayed.value.isNullOrEmpty()) {
+            for (session in sessionsToBeDisplayed.value!!) {
+                if (session.sessionDuration != null) {
+                    totalDuration += session.sessionDuration
+                }
+            }
+            averageDuration =
+                convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration / sessionsToBeDisplayed.value!!.size)
+        }
+        _averageDurationOfSessions.value = averageDuration
+        _totalTimeSpentPracticing.value =
+            convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration)
+    }
+
     // region Database Functions
 
     fun deleteAllRecords() {
@@ -53,22 +86,44 @@ class HomeScreensViewModel(
 
     fun getSessionsToBeDisplayed() {
         viewModelScope.launch {
-            val currentEpochDay = convertLocalDateToEpochDay(LocalDate.now())
-            val startEpochDay = when (durationOfStats.value) {
-                "Week" -> currentEpochDay - 7
-                "Month" -> currentEpochDay - 31
-                "Year" -> currentEpochDay - 365
-                "All" -> 0
+            when (durationOfStats.value) {
+                ResultsRange.Week.name -> {
+                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
+                        currentEpochDay - ResultsRange.Week.resultsRangeLength,
+                        currentEpochDay
+                    )
+                }
+                ResultsRange.Month.name -> {
+                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
+                        currentEpochDay - ResultsRange.Month.resultsRangeLength,
+                        currentEpochDay
+                    )
+                }
+                ResultsRange.Year.name -> {
+                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
+                        currentEpochDay - ResultsRange.Year.resultsRangeLength,
+                        currentEpochDay
+                    )
+                }
+                ResultsRange.All.name -> {
+                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
+                        currentEpochDay - ResultsRange.All.resultsRangeLength,
+                        currentEpochDay
+                    )
+                }
                 // Setting this to the same as week because the spinner that sets this value
                 // defaults to the "Week" option.
-                else -> currentEpochDay - 7
+                else -> {
+                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
+                        currentEpochDay - ResultsRange.Week.resultsRangeLength,
+                        currentEpochDay
+                    )
+                }
             }
-            _sessionsToBeDisplayed.value =
-                sessionRepository.getAllSessionsInRange(startEpochDay, currentEpochDay)
         }
     }
-
-    // endregion
-
-    // endregion
 }
+
+// endregion
+
+// endregion

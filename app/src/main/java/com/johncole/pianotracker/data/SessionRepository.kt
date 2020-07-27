@@ -7,13 +7,14 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
     suspend fun getAllSessionsInRange(startEpochDay: Long, currentEpochDay: Long): List<Session> =
         sessionDao.getAllSessionsInRange(startEpochDay, currentEpochDay)
 
-    suspend fun getSessionById(sessionId: Long): Session {
-        return sessionDao.getSessionById(sessionId)
-    }
+    suspend fun getSessionById(sessionId: Long): Session = sessionDao.getSessionById(sessionId)
 
-    suspend fun insertSession(session: Session): Long {
-        return sessionDao.insertSession(session)
-    }
+    suspend fun getDurationsOfAllSessionsInRange(
+        startEpochDay: Long,
+        currentEpochDay: Long
+    ): List<Long>? = sessionDao.getDurationsOfAllSessionsInRange(startEpochDay, currentEpochDay)
+
+    suspend fun insertSession(session: Session): Long = sessionDao.insertSession(session)
 
     suspend fun updateSession(
         sessionId: Long,
