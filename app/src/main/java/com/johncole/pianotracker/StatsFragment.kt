@@ -18,7 +18,9 @@ import com.github.mikephil.charting.utils.EntryXComparator
 import com.johncole.pianotracker.databinding.FragmentStatsBinding
 import com.johncole.pianotracker.utilities.DateValueFormatter
 import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.utilities.convertLocalDateToEpochDay
 import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
+import java.time.LocalDate
 import java.util.*
 
 
@@ -74,25 +76,45 @@ class StatsFragment : Fragment() {
             }
             dataSet.notifyDataSetChanged()
 
+
             binding.overTimeLineChart.apply {
+
+                legend.isEnabled = false
+                axisRight.isEnabled = false
+                description.text = ""
 
                 xAxis.apply {
                     valueFormatter = DateValueFormatter()
+                    when (viewModel.durationOfStats.value) {
+                        "Week" -> {
+                            axisMinimum = viewModel.currentDateEpochDay - 7
+                            granularity = 1F
+                        }
+                        "Month" -> {
+                            axisMinimum = viewModel.currentDateEpochDay - 31
+                            granularity = 5F
+                        }
+                        "Year" -> {
+                            axisMinimum = viewModel.currentDateEpochDay - 365
+                            granularity = 30F
+                        }
+                        "All" -> {
+                            axisMinimum = values[0].x
+                        }
+                    }
+                    axisMaximum = convertLocalDateToEpochDay(LocalDate.now()).toFloat()
                     position = XAxis.XAxisPosition.BOTTOM
                     setDrawLabels(true)
                     axisLineColor = Color.BLUE
-
-                    axisLeft.apply {
-                        axisLineColor = Color.BLUE
-                    }
-
-                    legend.isEnabled = false
-                    axisRight.isEnabled = false
-                    description.text = ""
-
-                    data = LineData(dataSet)
-                    invalidate()
                 }
+
+                axisLeft.apply {
+                    axisLineColor = Color.BLUE
+                    axisMinimum = 0F
+                }
+
+                data = LineData(dataSet)
+                invalidate()
             }
         }
 
@@ -140,7 +162,7 @@ class StatsFragment : Fragment() {
 
                     val averageDurationTime = "1 hour 15 minutes"
                     val forThePast = if (selectedItem.toString() == "All") {
-                        "since you started using this app!"
+                        "since you started using this app"
                     } else {
                         "for the past ${selectedItem.toString().toLowerCase(Locale.ROOT)}"
                     }

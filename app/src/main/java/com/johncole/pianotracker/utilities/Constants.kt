@@ -5,5 +5,10 @@ package com.johncole.pianotracker.utilities
  */
 
 const val DATABASE_NAME = "piano-tracker-database"
-const val SESSION_FRAGMENT_REQUEST_CODE = 4
-const val PRACTICE_ACTIVITY_BUNDLE_KEY = "newPracticeActivityBundle"
+
+// These constants are used when setting the granularity of the line chart's x axis dates in the
+// stats screen.
+const val DAY_GRANULARITY = 1F
+const val MONTH_GRANULARITY = 5F
+const val YEAR_GRANULARITY = 30F
+const val ALL_GRANULARITY = 180F
