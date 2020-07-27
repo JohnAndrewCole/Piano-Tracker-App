@@ -38,6 +38,10 @@ class StatsFragment : Fragment() {
 
         viewModel.getSessionsToBeDisplayed()
 
+        viewModel.sessions.observe(viewLifecycleOwner) { result ->
+            binding.hasSessions = result.isNullOrEmpty()
+        }
+
         // Observer for line chart.
         viewModel.sessionsToBeDisplayed.observe(viewLifecycleOwner) { sessionsBeforeCurrentDate ->
 
@@ -80,9 +84,6 @@ class StatsFragment : Fragment() {
 
                     axisLeft.apply {
                         axisLineColor = Color.BLUE
-//                        axisMinimum = 0f
-//                        axisMaximum = 6f
-//                        granularity = 0.5f
                     }
 
                     legend.isEnabled = false
@@ -98,15 +99,12 @@ class StatsFragment : Fragment() {
         // Setting binding for spinner that sets duration over which to view stats.
         binding.spnStatsDuration.let {
 
-            // Create an ArrayAdapter using the string array and a default spinner layout
             ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.stats_duration_array,
                 android.R.layout.simple_spinner_item
             ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
                 it.adapter = adapter
             }
 
@@ -122,7 +120,6 @@ class StatsFragment : Fragment() {
                     pos: Int,
                     id: Long
                 ) {
-                    // An item was selected. You can retrieve the selected item using
                     val selectedItem = parent.getItemAtPosition(pos)
                     viewModel.durationOfStats.value = selectedItem.toString()
                     viewModel.getSessionsToBeDisplayed()
