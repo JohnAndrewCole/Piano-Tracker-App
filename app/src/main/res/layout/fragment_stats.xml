@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.HomeScreensViewModel" />
+
+        <variable
+            name="hasSessions"
+            type="boolean" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -23,6 +27,19 @@
             tools:context=".StatsFragment">
 
             <TextView
+                android:id="@+id/txt_v_no_sessions_recorded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_sessions_yet"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                app:isGone="@{!hasSessions}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/txt_v_stats_over_time_heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,6 +49,7 @@
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:isGone="@{hasSessions}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,6 +62,7 @@
                 android:layout_marginEnd="16dp"
                 android:entries="@array/stats_duration_array"
                 android:textAlignment="center"
+                app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txt_v_stats_over_time_heading"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,6 +74,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -71,6 +91,7 @@
                 android:text="@string/detailed_breakdown"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:isGone="@{hasSessions}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/overTimeLineChart" />
 
@@ -81,6 +102,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:scrollHorizontally="false"
+                app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/txt_v_detailed_breakdown"
@@ -94,6 +116,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:scrollHorizontally="false"
+                app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/txt_v_day_most_practiced_on"
@@ -107,6 +130,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:scrollHorizontally="false"
+                app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/txt_v_time_most_practiced_at"
@@ -120,6 +144,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:scrollHorizontally="false"
+                app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/txt_v_most_practiced_activity"
@@ -134,6 +159,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:scrollHorizontally="false"
+                app:isGone="@{hasSessions}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

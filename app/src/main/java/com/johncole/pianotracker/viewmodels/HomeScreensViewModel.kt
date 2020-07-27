@@ -18,6 +18,11 @@ class HomeScreensViewModel(
 
     // region Properties
 
+    val currentDateEpochDay: Float
+        get() {
+            return convertLocalDateToEpochDay(LocalDate.now()).toFloat()
+        }
+
     // region Live Data
 
     val sessions: LiveData<List<Session>> =
@@ -31,13 +36,11 @@ class HomeScreensViewModel(
     val durationOfStats: MutableLiveData<String>
         get() = _durationOfStats
 
-
-//    val allSessionsBeforeCurrentDate: LiveData<List<Session>> =
-//        sessionRepository.getAllSessionsBeforePresent(convertLocalDateToEpochDay(LocalDate.now()))
-
     // endregion
 
     // endregion
+
+    // region Functions
 
     // region Database Functions
 
@@ -65,13 +68,7 @@ class HomeScreensViewModel(
         }
     }
 
-//    fun getAllSessionsBeforePresent() {
-//        viewModelScope.launch {
-//            listOfSessionsBeforeCurrentDate = sessionRepository.getAllSessionsBeforePresent(
-//                convertLocalDateToEpochDay(LocalDate.now())
-//            )
-//        }
-//    }
+    // endregion
 
     // endregion
 }

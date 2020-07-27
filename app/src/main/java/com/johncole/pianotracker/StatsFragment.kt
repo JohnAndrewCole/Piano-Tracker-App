@@ -18,7 +18,9 @@ import com.github.mikephil.charting.utils.EntryXComparator
 import com.johncole.pianotracker.databinding.FragmentStatsBinding
 import com.johncole.pianotracker.utilities.DateValueFormatter
 import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.utilities.convertLocalDateToEpochDay
 import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
+import java.time.LocalDate
 import java.util.*
 
 
@@ -37,6 +39,10 @@ class StatsFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.getSessionsToBeDisplayed()
+
+        viewModel.sessions.observe(viewLifecycleOwner) { result ->
+            binding.hasSessions = result.isNullOrEmpty()
+        }
 
         // Observer for line chart.
         viewModel.sessionsToBeDisplayed.observe(viewLifecycleOwner) { sessionsBeforeCurrentDate ->
@@ -70,43 +76,57 @@ class StatsFragment : Fragment() {
             }
             dataSet.notifyDataSetChanged()
 
+
             binding.overTimeLineChart.apply {
+
+                legend.isEnabled = false
+                axisRight.isEnabled = false
+                description.text = ""
 
                 xAxis.apply {
                     valueFormatter = DateValueFormatter()
+                    when (viewModel.durationOfStats.value) {
+                        "Week" -> {
+                            axisMinimum = viewModel.currentDateEpochDay - 7
+                            granularity = 1F
+                        }
+                        "Month" -> {
+                            axisMinimum = viewModel.currentDateEpochDay - 31
+                            granularity = 5F
+                        }
+                        "Year" -> {
+                            axisMinimum = viewModel.currentDateEpochDay - 365
+                            granularity = 30F
+                        }
+                        "All" -> {
+                            axisMinimum = values[0].x
+                        }
+                    }
+                    axisMaximum = convertLocalDateToEpochDay(LocalDate.now()).toFloat()
                     position = XAxis.XAxisPosition.BOTTOM
                     setDrawLabels(true)
                     axisLineColor = Color.BLUE
-
-                    axisLeft.apply {
-                        axisLineColor = Color.BLUE
-//                        axisMinimum = 0f
-//                        axisMaximum = 6f
-//                        granularity = 0.5f
-                    }
-
-                    legend.isEnabled = false
-                    axisRight.isEnabled = false
-                    description.text = ""
-
-                    data = LineData(dataSet)
-                    invalidate()
                 }
+
+                axisLeft.apply {
+                    axisLineColor = Color.BLUE
+                    axisMinimum = 0F
+                }
+
+                data = LineData(dataSet)
+                invalidate()
             }
         }
 
         // Setting binding for spinner that sets duration over which to view stats.
         binding.spnStatsDuration.let {
 
-            // Create an ArrayAdapter using the string array and a default spinner layout
             ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.stats_duration_array,
                 android.R.layout.simple_spinner_item
             ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
                 it.adapter = adapter
             }
 
@@ -122,7 +142,6 @@ class StatsFragment : Fragment() {
                     pos: Int,
                     id: Long
                 ) {
-                    // An item was selected. You can retrieve the selected item using
                     val selectedItem = parent.getItemAtPosition(pos)
                     viewModel.durationOfStats.value = selectedItem.toString()
                     viewModel.getSessionsToBeDisplayed()
@@ -143,7 +162,7 @@ class StatsFragment : Fragment() {
 
                     val averageDurationTime = "1 hour 15 minutes"
                     val forThePast = if (selectedItem.toString() == "All") {
-                        "since you started using this app!"
+                        "since you started using this app"
                     } else {
                         "for the past ${selectedItem.toString().toLowerCase(Locale.ROOT)}"
                     }
