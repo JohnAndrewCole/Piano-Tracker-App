@@ -60,22 +60,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/session_date_edit_text" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_goal_edit_text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:autofillHints="@string/goal_input"
-            android:ems="10"
-            android:hint="@string/goal_input"
-            android:imeOptions="actionDone"
-            android:inputType="textPersonName"
-            android:text="@={viewModel.sessionGoal}"
+            android:layout_marginBottom="16dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="60"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text" />
+            app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/goal_input"
+                android:ems="10"
+                android:hint="@string/goal_input"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:maxLength="60"
+                android:text="@={viewModel.sessionGoal}"
+                android:textSize="@dimen/paragraph_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/duration_colon"
@@ -134,7 +147,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/recycler_view_border"
             android:padding="10dp"
             app:isGone="@{isCreatingSession}"
