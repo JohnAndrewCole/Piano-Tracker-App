@@ -20,10 +20,10 @@ class PracticeActivityRepository private constructor(private val practiceActivit
         practiceActivityId: Long,
         sessionId: String,
         practiceActivityType: String,
-        technicalWorkType: String,
-        key: String,
-        bpm: String,
-        notes: String
+        technicalWorkType: String?,
+        key: String?,
+        bpm: String?,
+        notes: String?
     ) {
         practiceActivityDao.updateSession(
             practiceActivityId,

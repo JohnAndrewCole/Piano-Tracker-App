@@ -52,10 +52,10 @@ class PracticeActivityViewModel(
         val newPracticeActivity = PracticeActivity(
             sessionId.toString(),
             practiceActivityType.value!!,
-            technicalWorkType.value!!,
-            keySelected.value!!,
-            bpmSelected.value!!,
-            notes.value!!
+            technicalWorkType.value,
+            keySelected.value,
+            bpmSelected.value,
+            notes.value
         )
 
         viewModelScope.launch {
@@ -94,10 +94,10 @@ class PracticeActivityViewModel(
                 practiceActivityId,
                 sessionId.toString(),
                 practiceActivityType.value!!,
-                technicalWorkType.value!!,
-                keySelected.value!!,
-                bpmSelected.value!!,
-                notes.value!!
+                technicalWorkType.value,
+                keySelected.value,
+                bpmSelected.value,
+                notes.value
             )
         }
     }

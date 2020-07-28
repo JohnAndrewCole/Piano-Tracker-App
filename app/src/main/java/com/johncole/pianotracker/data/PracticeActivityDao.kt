@@ -25,10 +25,10 @@ interface PracticeActivityDao {
         practiceActivityId: Long,
         sessionId: String,
         practiceActivityType: String,
-        technicalWorkType: String,
-        key: String,
-        bpm: String,
-        notes: String
+        technicalWorkType: String?,
+        key: String?,
+        bpm: String?,
+        notes: String?
     )
 
     @Insert
