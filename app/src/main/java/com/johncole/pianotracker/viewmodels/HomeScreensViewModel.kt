@@ -59,20 +59,38 @@ class HomeScreensViewModel(
     // region Functions
 
     fun getTimeStatsForCurrentSessions() {
-        var totalDuration = 0L
-        var averageDuration = "0 hrs 0 mins"
-        if (!sessionsToBeDisplayed.value.isNullOrEmpty()) {
-            for (session in sessionsToBeDisplayed.value!!) {
-                if (session.sessionDuration != null) {
-                    totalDuration += session.sessionDuration
+        viewModelScope.launch {
+            var totalDuration = 0L
+            var averageDuration = "0 hrs 0 mins"
+
+            if (!sessionsToBeDisplayed.value.isNullOrEmpty()) {
+
+                // For total duration of all sessions
+                for (session in sessionsToBeDisplayed.value!!) {
+                    if (session.sessionDuration != null) {
+                        totalDuration += session.sessionDuration
+                    }
                 }
+
+                // For average start time of all sessions
+                val startTimeMap: List<String?> = sessionsToBeDisplayed.value!!.map { it.startTime }
+                val countOfUniqueStartTimes = startTimeMap.groupingBy { it }.eachCount()
+                val favouriteStartTime = countOfUniqueStartTimes.maxBy { it.value }?.key.toString()
+                _favouritePracticeTime.value = if (favouriteStartTime == "null") {
+                    "No Times Set"
+                } else {
+                    favouriteStartTime
+                }
+
+                // For average length of all sessions
+                averageDuration =
+                    convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration / sessionsToBeDisplayed.value!!.size)
             }
-            averageDuration =
-                convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration / sessionsToBeDisplayed.value!!.size)
+
+            _averageDurationOfSessions.value = averageDuration
+            _totalTimeSpentPracticing.value =
+                convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration)
         }
-        _averageDurationOfSessions.value = averageDuration
-        _totalTimeSpentPracticing.value =
-            convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration)
     }
 
     // region Database Functions

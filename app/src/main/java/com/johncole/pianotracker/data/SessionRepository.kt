@@ -9,11 +9,6 @@ class SessionRepository private constructor(private val sessionDao: SessionDao) 
 
     suspend fun getSessionById(sessionId: Long): Session = sessionDao.getSessionById(sessionId)
 
-    suspend fun getDurationsOfAllSessionsInRange(
-        startEpochDay: Long,
-        currentEpochDay: Long
-    ): List<Long>? = sessionDao.getDurationsOfAllSessionsInRange(startEpochDay, currentEpochDay)
-
     suspend fun insertSession(session: Session): Long = sessionDao.insertSession(session)
 
     suspend fun updateSession(
