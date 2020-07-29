@@ -104,35 +104,35 @@ class HomeScreensViewModel(
 
     fun getSessionsToBeDisplayed() {
         viewModelScope.launch {
-            when (durationOfStats.value) {
+            _sessionsToBeDisplayed.value = when (durationOfStats.value) {
                 ResultsRange.Week.name -> {
-                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
+                    sessionRepository.getAllSessionsInRange(
                         currentEpochDay - ResultsRange.Week.resultsRangeLength,
                         currentEpochDay
                     )
                 }
                 ResultsRange.Month.name -> {
-                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
+                    sessionRepository.getAllSessionsInRange(
                         currentEpochDay - ResultsRange.Month.resultsRangeLength,
                         currentEpochDay
                     )
                 }
                 ResultsRange.Year.name -> {
-                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
+                    sessionRepository.getAllSessionsInRange(
                         currentEpochDay - ResultsRange.Year.resultsRangeLength,
                         currentEpochDay
                     )
                 }
                 ResultsRange.All.name -> {
-                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
-                        currentEpochDay - ResultsRange.All.resultsRangeLength,
+                    sessionRepository.getAllSessionsInRange(
+                        ResultsRange.All.resultsRangeLength,
                         currentEpochDay
                     )
                 }
                 // Setting this to the same as week because the spinner that sets this value
                 // defaults to the "Week" option.
                 else -> {
-                    _sessionsToBeDisplayed.value = sessionRepository.getAllSessionsInRange(
+                    sessionRepository.getAllSessionsInRange(
                         currentEpochDay - ResultsRange.Week.resultsRangeLength,
                         currentEpochDay
                     )
