@@ -1,6 +1,7 @@
 package com.johncole.pianotracker.dialogs
 
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
         val args = PracticeActivityDialogFragmentArgs.fromBundle(requireArguments())
         viewModel.sessionId = args.sessionId
         if (args.isViewingPracticeActivity) {
+            binding.isViewingPracticeActivity = true
             viewModel.practiceActivityId = args.practiceActivityId
             viewModel.getPracticeActivityById()
         }
@@ -47,44 +49,38 @@ class PracticeActivityDialogFragment : DialogFragment() {
             val builder = AlertDialog.Builder(it, R.style.AppTheme_FullScreenDialog)
 
             builder.setView(binding.root)
-                // Add action buttons
-                .setPositiveButton(R.string.save) { _, _ ->
-                    if (args.isViewingPracticeActivity) {
-                        viewModel.updatePracticeActivity()
-                    } else {
-                        viewModel.savePracticeActivity()
-                    }
-                    findNavController(requireParentFragment())
-                        .navigate(
-                            PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
-                                true,
-                                viewModel.sessionId
-                            )
-                        )
-                }
-                .setNeutralButton("Delete") { _, _ ->
-                    viewModel.deleteByPracticeActivityId()
-                    findNavController(requireParentFragment())
-                        .navigate(
-                            PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
-                                true,
-                                viewModel.sessionId
-                            )
-                        )
-                }
-                .setNegativeButton(R.string.cancel) { _, _ ->
-                    findNavController(requireParentFragment())
-                        .navigate(
-                            PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
-                                true,
-                                viewModel.sessionId
-                            )
-                        )
-                }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
 
         // region Bindings
+
+        binding.btnSavePracticeActivity.setOnClickListener {
+            if (args.isViewingPracticeActivity) {
+                viewModel.updatePracticeActivity()
+            } else {
+                viewModel.savePracticeActivity()
+            }
+            findNavController(requireParentFragment())
+                .navigate(
+                    PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
+                        true,
+                        viewModel.sessionId
+                    )
+                )
+        }
+
+        binding.btnDeletePracticeActivity.let {
+            it.setOnClickListener {
+                viewModel.deleteByPracticeActivityId()
+                findNavController(requireParentFragment())
+                    .navigate(
+                        PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
+                            true,
+                            viewModel.sessionId
+                        )
+                    )
+            }
+        }
 
         binding.toolbar.let {
             it.title = if (args.isViewingPracticeActivity) {
@@ -92,6 +88,8 @@ class PracticeActivityDialogFragment : DialogFragment() {
             } else {
                 getString(R.string.new_practice_activity)
             }
+
+            it.setTitleTextColor(Color.WHITE)
 
             it.setNavigationOnClickListener {
                 dismiss()

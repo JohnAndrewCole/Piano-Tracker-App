@@ -8,44 +8,40 @@
         <variable
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.PracticeActivityViewModel" />
+
+        <variable
+            name="isViewingPracticeActivity"
+            type="boolean" />
     </data>
 
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:elevation="0dp">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:paddingStart="6dp"
-                android:paddingEnd="16dp"
-                app:contentInsetStartWithNavigation="0dp"
-                app:navigationIcon="@drawable/ic_close_24" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/practice_activity_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txt_v_practice_activity_title"
-                android:layout_width="wrap_content"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="@dimen/page_titles"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:elevation="0dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="16dp"
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:navigationIcon="@drawable/ic_close_white_24" />
+
+            </com.google.android.material.appbar.AppBarLayout>
 
             <TextView
                 android:id="@+id/txt_v_select_practice_activity"
@@ -58,7 +54,7 @@
                 android:textSize="@dimen/dialog_sub_heading"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_v_practice_activity_title" />
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
             <Spinner
                 android:id="@+id/spinner_select_practice_activity"
@@ -168,14 +164,11 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="60"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/seekBar_bpm"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintTop_toBottomOf="@+id/seekBar_bpm">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -190,6 +183,41 @@
                     android:textSize="@dimen/paragraph_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/btn_save_practice_activity"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/btn_delete_practice_activity"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btn_save_practice_activity"
+                android:layout_alignBottom="@id/btn_save_practice_activity"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="16dp"
+                android:text="@string/delete"
+                android:textColor="@color/colorError"
+                app:isGone="@{!isViewingPracticeActivity}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btn_save_practice_activity"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
 </layout>
