@@ -62,13 +62,13 @@ class SessionFragment : Fragment() {
         })
 
         viewModel.sessionDate.observe(viewLifecycleOwner, Observer { newDate ->
-            binding.sessionDateEditText.setText(convertDateToFormattedString(newDate))
+            binding.sessionDateEditText.editText?.setText(convertDateToFormattedString(newDate))
             binding.hasDateEntered = true
         })
 
         viewModel.sessionStartTime.observe(viewLifecycleOwner, Observer { newTime ->
             if (newTime != null) {
-                binding.sessionTimeEditText.setText(convertTimeToFormattedString(newTime))
+                binding.sessionTimeEditText.editText?.setText(convertTimeToFormattedString(newTime))
             }
         })
 
@@ -76,11 +76,11 @@ class SessionFragment : Fragment() {
 
         //region Bindings
 
-        binding.sessionDateEditText.setOnClickListener {
+        binding.sessionDateEditText.editText?.setOnClickListener {
             DatePickerFragment().show(parentFragmentManager, "datePicker")
         }
 
-        binding.sessionTimeEditText.setOnClickListener {
+        binding.sessionTimeEditText.editText?.setOnClickListener {
             TimePickerFragment().show(parentFragmentManager, "timePicker")
         }
 

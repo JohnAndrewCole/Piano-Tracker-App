@@ -19,6 +19,7 @@ import com.johncole.pianotracker.databinding.DialogPracticeActivityBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
 import com.johncole.pianotracker.viewmodels.PracticeActivityViewModel
 
+
 class PracticeActivityDialogFragment : DialogFragment() {
 
     private var _binding: DialogPracticeActivityBinding? = null
@@ -43,7 +44,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
         }
 
         val dialog = activity?.let {
-            val builder = AlertDialog.Builder(it)
+            val builder = AlertDialog.Builder(it, R.style.AppTheme_FullScreenDialog)
 
             builder.setView(binding.root)
                 // Add action buttons
@@ -85,11 +86,18 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         // region Bindings
 
-        if (args.isViewingPracticeActivity) {
-            binding.txtVPracticeActivityTitle.text = getString(R.string.practice_activity)
-        } else {
-            binding.txtVPracticeActivityTitle.text = getString(R.string.new_practice_activity)
+        binding.toolbar.let {
+            it.title = if (args.isViewingPracticeActivity) {
+                getString(R.string.practice_activity)
+            } else {
+                getString(R.string.new_practice_activity)
+            }
+
+            it.setNavigationOnClickListener {
+                dismiss()
+            }
         }
+
 
         // region Spinner Set-up
 
