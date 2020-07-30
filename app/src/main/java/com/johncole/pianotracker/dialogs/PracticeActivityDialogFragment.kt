@@ -2,11 +2,11 @@ package com.johncole.pianotracker.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
@@ -23,6 +23,7 @@ import com.johncole.pianotracker.viewmodels.PracticeActivityViewModel
 class PracticeActivityDialogFragment : DialogFragment() {
 
     private var _binding: DialogPracticeActivityBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -43,6 +44,8 @@ class PracticeActivityDialogFragment : DialogFragment() {
             viewModel.practiceActivityId = args.practiceActivityId
             viewModel.getPracticeActivityById()
         }
+
+        binding.isTechnicalWorkNotSelected = false
 
         val dialog = activity?.let {
             val builder = AlertDialog.Builder(it, R.style.AppTheme_FullScreenDialog)
@@ -97,107 +100,62 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         binding.spinnerSelectPracticeActivity.let {
 
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter.createFromResource(
+            val adapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.practice_type_array,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                it.adapter = adapter
-            }
+                R.layout.dropdown_menu_popup_item
+            )
+            it.setAdapter(adapter)
+            it.isFocusableInTouchMode = false
+            it.isLongClickable = false
+            it.inputType = InputType.TYPE_NULL
 
-            it.onItemSelectedListener = object : OnItemSelectedListener {
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Another interface callback
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    pos: Int,
-                    id: Long
-                ) {
-                    // An item was selected. You can retrieve the selected item using
+            it.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, _, pos, _ ->
                     val selectedItem = parent?.getItemAtPosition(pos)
                     viewModel.practiceActivityType.value = selectedItem.toString()
-                    if (selectedItem.toString() == "Technical Work") {
-                        binding.spinnerSelectTechnicalWorkType.visibility = View.VISIBLE
-                        binding.txtVSelectTechnicalWorkType.visibility = View.VISIBLE
-                    } else if (selectedItem.toString() != "Technical Work") {
-                        binding.spinnerSelectTechnicalWorkType.visibility = View.GONE
-                        binding.txtVSelectTechnicalWorkType.visibility = View.GONE
-                    }
+                    binding.isTechnicalWorkNotSelected = selectedItem.toString() == "Technical Work"
                 }
-            }
         }
 
         binding.spinnerSelectTechnicalWorkType.let {
 
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter.createFromResource(
+            val adapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.technical_work_type_array,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                it.adapter = adapter
-            }
+                R.layout.dropdown_menu_popup_item
+            )
 
-            it.onItemSelectedListener = object : OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    pos: Int,
-                    id: Long
-                ) {
-                    // An item was selected. You can retrieve the selected item using
+            it.setAdapter(adapter)
+            it.isFocusableInTouchMode = false
+            it.isLongClickable = false
+            it.inputType = InputType.TYPE_NULL
+
+            it.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, _, pos, _ ->
                     val selectedItem = parent?.getItemAtPosition(pos)
                     viewModel.technicalWorkType.value = selectedItem.toString()
                 }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // Another interface callback
-                }
-            }
-
         }
 
         binding.spinnerSelectKey.let {
 
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter.createFromResource(
+            val adapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.key_array,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                it.adapter = adapter
-            }
+                R.layout.dropdown_menu_popup_item
+            )
 
-            it.onItemSelectedListener = object : OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    pos: Int,
-                    id: Long
-                ) {
-                    // An item was selected. You can retrieve the selected item using
+            it.setAdapter(adapter)
+            it.isFocusableInTouchMode = false
+            it.isLongClickable = false
+            it.inputType = InputType.TYPE_NULL
+
+            it.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, _, pos, _ ->
                     val selectedItem = parent?.getItemAtPosition(pos)
                     viewModel.keySelected.value = selectedItem.toString()
                 }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // Another interface callback
-                }
-            }
         }
 
         // endregion
@@ -244,60 +202,17 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         // region ViewModel Observers
 
-        viewModel.practiceActivityType.observe(viewLifecycleOwner, Observer { practiceActivityType ->
-            binding.spinnerSelectPracticeActivity.let {
-                if (!practiceActivityType.isNullOrEmpty()) {
-                    when (practiceActivityType) {
-                        "Technical Work" -> it.setSelection(0)
-                        "Playing for Fun" -> it.setSelection(1)
-                        "Working on a Piece" -> it.setSelection(2)
-                        "Improvising" -> it.setSelection(3)
-                        "Composing" -> it.setSelection(4)
-                        else -> it.setSelection(0)
-                    }
-                }
-            }
+        viewModel.practiceActivityType.observe(viewLifecycleOwner, Observer { activityType ->
+            binding.spinnerSelectPracticeActivity.setText(activityType, false)
+            binding.isTechnicalWorkNotSelected = activityType == "Technical Work"
         })
 
         viewModel.technicalWorkType.observe(viewLifecycleOwner, Observer { technicalWorkType ->
-
-            binding.spinnerSelectTechnicalWorkType.let{
-                if (!technicalWorkType.isNullOrEmpty()) {
-                    when (technicalWorkType) {
-                        "Scales" -> it.setSelection(0)
-                        "Modes" -> it.setSelection(1)
-                        "Chords" -> it.setSelection(2)
-                        "Rhythm" -> it.setSelection(3)
-                        "Sheet Reading" -> it.setSelection(4)
-                        "Ear Training" -> it.setSelection(5)
-                        else -> it.setSelection(0)
-                    }
-                }
-            }
+            binding.spinnerSelectTechnicalWorkType.setText(technicalWorkType, false)
         })
 
         viewModel.keySelected.observe(viewLifecycleOwner, Observer { keySelected ->
-
-            binding.spinnerSelectKey.let {
-                if (!keySelected.isNullOrEmpty()) {
-                    when (keySelected) {
-                        "C" -> it.setSelection(0)
-                        "G" -> it.setSelection(1)
-                        "D" -> it.setSelection(2)
-                        "A" -> it.setSelection(3)
-                        "E" -> it.setSelection(4)
-                        "B" -> it.setSelection(5)
-                        "G♭" -> it.setSelection(6)
-                        "D♭" -> it.setSelection(7)
-                        "A♭" -> it.setSelection(8)
-                        "E♭" -> it.setSelection(9)
-                        "B♭" -> it.setSelection(10)
-                        "F" -> it.setSelection(11)
-                        "NA" -> it.setSelection(12)
-                        else -> it.setSelection(12)
-                    }
-                }
-            }
+            binding.spinnerSelectKey.setText(keySelected, false)
         })
 
         viewModel.bpmSelected.observe(viewLifecycleOwner, Observer { bpmSelected ->

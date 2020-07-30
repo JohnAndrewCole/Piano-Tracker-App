@@ -12,6 +12,10 @@
         <variable
             name="isViewingPracticeActivity"
             type="boolean" />
+
+        <variable
+            name="isTechnicalWorkNotSelected"
+            type="boolean" />
     </data>
 
 
@@ -43,83 +47,69 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <TextView
-                android:id="@+id/txt_v_select_practice_activity"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/practice_activity_spinner_container"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:text="@string/set_practice_activity"
-                android:textSize="@dimen/dialog_sub_heading"
-                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
-            <Spinner
-                android:id="@+id/spinner_select_practice_activity"
+                <AutoCompleteTextView
+                    android:id="@+id/spinner_select_practice_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/practice_type_array"
+                    android:hint="@string/set_practice_activity" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/technical_work_spinner_container"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="#BBDEFB"
-                android:entries="@array/practice_type_array"
+                app:isGone="@{!isTechnicalWorkNotSelected}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_v_select_practice_activity" />
+                app:layout_constraintTop_toBottomOf="@+id/practice_activity_spinner_container">
 
-            <TextView
-                android:id="@+id/txt_v_select_technical_work_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/technical_work_type"
-                android:textSize="@dimen/dialog_sub_heading"
-                android:textStyle="bold"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_select_practice_activity" />
+                <AutoCompleteTextView
+                    android:id="@+id/spinner_select_technical_work_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/technical_work_type_array"
+                    android:hint="@string/set_technical_work" />
 
-            <Spinner
-                android:id="@+id/spinner_select_technical_work_type"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/key_select_container"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="#BBDEFB"
-                android:entries="@array/technical_work_type_array"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_v_select_technical_work_type" />
+                app:layout_constraintTop_toBottomOf="@+id/technical_work_spinner_container">
 
-            <TextView
-                android:id="@+id/txt_v_select_key"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/select_key"
-                android:textSize="@dimen/dialog_sub_heading"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_select_technical_work_type" />
+                <AutoCompleteTextView
+                    android:id="@+id/spinner_select_key"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/key_array"
+                    android:hint="@string/set_key" />
 
-            <Spinner
-                android:id="@+id/spinner_select_key"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="#BBDEFB"
-                android:entries="@array/key_array"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_v_select_key" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/txt_v_select_bpm"
@@ -131,7 +121,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_select_key" />
+                app:layout_constraintTop_toBottomOf="@+id/key_select_container" />
 
             <TextView
                 android:id="@+id/txt_v_bpm_display"

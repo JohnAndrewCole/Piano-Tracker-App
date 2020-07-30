@@ -23,14 +23,14 @@
     <string name="start_session">Start</string>
     <string name="add_an_activity">Add an activity to your practice list. When you are done, click \"Start Session\" to begin timing.</string>
     <string name="select_bpm">Select BPM:</string>
-    <string name="select_key">Select Key:</string>
-    <string name="set_practice_activity">Choose Practice Activity:</string>
+    <string name="set_practice_activity">Select Practice Activity</string>
+    <string name="set_technical_work">Select Technical Work Type</string>
+    <string name="set_key">Select Key</string>
     <string name="enter_notes">Enter notes…</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="new_practice_activity">New Practice Activity</string>
     <string name="practice_activity">Practice Activity</string>
-    <string name="technical_work_type">Technical Work Type:</string>
     <string name="seek_bar_bpm_display">%1$d BPM</string>
     <string name="bpm">BPM</string>
 
