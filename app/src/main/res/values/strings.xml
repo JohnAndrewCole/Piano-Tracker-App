@@ -67,7 +67,7 @@
     <string name="no_goal_set">No Goal Set</string>
 
     <!-- Stats Screen -->
-    <string name="stats_over_time">Showing stats for the past</string>
+    <string name="stats_over_time">Duration:</string>
     <string name="detailed_breakdown">Details for this Period</string>
     <string name="clear_out_database">Delete all your saved records:</string>
     <string name="warning_cannot_undo">Be careful! You cannot undo this.</string>

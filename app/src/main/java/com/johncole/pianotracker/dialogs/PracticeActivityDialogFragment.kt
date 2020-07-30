@@ -1,7 +1,6 @@
 package com.johncole.pianotracker.dialogs
 
 import android.app.Dialog
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -88,8 +87,6 @@ class PracticeActivityDialogFragment : DialogFragment() {
             } else {
                 getString(R.string.new_practice_activity)
             }
-
-            it.setTitleTextColor(Color.WHITE)
 
             it.setNavigationOnClickListener {
                 dismiss()
