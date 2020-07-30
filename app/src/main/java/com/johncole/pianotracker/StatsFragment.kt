@@ -139,12 +139,12 @@ class StatsFragment : Fragment() {
                 }
 
                 override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
+                    parent: AdapterView<*>?,
+                    view: View?,
                     pos: Int,
                     id: Long
                 ) {
-                    val selectedItem = parent.getItemAtPosition(pos)
+                    val selectedItem = parent?.getItemAtPosition(pos)
                     viewModel.durationOfStats.value = selectedItem.toString()
                     viewModel.getSessionsToBeDisplayed()
                 }

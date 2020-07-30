@@ -120,13 +120,13 @@ class PracticeActivityDialogFragment : DialogFragment() {
                 }
 
                 override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
+                    parent: AdapterView<*>?,
+                    view: View?,
                     pos: Int,
                     id: Long
                 ) {
                     // An item was selected. You can retrieve the selected item using
-                    val selectedItem = parent.getItemAtPosition(pos)
+                    val selectedItem = parent?.getItemAtPosition(pos)
                     viewModel.practiceActivityType.value = selectedItem.toString()
                     if (selectedItem.toString() == "Technical Work") {
                         binding.spinnerSelectTechnicalWorkType.visibility = View.VISIBLE
@@ -155,13 +155,13 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
             it.onItemSelectedListener = object : OnItemSelectedListener {
                 override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
+                    parent: AdapterView<*>?,
+                    view: View?,
                     pos: Int,
                     id: Long
                 ) {
                     // An item was selected. You can retrieve the selected item using
-                    val selectedItem = parent.getItemAtPosition(pos)
+                    val selectedItem = parent?.getItemAtPosition(pos)
                     viewModel.technicalWorkType.value = selectedItem.toString()
                 }
 
@@ -188,13 +188,13 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
             it.onItemSelectedListener = object : OnItemSelectedListener {
                 override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
+                    parent: AdapterView<*>?,
+                    view: View?,
                     pos: Int,
                     id: Long
                 ) {
                     // An item was selected. You can retrieve the selected item using
-                    val selectedItem = parent.getItemAtPosition(pos)
+                    val selectedItem = parent?.getItemAtPosition(pos)
                     viewModel.keySelected.value = selectedItem.toString()
                 }
 
