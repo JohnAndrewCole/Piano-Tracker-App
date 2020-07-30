@@ -1,5 +1,6 @@
 package com.johncole.pianotracker
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -113,6 +114,20 @@ class StatsFragment : Fragment() {
                 axisLeft.apply {
                     axisLineColor = Color.BLUE
                     axisMinimum = 0F
+                }
+
+
+                when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                    // Night mode is not active, we're using the light theme
+                    Configuration.UI_MODE_NIGHT_NO -> {
+                        xAxis.textColor = Color.BLACK
+                        axisLeft.textColor = Color.BLACK
+                    }
+                    // Night mode is active, we're using dark theme
+                    Configuration.UI_MODE_NIGHT_YES -> {
+                        xAxis.textColor = Color.WHITE
+                        axisLeft.textColor = Color.WHITE
+                    }
                 }
 
                 data = LineData(dataSet)
