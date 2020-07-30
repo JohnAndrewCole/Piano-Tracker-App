@@ -11,8 +11,7 @@
         android:label="@string/your_sessions">
         <action
             android:id="@+id/action_sessionListFragment_to_sessionFragment"
-            app:destination="@id/sessionNavigation"
-            app:enterAnim="@android:anim/slide_in_left" />
+            app:destination="@id/sessionNavigation" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
@@ -49,8 +48,7 @@
                 app:argType="long" />
             <action
                 android:id="@+id/action_sessionFragment_to_PracticeActivityDialogFragment"
-                app:destination="@id/PracticeActivityDialogFragment"
-                app:enterAnim="@android:anim/slide_out_right" />
+                app:destination="@id/PracticeActivityDialogFragment" />
         </fragment>
 
         <dialog
@@ -76,7 +74,6 @@
         <action
             android:id="@+id/action_sessionFragment_to_sessionListFragment"
             app:destination="@id/sessionListFragment"
-            app:enterAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/sessionListFragment"
             app:popUpToInclusive="true" />
     </navigation>
