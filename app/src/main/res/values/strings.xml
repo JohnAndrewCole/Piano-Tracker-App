@@ -20,7 +20,7 @@
     <!-- Practice Activity Dialog -->
     <string name="session_practiceType">Practice type:</string>
     <string name="key_name">Enter key name…</string>
-    <string name="start_session">Start Session</string>
+    <string name="start_session">Start</string>
     <string name="add_an_activity">Add an activity to your practice list. When you are done, click \"Start Session\" to begin timing.</string>
     <string name="select_bpm">Select BPM:</string>
     <string name="select_key">Select Key:</string>
@@ -28,7 +28,6 @@
     <string name="enter_notes">Enter notes…</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="add_a_practice_activity">Practice Activity</string>
     <string name="new_practice_activity">New Practice Activity</string>
     <string name="practice_activity">Practice Activity</string>
     <string name="technical_work_type">Technical Work Type:</string>
@@ -49,7 +48,7 @@
     <string name="session_goal">Session Goal:</string>
     <string name="required">REQUIRED</string>
     <string name="optional">OPTIONAL</string>
-    <string name="save_session">Save Session</string>
+    <string name="save_session">Save</string>
     <string name="time_input">Time</string>
     <string name="length_input">Length</string>
     <string name="goal_input">Goal</string>
@@ -58,7 +57,8 @@
     <string name="hh">HH</string>
     <string name="mm">MM</string>
     <string name="duration_colon">:</string>
-    <string name="duration_empty_time">00</string>
+    <string name="duration_hours_hint">Hours</string>
+    <string name="duration_minutes_hint">Minutes</string>
     <string name="viewing_session">Session</string>
     <string name="your_stats">Your Stats</string>
     <string name="settings">Settings</string>
@@ -74,4 +74,6 @@
     <string name="total_time_spent">Total time spent practicing:</string>
     <string name="average_time_spent_per_day">Average practice time per session:</string>
     <string name="time_most_practiced_at">Your favourite time to practice:</string>
+    <string name="session_details_section_heading">Session Details</string>
+    <string name="practice_activity_section_heading">Practice Activity List</string>
 </resources>

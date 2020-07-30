@@ -16,4 +16,7 @@
     <dimen name="text_inputs">16sp</dimen>
     <dimen name="dialog_sub_heading">18sp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
+    <!-- Misc -->
+    <dimen name="section_heading_box_height">20dp</dimen>
 </resources>

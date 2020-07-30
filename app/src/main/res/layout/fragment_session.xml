@@ -28,6 +28,25 @@
         android:layout_height="match_parent"
         tools:context=".SessionFragment">
 
+        <TextView
+            android:id="@+id/date_and_time_section_heading"
+            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/primaryLightColor"
+            android:fontFamily="@font/amiko"
+            android:paddingHorizontal="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="2dp"
+            android:text="@string/session_details_section_heading"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_date_edit_text"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -38,7 +57,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/date_and_time_section_heading">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -82,16 +101,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_goal_edit_text"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             app:counterEnabled="true"
             app:counterMaxLength="60"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/session_date_edit_text"
+            app:layout_constraintStart_toStartOf="@+id/session_date_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -109,84 +125,108 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/duration_colon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/duration_colon"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />
-
-        <EditText
-            android:id="@+id/txt_e_hours"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:autofillHints="@string/duration_empty_time"
-            android:ems="10"
-            android:hint="@string/duration_empty_time"
-            android:imeOptions="actionDone"
-            android:inputType="number"
-            android:maxLength="2"
-            android:text="@={viewModel.sessionHours}"
-            android:textAlignment="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/duration_colon"
-            app:layout_constraintEnd_toStartOf="@+id/duration_colon"
-            app:layout_constraintStart_toStartOf="@+id/session_goal_edit_text"
-            tools:text="00" />
-
-        <EditText
-            android:id="@+id/txt_e_minutes"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/session_duration_hour_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:autofillHints="@string/duration_empty_time"
-            android:ems="10"
-            android:hint="@string/duration_empty_time"
-            android:imeOptions="actionDone"
-            android:inputType="number"
-            android:maxLength="2"
-            android:text="@={viewModel.sessionMinutes}"
-            android:textAlignment="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/duration_colon"
-            app:layout_constraintEnd_toEndOf="@+id/session_goal_edit_text"
-            app:layout_constraintStart_toEndOf="@+id/duration_colon"
-            tools:text="00" />
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/session_goal_edit_text"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_e_hours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/duration_hours_hint"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="2"
+                android:text="@={viewModel.sessionHours}"
+                android:textAlignment="center"
+                android:textSize="@dimen/paragraph_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/session_duration_minutes_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/session_goal_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2">
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/txt_e_minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ems="10"
+                android:hint="@string/duration_minutes_hint"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="2"
+                android:text="@={viewModel.sessionMinutes}"
+                android:textAlignment="center"
+                android:textSize="@dimen/paragraph_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/practice_activity_section_heading"
+            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/primaryLightColor"
+            android:fontFamily="@font/amiko"
+            android:paddingHorizontal="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="2dp"
+            android:text="@string/practice_activity_section_heading"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="18sp"
+            app:isGone="@{isCreatingSession}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/practice_activity_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
             app:isGone="@{isCreatingSession}"
-            app:layout_constraintBottom_toTopOf="@+id/btn_save_session"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_e_hours" />
+            app:layout_constraintTop_toBottomOf="@+id/practice_activity_section_heading"
+            app:layout_constraintVertical_bias="1.0" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add_practice_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="#B3E5FC"
-            android:backgroundTint="#B3E5FC"
-            android:text="@string/add_a_practice_activity"
-            android:textColor="#2C2828"
-            app:cornerRadius="10dp"
-            app:icon="@drawable/ic_add_24"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_add_white_24"
+            app:backgroundTint="@color/secondaryLightColor"
+            app:fabSize="mini"
             app:isGone="@{isCreatingSession}"
-            app:layout_constraintBottom_toBottomOf="@+id/practice_activity_list"
-            app:layout_constraintEnd_toEndOf="@+id/practice_activity_list" />
+            app:layout_constraintEnd_toEndOf="@+id/practice_activity_list"
+            app:layout_constraintTop_toBottomOf="@+id/practice_activity_section_heading"
+            app:tint="@color/secondaryTextColor" />
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -196,28 +236,36 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
         <Button
             android:id="@+id/btn_save_session"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:enabled="@{hasDateEntered}"
             android:text="@string/save_session"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/btn_delete_session"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:enabled="false"
             android:text="@string/start_session"
             android:textSize="@dimen/button_text"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

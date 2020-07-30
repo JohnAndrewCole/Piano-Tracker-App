@@ -96,7 +96,6 @@ class PracticeActivityDialogFragment : DialogFragment() {
             }
         }
 
-
         // region Spinner Set-up
 
         binding.spinnerSelectPracticeActivity.let {

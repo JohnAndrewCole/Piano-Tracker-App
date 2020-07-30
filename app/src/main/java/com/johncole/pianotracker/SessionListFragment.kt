@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.johncole.pianotracker.adapters.SessionListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionListBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.utilities.setDivider
 import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
 
 class SessionListFragment : Fragment() {
@@ -27,7 +28,10 @@ class SessionListFragment : Fragment() {
     ): View? {
         binding = FragmentSessionListBinding.inflate(inflater, container, false)
         val adapter = SessionListAdapter()
-        binding.sessionListRecyclerView.adapter = adapter
+        binding.sessionListRecyclerView.let {
+            it.adapter = adapter
+            it.setDivider(R.drawable.recycler_view_divider)
+        }
 
         viewModel.sessions.observe(viewLifecycleOwner) { result ->
             binding.hasSessions = !result.isNullOrEmpty()

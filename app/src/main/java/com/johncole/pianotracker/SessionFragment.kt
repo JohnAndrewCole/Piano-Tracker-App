@@ -12,11 +12,9 @@ import com.johncole.pianotracker.adapters.PracticeActivityListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
 import com.johncole.pianotracker.dialogs.TimePickerFragment
-import com.johncole.pianotracker.utilities.InjectorUtils
-import com.johncole.pianotracker.utilities.TimeInputFilterMinMax
-import com.johncole.pianotracker.utilities.convertDateToFormattedString
-import com.johncole.pianotracker.utilities.convertTimeToFormattedString
+import com.johncole.pianotracker.utilities.*
 import com.johncole.pianotracker.viewmodels.SessionViewModel
+
 
 class SessionFragment : Fragment() {
 
@@ -40,8 +38,11 @@ class SessionFragment : Fragment() {
         binding.viewModel = viewModel
 
         val adapter = PracticeActivityListAdapter()
-        binding.practiceActivityList.layoutManager = LinearLayoutManager(requireContext())
-        binding.practiceActivityList.adapter = adapter
+        binding.practiceActivityList.let {
+            it.layoutManager = LinearLayoutManager(requireContext())
+            it.adapter = adapter
+            it.setDivider(R.drawable.recycler_view_divider)
+        }
 
         binding.isCreatingSession = true
 

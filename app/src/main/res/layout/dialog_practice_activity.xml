@@ -212,7 +212,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="16dp"
                 android:text="@string/delete"
-                android:textColor="@color/colorError"
+                android:textColor="@color/errorColor"
                 app:isGone="@{!isViewingPracticeActivity}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/btn_save_practice_activity"
                 app:layout_constraintStart_toStartOf="parent" />

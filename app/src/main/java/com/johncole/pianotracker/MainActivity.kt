@@ -1,6 +1,7 @@
 package com.johncole.pianotracker
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.findNavController
@@ -27,6 +28,15 @@ class MainActivity : AppCompatActivity() {
          */
         val navController =
             (supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment?)!!.navController
+
+        //setting the Bottom navigation visibility
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.sessionFragment || destination.id == R.id.PracticeActivityDialogFragment) {
+                navView.visibility = View.GONE
+            } else {
+                navView.visibility = View.VISIBLE
+            }
+        }
 
         val appBarConfiguration = AppBarConfiguration
             .Builder(
