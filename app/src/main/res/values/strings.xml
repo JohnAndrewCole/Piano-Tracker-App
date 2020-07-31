@@ -46,8 +46,7 @@
     <string name="session_name">Session Name:</string>
     <string name="how_long_session">Length of session:</string>
     <string name="session_goal">Session Goal:</string>
-    <string name="required">REQUIRED</string>
-    <string name="optional">OPTIONAL</string>
+    <string name="optional">Optional</string>
     <string name="save_session">Save</string>
     <string name="time_input">Time</string>
     <string name="length_input">Length</string>

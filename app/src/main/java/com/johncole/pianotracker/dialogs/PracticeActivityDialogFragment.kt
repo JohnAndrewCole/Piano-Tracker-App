@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -43,6 +42,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
             binding.isViewingPracticeActivity = true
             viewModel.practiceActivityId = args.practiceActivityId
             viewModel.getPracticeActivityById()
+            binding.btnSavePracticeActivity.isEnabled = true
         }
 
         binding.isTechnicalWorkNotSelected = false
@@ -161,33 +161,6 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         // endregion
 
-        // region SeekBars
-
-        binding.seekBarBpm.let {
-            val bpmTextView = binding.txtVBpmDisplay
-            var bpmProgress = 20
-
-            bpmTextView.text = getString(R.string.seek_bar_bpm_display, bpmProgress)
-
-            it.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
-                    bpmProgress = seek.progress
-                    viewModel.bpmSelected.value = bpmProgress.toString()
-                    bpmTextView.text = getString(R.string.seek_bar_bpm_display, bpmProgress)
-                }
-
-                override fun onStartTrackingTouch(seek: SeekBar) {
-                    // write custom code for progress is started
-                }
-
-                override fun onStopTrackingTouch(seek: SeekBar) {
-                    // write custom code for progress is stopped
-                }
-            })
-        }
-
-        // endregion
-
         //endregion
 
         return dialog
@@ -214,13 +187,6 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         viewModel.keySelected.observe(viewLifecycleOwner, Observer { keySelected ->
             binding.spinnerSelectKey.setText(keySelected, false)
-        })
-
-        viewModel.bpmSelected.observe(viewLifecycleOwner, Observer { bpmSelected ->
-
-            if (!bpmSelected.isNullOrEmpty()) {
-                binding.seekBarBpm.progress = bpmSelected.toInt()
-            }
         })
 
         // endregion
