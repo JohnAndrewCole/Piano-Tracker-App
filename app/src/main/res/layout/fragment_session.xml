@@ -246,7 +246,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.75" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save_session"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -256,18 +256,6 @@
             android:text="@string/save_session"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/btn_delete_session"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:enabled="false"
-            android:text="@string/start_session"
-            android:textSize="@dimen/button_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
