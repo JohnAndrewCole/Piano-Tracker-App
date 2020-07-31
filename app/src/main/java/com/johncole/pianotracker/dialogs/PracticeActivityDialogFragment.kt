@@ -115,6 +115,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
                     val selectedItem = parent?.getItemAtPosition(pos)
                     viewModel.practiceActivityType.value = selectedItem.toString()
                     binding.isTechnicalWorkNotSelected = selectedItem.toString() == "Technical Work"
+                    binding.btnSavePracticeActivity.isEnabled = true
                 }
         }
 

@@ -56,12 +56,20 @@ fun TextView.setPracticeActivityName(item: PracticeActivity) {
 
 @BindingAdapter("practiceActivityKey")
 fun TextView.setPracticeActivityKey(item: PracticeActivity) {
-    text = item.key
+    text = if (item.key.isNullOrEmpty()) {
+        context.getString(R.string.no_key_set)
+    } else {
+        item.key
+    }
 }
 
 @BindingAdapter("practiceActivityBpm")
 fun TextView.setPracticeActivityBpm(item: PracticeActivity) {
-    text = item.bpm
+    text = if (item.bpm.isNullOrEmpty()) {
+        context.getString(R.string.no_bpm_set)
+    } else {
+        item.bpm
+    }
 }
 
 // endregion

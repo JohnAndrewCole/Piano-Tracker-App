@@ -65,6 +65,8 @@
     <string name="delete">Delete</string>
     <string name="no_start_time_set">No Start Time Set</string>
     <string name="no_goal_set">No Goal Set</string>
+    <string name="no_key_set">No Key Set</string>
+    <string name="no_bpm_set">No BPM Set</string>
 
     <!-- Stats Screen -->
     <string name="stats_over_time">Duration:</string>
