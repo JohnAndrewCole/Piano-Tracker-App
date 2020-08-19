@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.johncole.pianotracker.R
 import com.johncole.pianotracker.databinding.DialogPracticeActivityBinding
@@ -176,16 +175,16 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         // region ViewModel Observers
 
-        viewModel.practiceActivityType.observe(viewLifecycleOwner, Observer { activityType ->
+        viewModel.practiceActivityType.observe(viewLifecycleOwner, { activityType ->
             binding.spinnerSelectPracticeActivity.setText(activityType, false)
             binding.isTechnicalWorkNotSelected = activityType == "Technical Work"
         })
 
-        viewModel.technicalWorkType.observe(viewLifecycleOwner, Observer { technicalWorkType ->
+        viewModel.technicalWorkType.observe(viewLifecycleOwner, { technicalWorkType ->
             binding.spinnerSelectTechnicalWorkType.setText(technicalWorkType, false)
         })
 
-        viewModel.keySelected.observe(viewLifecycleOwner, Observer { keySelected ->
+        viewModel.keySelected.observe(viewLifecycleOwner, { keySelected ->
             binding.spinnerSelectKey.setText(keySelected, false)
         })
 
