@@ -75,7 +75,8 @@ class HomeScreensViewModel(
                 // For average start time of all sessions
                 val startTimeMap: List<String?> = sessionsToBeDisplayed.value!!.map { it.startTime }
                 val countOfUniqueStartTimes = startTimeMap.groupingBy { it }.eachCount()
-                val favouriteStartTime = countOfUniqueStartTimes.maxBy { it.value }?.key.toString()
+                val favouriteStartTime =
+                    countOfUniqueStartTimes.maxByOrNull { it.value }?.key.toString()
                 _favouritePracticeTime.value = if (favouriteStartTime == "null") {
                     "No Times Set"
                 } else {

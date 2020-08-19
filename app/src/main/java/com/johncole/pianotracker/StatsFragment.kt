@@ -41,12 +41,12 @@ class StatsFragment : Fragment() {
 
         viewModel.getSessionsToBeDisplayed()
 
-        viewModel.sessions.observe(viewLifecycleOwner) { result ->
+        viewModel.sessions.observe(viewLifecycleOwner, { result ->
             binding.hasSessions = result.isNullOrEmpty()
-        }
+        })
 
         // Observer for line chart.
-        viewModel.sessionsToBeDisplayed.observe(viewLifecycleOwner) { sessionsBeforeCurrentDate ->
+        viewModel.sessionsToBeDisplayed.observe(viewLifecycleOwner, { sessionsBeforeCurrentDate ->
 
             viewModel.getTimeStatsForCurrentSessions()
 
@@ -133,7 +133,7 @@ class StatsFragment : Fragment() {
                 data = LineData(dataSet)
                 invalidate()
             }
-        }
+        })
 
         // Setting binding for spinner that sets duration over which to view stats.
         binding.spnStatsDuration.let {

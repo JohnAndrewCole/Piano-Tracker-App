@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,12 +17,6 @@ import com.johncole.pianotracker.viewmodels.SessionViewModel
 
 class SessionFragment : Fragment() {
 
-    // TODO: Look at removing this maybe, now that this is scoped to navGraphViewModels
-    private var _binding: FragmentSessionBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
     private val viewModel: SessionViewModel by navGraphViewModels(R.id.sessionNavigation) {
         InjectorUtils.provideSessionViewModelFactory(requireContext())
     }
@@ -33,7 +26,7 @@ class SessionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSessionBinding.inflate(inflater, container, false)
+        val binding = FragmentSessionBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -57,17 +50,17 @@ class SessionFragment : Fragment() {
 
         //region LiveData Observers
 
-        viewModel.practiceActivities.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.practiceActivities.observe(viewLifecycleOwner, { result ->
             binding.hasPracticeActivities = !result.isNullOrEmpty()
             adapter.submitList(result)
         })
 
-        viewModel.sessionDate.observe(viewLifecycleOwner, Observer { newDate ->
+        viewModel.sessionDate.observe(viewLifecycleOwner, { newDate ->
             binding.sessionDateEditText.editText?.setText(convertDateToFormattedString(newDate))
             binding.hasDateEntered = true
         })
 
-        viewModel.sessionStartTime.observe(viewLifecycleOwner, Observer { newTime ->
+        viewModel.sessionStartTime.observe(viewLifecycleOwner, { newTime ->
             if (newTime != null) {
                 binding.sessionTimeEditText.editText?.setText(convertTimeToFormattedString(newTime))
             }
@@ -130,10 +123,5 @@ class SessionFragment : Fragment() {
                 )
         }
         return false
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

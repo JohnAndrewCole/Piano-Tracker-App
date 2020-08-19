@@ -33,10 +33,10 @@ class SessionListFragment : Fragment() {
             it.setDivider(R.drawable.recycler_view_divider)
         }
 
-        viewModel.sessions.observe(viewLifecycleOwner) { result ->
+        viewModel.sessions.observe(viewLifecycleOwner, { result ->
             binding.hasSessions = !result.isNullOrEmpty()
             adapter.submitList(result)
-        }
+        })
 
         binding.fabNewSession.setOnClickListener { view ->
             view.findNavController()
