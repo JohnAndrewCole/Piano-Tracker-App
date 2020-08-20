@@ -71,19 +71,19 @@ class PracticeActivityViewModel(
             _practiceActivityType.value = _practiceActivity.practiceActivityType
 
             if (!_practiceActivity.technicalWorkType.isNullOrEmpty()) {
-                _technicalWorkType.value = _practiceActivity.technicalWorkType
+                _technicalWorkType.value = _practiceActivity.technicalWorkType!!
             }
 
             if (!_practiceActivity.key.isNullOrEmpty()) {
-                _keySelected.value = _practiceActivity.key
+                _keySelected.value = _practiceActivity.key!!
             }
 
             if (!_practiceActivity.bpm.isNullOrEmpty()) {
-                _bpmSelected.value = _practiceActivity.bpm
+                _bpmSelected.value = _practiceActivity.bpm!!
             }
 
             if (!_practiceActivity.notes.isNullOrEmpty()) {
-                _notes.value = _practiceActivity.notes
+                _notes.value = _practiceActivity.notes!!
             }
         }
     }
