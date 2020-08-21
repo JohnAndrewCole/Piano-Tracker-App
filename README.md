@@ -1,4 +1,7 @@
 # Piano Tracker App
+
+[![Build Status](https://app.bitrise.io/app/5fad26dc52ee701d/status.svg?token=DqMyVg40tqLlN5h5eMOBgw&branch=master)](https://app.bitrise.io/app/5fad26dc52ee701d)
+
 Android-only ease of tracking piano self-education
 
 This is a simple, no-frills application, built natively for Android using Kotlin.
