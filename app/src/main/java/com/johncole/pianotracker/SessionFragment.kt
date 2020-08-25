@@ -104,6 +104,10 @@ class SessionFragment : Fragment() {
                 )
         }
 
+        binding.btnStartTimer.setOnClickListener {
+            viewModel.startTimer()
+        }
+
         //endregion
 
         return binding.root

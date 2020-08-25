@@ -77,4 +77,7 @@
     <string name="time_most_practiced_at">Your favourite time to practice:</string>
     <string name="session_details_section_heading">Session Details</string>
     <string name="practice_activity_section_heading">Practice Activity List</string>
+
+    <!-- Accessibility -->
+    <string name="btn_start_timer">Button to start timer</string>
 </resources>
