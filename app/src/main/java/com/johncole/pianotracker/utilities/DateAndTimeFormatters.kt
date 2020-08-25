@@ -140,11 +140,11 @@ class TimeInputFilterMinMax(min: Float, max: Float) : InputFilter {
     ): CharSequence? {
         try {
             val input = (
-                    dest.subSequence(0, dstart).toString() + source + dest.subSequence(
-                        dend,
-                        dest.length
-                    )
-                    ).toFloat()
+                dest.subSequence(0, dstart).toString() + source + dest.subSequence(
+                    dend,
+                    dest.length
+                )
+                ).toFloat()
             if (isInRange(min, max, input))
                 return null
         } catch (nfe: NumberFormatException) {

@@ -9,7 +9,11 @@ import com.johncole.pianotracker.data.PracticeActivity
 import com.johncole.pianotracker.data.PracticeActivityRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
-import com.johncole.pianotracker.utilities.*
+import com.johncole.pianotracker.utilities.Timer
+import com.johncole.pianotracker.utilities.convertHoursAndMinutesToDurationLong
+import com.johncole.pianotracker.utilities.convertLocalDateToEpochDay
+import com.johncole.pianotracker.utilities.convertLongDurationToHours
+import com.johncole.pianotracker.utilities.convertLongDurationToMinutes
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime

@@ -21,7 +21,7 @@ import com.johncole.pianotracker.utilities.InjectorUtils
 import com.johncole.pianotracker.utilities.convertLocalDateToEpochDay
 import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
 import java.time.LocalDate
-import java.util.*
+import java.util.Collections
 
 class StatsFragment : Fragment() {
 

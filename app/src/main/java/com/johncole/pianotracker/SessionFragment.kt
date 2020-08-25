@@ -2,7 +2,12 @@ package com.johncole.pianotracker
 
 import android.os.Bundle
 import android.text.InputFilter
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
@@ -11,7 +16,11 @@ import com.johncole.pianotracker.adapters.PracticeActivityListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
 import com.johncole.pianotracker.dialogs.TimePickerFragment
-import com.johncole.pianotracker.utilities.*
+import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.utilities.TimeInputFilterMinMax
+import com.johncole.pianotracker.utilities.convertDateToFormattedString
+import com.johncole.pianotracker.utilities.convertTimeToFormattedString
+import com.johncole.pianotracker.utilities.setDivider
 import com.johncole.pianotracker.viewmodels.SessionViewModel
 
 class SessionFragment : Fragment() {
