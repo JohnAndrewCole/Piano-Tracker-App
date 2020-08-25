@@ -67,6 +67,16 @@
                 app:layout_constraintStart_toEndOf="@+id/txt_v_stats_over_time_heading"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/heading_graph"
+                style="@style/HeadingText"
+                android:layout_marginTop="16dp"
+                android:text="@string/heading_graph"
+                app:isGone="@{hasSessions}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_v_stats_over_time_heading" />
+
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/overTimeLineChart"
                 android:layout_width="0dp"
@@ -78,18 +88,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_v_stats_over_time_heading">
-
-            </com.github.mikephil.charting.charts.LineChart>
+                app:layout_constraintTop_toBottomOf="@+id/heading_graph" />
 
             <TextView
                 android:id="@+id/txt_v_detailed_breakdown"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/HeadingText"
                 android:layout_marginTop="16dp"
                 android:text="@string/detailed_breakdown"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

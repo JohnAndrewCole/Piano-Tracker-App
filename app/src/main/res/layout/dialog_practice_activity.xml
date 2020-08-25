@@ -48,7 +48,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/practice_activity_spinner_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                style="@style/DropdownTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -69,7 +69,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/technical_work_spinner_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                style="@style/DropdownTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -91,7 +91,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/key_select_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                style="@style/DropdownTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -114,7 +114,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/bpm_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -128,22 +128,17 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_e_set_bpm"
+                    style="@style/TextInputBpm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:hint="@string/bpm"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    android:text="@={viewModel.bpmSelected}"
-                    android:textSize="@dimen/paragraph_text" />
+                    android:text="@={viewModel.bpmSelected}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txt_e_enter_notes"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -158,16 +153,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/bpm_container">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/TextInputText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:hint="@string/enter_notes"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:maxLength="60"
-                    android:text="@={viewModel.notes}"
-                    android:textSize="@dimen/paragraph_text" />
+                    android:text="@={viewModel.notes}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -188,18 +178,18 @@
 
             <Button
                 android:id="@+id/btn_save_practice_activity"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/TextButtonStandard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="@string/save"
                 android:enabled="false"
+                android:text="@string/save"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
                 android:id="@+id/btn_delete_practice_activity"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/TextButtonNegative"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/btn_save_practice_activity"
@@ -207,7 +197,6 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="16dp"
                 android:text="@string/delete"
-                android:textColor="@color/errorColor"
                 app:isGone="@{!isViewingPracticeActivity}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/btn_save_practice_activity"
                 app:layout_constraintStart_toStartOf="parent" />

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextButtonStandard" parent="Widget.MaterialComponents.Button.TextButton" />
+
+    <style name="TextButtonNegative" parent="TextButtonStandard">
+        <item name="android:textColor">@color/errorColor</item>
+    </style>
+
+    <style name="ExtendedFloatingActionButton">
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
+    </style>
+</resources>

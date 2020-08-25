@@ -69,7 +69,8 @@
 
     <!-- Stats Screen -->
     <string name="stats_over_time">Duration:</string>
-    <string name="detailed_breakdown">Details for this Period</string>
+    <string name="heading_graph">Your practice time graph</string>
+    <string name="detailed_breakdown">Details for this period</string>
     <string name="clear_out_database">Delete all your saved records:</string>
     <string name="warning_cannot_undo">Be careful! You cannot undo this.</string>
     <string name="total_time_spent">Total time spent practicing:</string>

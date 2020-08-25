@@ -20,6 +20,7 @@
         <variable
             name="hasPracticeActivities"
             type="boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,26 +33,15 @@
 
         <TextView
             android:id="@+id/date_and_time_section_heading"
-            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/primaryLightColor"
-            android:fontFamily="@font/amiko"
-            android:paddingHorizontal="5dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="2dp"
+            style="@style/HeadingText"
             android:text="@string/session_details_section_heading"
-            android:textAlignment="textStart"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_date_edit_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -62,22 +52,17 @@
             app:layout_constraintTop_toBottomOf="@+id/date_and_time_section_heading">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextInputDateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/date_input"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="@string/date_input"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:textSize="@dimen/paragraph_text" />
+                android:hint="@string/date_input" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_time_edit_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -87,22 +72,17 @@
             app:layout_constraintStart_toStartOf="@+id/guideline">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextInputDateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/time_input"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="@string/time_input"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:textSize="@dimen/paragraph_text" />
+                android:hint="@string/time_input" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_goal_edit_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -113,23 +93,18 @@
             app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextInputText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/goal_input"
-                android:ems="10"
                 android:hint="@string/goal_input"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:maxLength="60"
-                android:text="@={viewModel.sessionGoal}"
-                android:textSize="@dimen/paragraph_text" />
+                android:text="@={viewModel.sessionGoal}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_duration_hour_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -140,23 +115,17 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txt_e_hours"
+                style="@style/TextInputDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:hint="@string/duration_hours_hint"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="@={viewModel.sessionHours}"
-                android:textAlignment="center"
-                android:textSize="@dimen/paragraph_text" />
+                android:text="@={viewModel.sessionHours}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_duration_minutes_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -165,40 +134,21 @@
             app:layout_constraintStart_toStartOf="@+id/guideline2">
 
             <com.google.android.material.textfield.TextInputEditText
-
                 android:id="@+id/txt_e_minutes"
+                style="@style/TextInputDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:ems="10"
                 android:hint="@string/duration_minutes_hint"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="@={viewModel.sessionMinutes}"
-                android:textAlignment="center"
-                android:textSize="@dimen/paragraph_text" />
+                android:text="@={viewModel.sessionMinutes}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <TextView
             android:id="@+id/practice_activity_section_heading"
-            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/HeadingText"
             android:layout_marginTop="16dp"
-            android:background="@color/primaryLightColor"
-            android:fontFamily="@font/amiko"
-            android:paddingHorizontal="5dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="2dp"
             android:text="@string/practice_activity_section_heading"
-            android:textAlignment="textStart"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="18sp"
             app:isGone="@{isCreatingSession}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -230,22 +180,6 @@
             app:layout_constraintTop_toBottomOf="@+id/practice_activity_section_heading"
             app:tint="@color/secondaryTextColor" />
 
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75" />
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save_session"
             android:layout_width="wrap_content"
@@ -267,6 +201,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@android:drawable/ic_menu_recent_history" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
