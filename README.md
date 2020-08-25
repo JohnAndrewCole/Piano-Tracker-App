@@ -1,6 +1,7 @@
 # Piano Tracker App
 
 [![Build Status](https://app.bitrise.io/app/5fad26dc52ee701d/status.svg?token=DqMyVg40tqLlN5h5eMOBgw&branch=master)](https://app.bitrise.io/app/5fad26dc52ee701d)
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 Android-only ease of tracking piano self-education
 
