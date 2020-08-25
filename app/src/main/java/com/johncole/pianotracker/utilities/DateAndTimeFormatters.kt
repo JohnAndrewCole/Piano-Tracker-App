@@ -12,10 +12,6 @@ import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-
-
-
-
 /**
  * Convert a LocalDate into a string format
  *
@@ -143,10 +139,12 @@ class TimeInputFilterMinMax(min: Float, max: Float) : InputFilter {
         dend: Int
     ): CharSequence? {
         try {
-            val input = (dest.subSequence(0, dstart).toString() + source + dest.subSequence(
-                dend,
-                dest.length
-            )).toFloat()
+            val input = (
+                    dest.subSequence(0, dstart).toString() + source + dest.subSequence(
+                        dend,
+                        dest.length
+                    )
+                    ).toFloat()
             if (isInRange(min, max, input))
                 return null
         } catch (nfe: NumberFormatException) {

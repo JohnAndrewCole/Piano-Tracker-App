@@ -12,7 +12,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.johncole.pianotracker.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val navController =
             (supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment?)!!.navController
 
-        //setting the Bottom navigation visibility
+        // setting the Bottom navigation visibility
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.sessionFragment || destination.id == R.id.PracticeActivityDialogFragment) {
                 navView.visibility = View.GONE

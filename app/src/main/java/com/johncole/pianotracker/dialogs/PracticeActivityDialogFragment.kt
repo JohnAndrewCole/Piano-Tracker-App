@@ -17,7 +17,6 @@ import com.johncole.pianotracker.databinding.DialogPracticeActivityBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
 import com.johncole.pianotracker.viewmodels.PracticeActivityViewModel
 
-
 class PracticeActivityDialogFragment : DialogFragment() {
 
     private var _binding: DialogPracticeActivityBinding? = null
@@ -175,18 +174,27 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         // region ViewModel Observers
 
-        viewModel.practiceActivityType.observe(viewLifecycleOwner, { activityType ->
-            binding.spinnerSelectPracticeActivity.setText(activityType, false)
-            binding.isTechnicalWorkNotSelected = activityType == "Technical Work"
-        })
+        viewModel.practiceActivityType.observe(
+            viewLifecycleOwner,
+            { activityType ->
+                binding.spinnerSelectPracticeActivity.setText(activityType, false)
+                binding.isTechnicalWorkNotSelected = activityType == "Technical Work"
+            }
+        )
 
-        viewModel.technicalWorkType.observe(viewLifecycleOwner, { technicalWorkType ->
-            binding.spinnerSelectTechnicalWorkType.setText(technicalWorkType, false)
-        })
+        viewModel.technicalWorkType.observe(
+            viewLifecycleOwner,
+            { technicalWorkType ->
+                binding.spinnerSelectTechnicalWorkType.setText(technicalWorkType, false)
+            }
+        )
 
-        viewModel.keySelected.observe(viewLifecycleOwner, { keySelected ->
-            binding.spinnerSelectKey.setText(keySelected, false)
-        })
+        viewModel.keySelected.observe(
+            viewLifecycleOwner,
+            { keySelected ->
+                binding.spinnerSelectKey.setText(keySelected, false)
+            }
+        )
 
         // endregion
 

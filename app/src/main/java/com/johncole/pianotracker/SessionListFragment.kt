@@ -22,7 +22,8 @@ class SessionListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSessionListBinding.inflate(inflater, container, false)
@@ -32,10 +33,13 @@ class SessionListFragment : Fragment() {
             it.setDivider(R.drawable.recycler_view_divider)
         }
 
-        viewModel.sessions.observe(viewLifecycleOwner, { result ->
-            binding.hasSessions = !result.isNullOrEmpty()
-            adapter.submitList(result)
-        })
+        viewModel.sessions.observe(
+            viewLifecycleOwner,
+            { result ->
+                binding.hasSessions = !result.isNullOrEmpty()
+                adapter.submitList(result)
+            }
+        )
 
         binding.fabNewSession.setOnClickListener { view ->
             view.findNavController()

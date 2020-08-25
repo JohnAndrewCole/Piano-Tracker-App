@@ -14,7 +14,6 @@ import com.johncole.pianotracker.dialogs.TimePickerFragment
 import com.johncole.pianotracker.utilities.*
 import com.johncole.pianotracker.viewmodels.SessionViewModel
 
-
 class SessionFragment : Fragment() {
 
     private val viewModel: SessionViewModel by navGraphViewModels(R.id.sessionNavigation) {
@@ -50,21 +49,34 @@ class SessionFragment : Fragment() {
 
         //region LiveData Observers
 
-        viewModel.practiceActivities.observe(viewLifecycleOwner, { result ->
-            binding.hasPracticeActivities = !result.isNullOrEmpty()
-            adapter.submitList(result)
-        })
-
-        viewModel.sessionDate.observe(viewLifecycleOwner, { newDate ->
-            binding.sessionDateEditText.editText?.setText(convertDateToFormattedString(newDate))
-            binding.hasDateEntered = true
-        })
-
-        viewModel.sessionStartTime.observe(viewLifecycleOwner, { newTime ->
-            if (newTime != null) {
-                binding.sessionTimeEditText.editText?.setText(convertTimeToFormattedString(newTime))
+        viewModel.practiceActivities.observe(
+            viewLifecycleOwner,
+            { result ->
+                binding.hasPracticeActivities = !result.isNullOrEmpty()
+                adapter.submitList(result)
             }
-        })
+        )
+
+        viewModel.sessionDate.observe(
+            viewLifecycleOwner,
+            { newDate ->
+                binding.sessionDateEditText.editText?.setText(convertDateToFormattedString(newDate))
+                binding.hasDateEntered = true
+            }
+        )
+
+        viewModel.sessionStartTime.observe(
+            viewLifecycleOwner,
+            { newTime ->
+                if (newTime != null) {
+                    binding.sessionTimeEditText.editText?.setText(
+                        convertTimeToFormattedString(
+                            newTime
+                        )
+                    )
+                }
+            }
+        )
 
         //endregion
 

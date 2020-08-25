@@ -13,9 +13,11 @@ import com.johncole.pianotracker.SessionListFragmentDirections
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.databinding.ListItemSessionBinding
 
-class SessionListAdapter : ListAdapter<Session, SessionListAdapter.ViewHolder>(SessionDiffCallback()){
+class SessionListAdapter :
+    ListAdapter<Session, SessionListAdapter.ViewHolder>(SessionDiffCallback()) {
 
-    class ViewHolder(private val binding: ListItemSessionBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ListItemSessionBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.setClickListener {
@@ -43,7 +45,9 @@ class SessionListAdapter : ListAdapter<Session, SessionListAdapter.ViewHolder>(S
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_session, parent, false
+                R.layout.list_item_session,
+                parent,
+                false
             )
         )
     }

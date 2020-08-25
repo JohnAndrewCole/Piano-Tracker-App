@@ -23,7 +23,6 @@ import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
 import java.time.LocalDate
 import java.util.*
 
-
 class StatsFragment : Fragment() {
 
     private val viewModel: HomeScreensViewModel by viewModels {
@@ -31,7 +30,8 @@ class StatsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentStatsBinding.inflate(inflater, container, false)
@@ -40,99 +40,103 @@ class StatsFragment : Fragment() {
 
         viewModel.getSessionsToBeDisplayed()
 
-        viewModel.sessions.observe(viewLifecycleOwner, { result ->
-            binding.hasSessions = result.isNullOrEmpty()
-        })
+        viewModel.sessions.observe(
+            viewLifecycleOwner,
+            { result ->
+                binding.hasSessions = result.isNullOrEmpty()
+            }
+        )
 
         // Observer for line chart.
-        viewModel.sessionsToBeDisplayed.observe(viewLifecycleOwner, { sessionsBeforeCurrentDate ->
+        viewModel.sessionsToBeDisplayed.observe(
+            viewLifecycleOwner,
+            { sessionsBeforeCurrentDate ->
 
-            viewModel.getTimeStatsForCurrentSessions()
+                viewModel.getTimeStatsForCurrentSessions()
 
-            val values = arrayListOf<Entry>()
+                val values = arrayListOf<Entry>()
 
-            Collections.sort(values, EntryXComparator())
+                Collections.sort(values, EntryXComparator())
 
-            val dataSet = LineDataSet(values, "Time series").apply {
-                color = Color.DKGRAY
-                valueTextColor = Color.RED
-                valueTextSize = 12F
-            }
+                val dataSet = LineDataSet(values, "Time series").apply {
+                    color = Color.DKGRAY
+                    valueTextColor = Color.RED
+                    valueTextSize = 12F
+                }
 
-            for (session in sessionsBeforeCurrentDate) {
-                if (session.sessionDuration == null) {
-                    values.add(
-                        Entry(
-                            session.sessionDateTimestamp.toFloat(),
-                            0F
+                for (session in sessionsBeforeCurrentDate) {
+                    if (session.sessionDuration == null) {
+                        values.add(
+                            Entry(
+                                session.sessionDateTimestamp.toFloat(),
+                                0F
+                            )
                         )
-                    )
-                } else {
-                    values.add(
-                        Entry(
-                            session.sessionDateTimestamp.toFloat(),
-                            (session.sessionDuration / 60).toFloat()
+                    } else {
+                        values.add(
+                            Entry(
+                                session.sessionDateTimestamp.toFloat(),
+                                (session.sessionDuration / 60).toFloat()
+                            )
                         )
-                    )
+                    }
+                }
+                dataSet.notifyDataSetChanged()
+
+                binding.overTimeLineChart.apply {
+
+                    legend.isEnabled = false
+                    axisRight.isEnabled = false
+                    description.text = ""
+
+                    xAxis.apply {
+                        valueFormatter = DateValueFormatter()
+                        when (viewModel.durationOfStats.value) {
+                            "Week" -> {
+                                axisMinimum = viewModel.currentDateEpochDay - 7
+                                granularity = 1F
+                            }
+                            "Month" -> {
+                                axisMinimum = viewModel.currentDateEpochDay - 31
+                                granularity = 5F
+                            }
+                            "Year" -> {
+                                axisMinimum = viewModel.currentDateEpochDay - 365
+                                granularity = 30F
+                            }
+                            "All" -> {
+                                axisMinimum = values[0].x
+                            }
+                        }
+                        axisMaximum = convertLocalDateToEpochDay(LocalDate.now()).toFloat()
+                        position = XAxis.XAxisPosition.BOTTOM
+                        setDrawLabels(true)
+                        axisLineColor = Color.BLUE
+                    }
+
+                    axisLeft.apply {
+                        axisLineColor = Color.BLUE
+                        axisMinimum = 0F
+                    }
+
+                    when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                        // Night mode is not active, we're using the light theme
+                        Configuration.UI_MODE_NIGHT_NO -> {
+                            xAxis.textColor = Color.BLACK
+                            axisLeft.textColor = Color.BLACK
+                        }
+                        // Night mode is active, we're using dark theme
+                        Configuration.UI_MODE_NIGHT_YES -> {
+                            xAxis.textColor = Color.WHITE
+                            axisLeft.textColor = Color.WHITE
+                        }
+                    }
+
+                    data = LineData(dataSet)
+                    invalidate()
                 }
             }
-            dataSet.notifyDataSetChanged()
-
-
-            binding.overTimeLineChart.apply {
-
-                legend.isEnabled = false
-                axisRight.isEnabled = false
-                description.text = ""
-
-                xAxis.apply {
-                    valueFormatter = DateValueFormatter()
-                    when (viewModel.durationOfStats.value) {
-                        "Week" -> {
-                            axisMinimum = viewModel.currentDateEpochDay - 7
-                            granularity = 1F
-                        }
-                        "Month" -> {
-                            axisMinimum = viewModel.currentDateEpochDay - 31
-                            granularity = 5F
-                        }
-                        "Year" -> {
-                            axisMinimum = viewModel.currentDateEpochDay - 365
-                            granularity = 30F
-                        }
-                        "All" -> {
-                            axisMinimum = values[0].x
-                        }
-                    }
-                    axisMaximum = convertLocalDateToEpochDay(LocalDate.now()).toFloat()
-                    position = XAxis.XAxisPosition.BOTTOM
-                    setDrawLabels(true)
-                    axisLineColor = Color.BLUE
-                }
-
-                axisLeft.apply {
-                    axisLineColor = Color.BLUE
-                    axisMinimum = 0F
-                }
-
-
-                when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                    // Night mode is not active, we're using the light theme
-                    Configuration.UI_MODE_NIGHT_NO -> {
-                        xAxis.textColor = Color.BLACK
-                        axisLeft.textColor = Color.BLACK
-                    }
-                    // Night mode is active, we're using dark theme
-                    Configuration.UI_MODE_NIGHT_YES -> {
-                        xAxis.textColor = Color.WHITE
-                        axisLeft.textColor = Color.WHITE
-                    }
-                }
-
-                data = LineData(dataSet)
-                invalidate()
-            }
-        })
+        )
 
         // Setting binding for spinner that sets duration over which to view stats.
         binding.spnStatsDuration.let {

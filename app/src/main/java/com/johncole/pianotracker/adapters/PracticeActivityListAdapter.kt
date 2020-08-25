@@ -13,7 +13,6 @@ import com.johncole.pianotracker.SessionFragmentDirections
 import com.johncole.pianotracker.data.PracticeActivity
 import com.johncole.pianotracker.databinding.ListItemPracticeActivityBinding
 
-
 class PracticeActivityListAdapter :
     ListAdapter<PracticeActivity, PracticeActivityListAdapter.ViewHolder>(
         PracticeActivityDiffCallback()
@@ -54,7 +53,9 @@ class PracticeActivityListAdapter :
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_practice_activity, parent, false
+                R.layout.list_item_practice_activity,
+                parent,
+                false
             )
         )
     }
