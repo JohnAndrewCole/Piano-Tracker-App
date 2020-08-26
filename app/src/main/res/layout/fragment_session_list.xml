@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/add_session"
+            android:text="@string/button_text_add_session"
             app:backgroundTint="@color/secondaryLightColor"
             app:cornerRadius="10dp"
             app:icon="@drawable/ic_add_white_24"
@@ -54,7 +54,7 @@
                 android:id="@+id/empty_practice_activity_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_sessions_yet"
+                android:text="@string/error_no_sessions_yet"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="18sp" />
 

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/sessionListFragment"
         android:name="com.johncole.pianotracker.SessionListFragment"
-        android:label="@string/your_sessions">
+        android:label="@string/toolbar_text_your_sessions">
         <action
             android:id="@+id/action_sessionListFragment_to_sessionFragment"
             app:destination="@id/sessionNavigation"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/statsFragment"
         android:name="com.johncole.pianotracker.StatsFragment"
-        android:label="@string/your_stats"
+        android:label="@string/toolbar_text_your_stats"
         tools:layout="@layout/fragment_stats" />
     <fragment
         android:id="@+id/settingsFragment"
@@ -41,7 +41,7 @@
         <fragment
             android:id="@+id/sessionFragment"
             android:name="com.johncole.pianotracker.SessionFragment"
-            android:label="@string/viewing_session"
+            android:label="@string/toolbar_text_viewing_session"
             tools:layout="@layout/fragment_session">
             <argument
                 android:name="isViewingSession"

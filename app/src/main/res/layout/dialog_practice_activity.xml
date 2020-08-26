@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:entries="@array/practice_type_array"
-                    android:hint="@string/set_practice_activity" />
+                    android:hint="@string/hint_practice_activity_type" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:entries="@array/technical_work_type_array"
-                    android:hint="@string/set_technical_work" />
+                    android:hint="@string/hint_technical_work_type" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:entries="@array/key_array"
-                    android:hint="@string/set_key" />
+                    android:hint="@string/hint_key" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,7 +131,7 @@
                     style="@style/TextInputBpm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/bpm"
+                    android:hint="@string/hint_bpm"
                     android:text="@={viewModel.bpmSelected}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -156,7 +156,7 @@
                     style="@style/TextInputText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/enter_notes"
+                    android:hint="@string/hint_enter_notes"
                     android:text="@={viewModel.notes}" />
 
             </com.google.android.material.textfield.TextInputLayout>
