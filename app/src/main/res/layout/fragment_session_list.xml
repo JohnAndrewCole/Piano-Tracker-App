@@ -12,22 +12,20 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SessionListFragment">
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_new_session"
+            style="@style/ExtendedFloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:text="@string/add_session"
-            android:textColor="@color/secondaryTextColor"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:text="@string/button_text_add_session"
             app:backgroundTint="@color/secondaryLightColor"
-            app:cornerRadius="10dp"
+            app:cornerRadius="@dimen/button_rounded_radius"
             app:icon="@drawable/ic_add_white_24"
             app:iconTint="@color/secondaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,11 +51,10 @@
 
             <TextView
                 android:id="@+id/empty_practice_activity_list"
+                style="@style/NoSessionWarningText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_sessions_yet"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="18sp" />
+                android:text="@string/error_no_sessions_yet" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

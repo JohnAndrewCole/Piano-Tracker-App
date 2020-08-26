@@ -130,13 +130,8 @@ class HomeScreensViewModel(
                         currentEpochDay
                     )
                 }
-                // Setting this to the same as week because the spinner that sets this value
-                // defaults to the "Week" option.
                 else -> {
-                    sessionRepository.getAllSessionsInRange(
-                        currentEpochDay - ResultsRange.Week.resultsRangeLength,
-                        currentEpochDay
-                    )
+                    null
                 }
             }
         }

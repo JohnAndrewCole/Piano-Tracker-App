@@ -15,27 +15,29 @@ import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
 
 class SessionListFragment : Fragment() {
 
-    private lateinit var binding: FragmentSessionListBinding
-
     private val viewModel: HomeScreensViewModel by viewModels {
         InjectorUtils.provideHomeScreensViewModelFactory(requireContext())
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSessionListBinding.inflate(inflater, container, false)
+        val binding = FragmentSessionListBinding.inflate(inflater, container, false)
         val adapter = SessionListAdapter()
         binding.sessionListRecyclerView.let {
             it.adapter = adapter
             it.setDivider(R.drawable.recycler_view_divider)
         }
 
-        viewModel.sessions.observe(viewLifecycleOwner, { result ->
-            binding.hasSessions = !result.isNullOrEmpty()
-            adapter.submitList(result)
-        })
+        viewModel.sessions.observe(
+            viewLifecycleOwner,
+            { result ->
+                binding.hasSessions = !result.isNullOrEmpty()
+                adapter.submitList(result)
+            }
+        )
 
         binding.fabNewSession.setOnClickListener { view ->
             view.findNavController()

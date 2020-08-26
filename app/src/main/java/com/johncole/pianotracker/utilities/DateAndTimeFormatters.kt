@@ -6,15 +6,9 @@ import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.johncole.pianotracker.SessionFragment
 import com.johncole.pianotracker.StatsFragment
-import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-
-
-
-
 
 /**
  * Convert a LocalDate into a string format
@@ -50,19 +44,6 @@ fun convertTimeToFormattedString(time: LocalTime): String {
  */
 fun convertLocalDateToEpochDay(date: LocalDate): Long {
     return date.toEpochDay()
-}
-
-/**
- * This converts a supplied Unix time in milliseconds to its equivalent day value.
- * @return float (because this function gets used to convert the date of the
- *                 install of the package from the Epoch Milliseconds to the
- *                Epoch Days, and is used on the MPAndroidChart line chart
- *                in the stats screen, it returns a float as required by
- *                the library).
- */
-fun convertEpochMillisecondsToEpochDay(milliseconds: Long): Float {
-    val time = Instant.ofEpochMilli(milliseconds).atZone(ZoneId.systemDefault()).toLocalDate()
-    return convertLocalDateToEpochDay(time).toFloat()
 }
 
 /**
@@ -143,10 +124,12 @@ class TimeInputFilterMinMax(min: Float, max: Float) : InputFilter {
         dend: Int
     ): CharSequence? {
         try {
-            val input = (dest.subSequence(0, dstart).toString() + source + dest.subSequence(
-                dend,
-                dest.length
-            )).toFloat()
+            val input = (
+                dest.subSequence(0, dstart).toString() + source + dest.subSequence(
+                    dend,
+                    dest.length
+                )
+                ).toFloat()
             if (isInRange(min, max, input))
                 return null
         } catch (nfe: NumberFormatException) {

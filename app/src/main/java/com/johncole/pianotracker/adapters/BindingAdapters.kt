@@ -30,7 +30,7 @@ fun TextView.setStartDateString(item: Session) {
 @BindingAdapter("sessionTimeString")
 fun TextView.setStartTimeString(item: Session) {
     text = if (item.startTime.isNullOrEmpty()) {
-        context.getString(R.string.no_start_time_set)
+        context.getString(R.string.recycler_text_no_start_time_set)
     } else {
         convertTimeToFormattedString(LocalTime.parse(item.startTime))
     }
@@ -39,7 +39,7 @@ fun TextView.setStartTimeString(item: Session) {
 @BindingAdapter("sessionGoalString")
 fun TextView.setGoalString(item: Session) {
     text = if (item.sessionGoal.isNullOrEmpty()) {
-        context.getString(R.string.no_goal_set)
+        context.getString(R.string.recycler_text_no_goal_set)
     } else {
         item.sessionGoal
     }
@@ -57,7 +57,7 @@ fun TextView.setPracticeActivityName(item: PracticeActivity) {
 @BindingAdapter("practiceActivityKey")
 fun TextView.setPracticeActivityKey(item: PracticeActivity) {
     text = if (item.key.isNullOrEmpty()) {
-        context.getString(R.string.no_key_set)
+        context.getString(R.string.recycler_text_no_key_set)
     } else {
         item.key
     }
@@ -66,7 +66,7 @@ fun TextView.setPracticeActivityKey(item: PracticeActivity) {
 @BindingAdapter("practiceActivityBpm")
 fun TextView.setPracticeActivityBpm(item: PracticeActivity) {
     text = if (item.bpm.isNullOrEmpty()) {
-        context.getString(R.string.no_bpm_set)
+        context.getString(R.string.recycler_text_no_bpm_set)
     } else {
         item.bpm
     }
