@@ -15,8 +15,6 @@ import com.johncole.pianotracker.viewmodels.HomeScreensViewModel
 
 class SessionListFragment : Fragment() {
 
-    private lateinit var binding: FragmentSessionListBinding
-
     private val viewModel: HomeScreensViewModel by viewModels {
         InjectorUtils.provideHomeScreensViewModelFactory(requireContext())
     }
@@ -26,7 +24,7 @@ class SessionListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSessionListBinding.inflate(inflater, container, false)
+        val binding = FragmentSessionListBinding.inflate(inflater, container, false)
         val adapter = SessionListAdapter()
         binding.sessionListRecyclerView.let {
             it.adapter = adapter

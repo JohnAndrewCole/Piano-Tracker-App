@@ -20,9 +20,7 @@ import com.johncole.pianotracker.viewmodels.PracticeActivityViewModel
 class PracticeActivityDialogFragment : DialogFragment() {
 
     private var _binding: DialogPracticeActivityBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     private val viewModel: PracticeActivityViewModel by viewModels {

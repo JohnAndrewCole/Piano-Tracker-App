@@ -25,7 +25,6 @@ import java.time.LocalDate
 import java.util.Collections
 
 class StatsFragment : Fragment() {
-    private var shortAnimationDuration: Int = 0
 
     private val viewModel: HomeScreensViewModel by viewModels {
         InjectorUtils.provideHomeScreensViewModelFactory(requireContext())
