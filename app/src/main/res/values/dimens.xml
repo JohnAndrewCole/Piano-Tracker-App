@@ -1,22 +1,23 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="nav_header_vertical_spacing">8dp</dimen>
-    <dimen name="nav_header_height">176dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <!-- Spacing -->
+    <dimen name="spacing_huge">40dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_huge">16dp</dimen>
+    <dimen name="padding_normal">6dp</dimen>
+    <dimen name="padding_small">2dp</dimen>
 
     <!-- Font Sizes -->
-    <dimen name="page_titles">20sp</dimen>
-    <dimen name="paragraph_text">14sp</dimen>
-    <dimen name="list_titles">14sp</dimen>
-    <dimen name="important_text">16sp</dimen>
-    <dimen name="secondary_text">14sp</dimen>
-    <dimen name="button_text">14sp</dimen>
-    <dimen name="text_inputs">16sp</dimen>
-    <dimen name="dialog_sub_heading">18sp</dimen>
-    <dimen name="text_margin">16dp</dimen>
+    <dimen name="font_huge">24sp</dimen>
+    <dimen name="font_large">18sp</dimen>
+    <dimen name="font_normal">15sp</dimen>
+    <dimen name="font_small">12sp</dimen>
 
     <!-- Misc -->
     <dimen name="section_heading_box_height">20dp</dimen>
+    <dimen name="button_rounded_radius">10dp</dimen>
 </resources>

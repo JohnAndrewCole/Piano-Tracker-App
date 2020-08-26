@@ -12,78 +12,80 @@
         <variable
             name="hasSessions"
             type="boolean" />
+
+        <variable
+            name="durationSelected"
+            type="boolean" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/stats_scroll_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/statsFragmentConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        tools:context=".StatsFragment">
+
+        <TextView
+            android:id="@+id/txt_v_no_sessions_recorded"
+            style="@style/NoSessionWarningText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error_no_sessions_yet"
+            app:isGone="@{!hasSessions}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/duration_spinner_container"
+            style="@style/DropdownTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            app:isGone="@{hasSessions}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinner_stats_duration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/hint_stats_duration"
+                android:textAlignment="center" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/statsFragmentConstraintLayout"
+            android:id="@+id/statsDetailsConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            app:isGone="@{!durationSelected}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/duration_spinner_container"
             tools:context=".StatsFragment">
 
             <TextView
-                android:id="@+id/txt_v_no_sessions_recorded"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/error_no_sessions_yet"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="18sp"
-                app:isGone="@{!hasSessions}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txt_v_stats_over_time_heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/text_duration"
-                android:textAllCaps="false"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:isGone="@{hasSessions}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/spn_stats_duration"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:entries="@array/stats_duration_array"
-                android:textAlignment="center"
-                app:isGone="@{hasSessions}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txt_v_stats_over_time_heading"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/heading_graph"
-                style="@style/HeadingText"
+                style="@style/BoxHeadingText"
                 android:layout_marginTop="16dp"
                 android:text="@string/heading_practice_time_graph"
                 app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_v_stats_over_time_heading" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/overTimeLineChart"
                 android:layout_width="0dp"
-                android:layout_height="380dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_height="190dp"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -92,8 +94,8 @@
 
             <TextView
                 android:id="@+id/txt_v_detailed_breakdown"
-                style="@style/HeadingText"
-                android:layout_marginTop="16dp"
+                style="@style/BoxHeadingText"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:text="@string/heading_detailed_breakdown"
                 app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -102,23 +104,23 @@
 
             <TextView
                 android:id="@+id/txt_v_total_time_spent_practicing"
+                style="@style/StatsDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:text="@string/text_total_time_spent"
-                android:textSize="18sp"
                 app:isGone="@{hasSessions}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_v_detailed_breakdown" />
 
             <TextView
                 android:id="@+id/txt_v_time_most_practiced_at"
+                style="@style/StatsDetails"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:text="@string/text_average_time_spent"
-                android:textSize="18sp"
                 app:isGone="@{hasSessions}"
                 app:layout_constraintEnd_toEndOf="@+id/txt_v_total_time_spent_practicing"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -127,27 +129,23 @@
 
             <TextView
                 android:id="@+id/txt_v_favourite_time_to_practice_at"
+                style="@style/StatsDetails"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:text="@string/text_time_most_practiced_at"
-                android:textSize="18sp"
                 app:isGone="@{hasSessions}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/txt_v_time_most_practiced_at"
                 app:layout_constraintStart_toStartOf="@+id/txt_v_time_most_practiced_at"
                 app:layout_constraintTop_toBottomOf="@+id/txt_v_time_most_practiced_at" />
 
             <TextView
                 android:id="@+id/txt_v_stat_total_time"
+                style="@style/StatsDetails.Numbers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="monospace"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 android:text="@={viewModel.totalTimeSpentPracticing}"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 app:isGone="@{hasSessions}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/txt_v_total_time_spent_practicing"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,13 +153,11 @@
 
             <TextView
                 android:id="@+id/txt_v_stat_average_practice_time"
+                style="@style/StatsDetails.Numbers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="monospace"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 android:text="@={viewModel.averageDurationOfSessions}"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 app:isGone="@{hasSessions}"
                 app:layout_constraintBottom_toBottomOf="@+id/txt_v_time_most_practiced_at"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -170,14 +166,12 @@
 
             <TextView
                 android:id="@+id/txt_v_stat_favourite_time"
+                style="@style/StatsDetails.Numbers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="monospace"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 android:text="@={viewModel.favouritePracticeTime}"
                 android:textAlignment="textEnd"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 app:isGone="@{hasSessions}"
                 app:layout_constraintBottom_toBottomOf="@+id/txt_v_favourite_time_to_practice_at"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -185,5 +179,5 @@
                 tools:text="11:00 AM" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -3,6 +3,7 @@ package com.johncole.pianotracker
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ import java.time.LocalDate
 import java.util.Collections
 
 class StatsFragment : Fragment() {
+    private var shortAnimationDuration: Int = 0
 
     private val viewModel: HomeScreensViewModel by viewModels {
         InjectorUtils.provideHomeScreensViewModelFactory(requireContext())
@@ -38,12 +40,19 @@ class StatsFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        viewModel.getSessionsToBeDisplayed()
-
         viewModel.sessions.observe(
             viewLifecycleOwner,
             { result ->
                 binding.hasSessions = result.isNullOrEmpty()
+            }
+        )
+
+        viewModel.sessionsToBeDisplayed.observe(
+            viewLifecycleOwner,
+            { sessions ->
+                if (sessions != null) {
+                    binding.durationSelected = true
+                }
             }
         )
 
@@ -138,35 +147,25 @@ class StatsFragment : Fragment() {
             }
         )
 
-        // Setting binding for spinner that sets duration over which to view stats.
-        binding.spnStatsDuration.let {
+        binding.spinnerStatsDuration.let {
 
-            ArrayAdapter.createFromResource(
+            val adapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.stats_duration_array,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                it.adapter = adapter
-            }
+                R.layout.dropdown_menu_popup_item
+            )
 
-            it.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            it.setAdapter(adapter)
+            it.isFocusableInTouchMode = false
+            it.isLongClickable = false
+            it.inputType = InputType.TYPE_NULL
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Another interface callback
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    pos: Int,
-                    id: Long
-                ) {
+            it.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, _, pos, _ ->
                     val selectedItem = parent?.getItemAtPosition(pos)
                     viewModel.durationOfStats.value = selectedItem.toString()
                     viewModel.getSessionsToBeDisplayed()
                 }
-            }
         }
 
         return binding.root

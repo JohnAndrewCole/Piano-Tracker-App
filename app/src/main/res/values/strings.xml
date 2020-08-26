@@ -1,7 +1,5 @@
 <resources>
-
     <!-- General -->
-
     <string name="app_name">Piano Tracker</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
@@ -11,19 +9,16 @@
     <string name="error_no_sessions_yet">You have no sessions yet!</string>
 
     <!-- Bottom Nav Tab Titles -->
-
     <string name="menu_session">Session</string>
     <string name="menu_stats">Stats</string>
     <string name="menu_settings">Settings</string>
 
     <!-- Session List Screen -->
-
     <string name="button_text_add_session">Add Session</string>
     <string name="recycler_text_no_start_time_set">No Start Time Set</string>
     <string name="recycler_text_no_goal_set">No Goal Set</string>
 
     <!-- Session Screen -->
-
     <string name="heading_session_details">Session Details</string>
     <string name="heading_practice_activity_list">Practice Activity List</string>
     <string name="recycler_text_no_key_set">No Key Set</string>
@@ -36,7 +31,6 @@
     <string name="button_content_description_start_timer">Button to start timer</string>
 
     <!-- Practice Activity Dialog -->
-
     <string name="heading_practice_activity">Practice Activity</string>
     <string name="heading_new_practice_activity">New Practice Activity</string>
     <string name="hint_practice_activity_type">Select Practice Activity</string>
@@ -46,16 +40,14 @@
     <string name="hint_enter_notes">Enter notes…</string>
 
     <!-- Stats Screen -->
-
-    <string name="text_duration">Duration:</string>
     <string name="heading_practice_time_graph">Your practice time graph</string>
     <string name="heading_detailed_breakdown">Details for this period</string>
     <string name="text_total_time_spent">Total time spent practicing:</string>
     <string name="text_average_time_spent">Average practice time per session:</string>
     <string name="text_time_most_practiced_at">Your favourite time to practice:</string>
+    <string name="hint_stats_duration">Duration over which to view stats</string>
 
     <!-- Settings Screen -->
-
     <string name="text_clear_out_database">Delete all your saved records</string>
     <string name="warning_cannot_undo">Be careful! You cannot undo this.</string>
 
@@ -63,5 +55,4 @@
     <string name="toolbar_text_viewing_session">Session</string>
     <string name="toolbar_text_your_stats">Your Stats</string>
     <string name="toolbar_text_your_sessions">Your Sessions</string>
-
 </resources>

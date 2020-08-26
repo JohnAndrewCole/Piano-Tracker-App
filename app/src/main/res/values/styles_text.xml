@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="HeadingText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+    <style name="BoxHeadingText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:fontFamily">@font/amiko</item>
         <item name="android:background">@color/primaryLightColor</item>
-        <item name="android:paddingHorizontal">5dp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">2dp</item>
+        <item name="android:paddingHorizontal">@dimen/padding_normal</item>
+        <item name="android:paddingTop">@dimen/padding_normal</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/primaryTextColor</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/font_large</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="HeadingText">
+        <item name="android:textSize">@dimen/font_large</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox" />
@@ -21,7 +25,7 @@
         <item name="android:ems">10</item>
         <item name="android:imeOptions">actionDone</item>
         <item name="android:importantForAutofill">no</item>
-        <item name="android:textSize">@dimen/paragraph_text</item>
+        <item name="android:textSize">@dimen/font_normal</item>
     </style>
 
     <style name="TextInputText" parent="TextInputParent">
@@ -50,17 +54,33 @@
     <style name="ListItemStandard">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginStart">@dimen/spacing_small</item>
     </style>
 
     <style name="ListItemStandardHeading" parent="ListItemStandard">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/font_large</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ListItemStandardSubHeading" parent="ListItemStandard">
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">@dimen/spacing_small</item>
+        <item name="android:textSize">@dimen/font_normal</item>
     </style>
 
+    <style name="NoSessionWarningText" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">@dimen/font_large</item>
+    </style>
+
+    <style name="SettingsScreenOptionText">
+        <item name="android:textSize">@dimen/font_large</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="StatsDetails">
+        <item name="android:textSize">@dimen/font_normal</item>
+    </style>
+
+    <style name="StatsDetails.Numbers">
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

@@ -14,7 +14,7 @@
             style="@style/DangerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/spacing_normal"
             android:text="@string/delete"
             app:backgroundTint="@color/errorColor"
             app:layout_constraintBottom_toBottomOf="@+id/divider"
@@ -23,13 +23,12 @@
 
         <TextView
             android:id="@+id/txt_v_delete_records"
+            style="@style/SettingsScreenOptionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:text="@string/text_clear_out_database"
-            android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,16 +36,16 @@
             android:id="@+id/txt_v_warning_cannot_undo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
             android:text="@string/warning_cannot_undo"
             app:layout_constraintStart_toStartOf="@+id/txt_v_delete_records"
             app:layout_constraintTop_toBottomOf="@+id/txt_v_delete_records" />
 
         <View
             android:id="@+id/divider"
-            android:layout_width="409dp"
+            android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
