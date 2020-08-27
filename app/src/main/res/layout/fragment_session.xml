@@ -96,8 +96,8 @@
                 style="@style/TextInputText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/hint_goal"
-                android:hint="@string/hint_goal"
+                android:autofillHints="@string/hint_session_note"
+                android:hint="@string/hint_session_note"
                 android:text="@={viewModel.sessionGoal}" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -148,7 +148,7 @@
             android:id="@+id/practice_activity_section_heading"
             style="@style/BoxHeadingText"
             android:layout_marginTop="@dimen/spacing_normal"
-            android:text="@string/heading_practice_activity_list"
+            android:text="@string/heading_goal_list"
             app:isGone="@{isCreatingSession}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -188,6 +188,7 @@
             android:layout_marginBottom="@dimen/spacing_small"
             android:enabled="@{hasDateEntered}"
             android:text="@string/save"
+            app:isGone="@{!isCreatingSession}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

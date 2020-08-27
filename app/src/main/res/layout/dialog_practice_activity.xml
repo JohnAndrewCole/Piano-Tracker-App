@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:entries="@array/practice_type_array"
-                    android:hint="@string/hint_practice_activity_type" />
+                    android:hint="@string/hint_goal_category" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

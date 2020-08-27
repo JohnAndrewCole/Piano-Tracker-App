@@ -20,22 +20,22 @@
 
     <!-- Session Screen -->
     <string name="heading_session_details">Session Details</string>
-    <string name="heading_practice_activity_list">Practice Activity List</string>
+    <string name="heading_goal_list">Goal List</string>
     <string name="recycler_text_no_key_set">No Key Set</string>
     <string name="recycler_text_no_bpm_set">No BPM Set</string>
     <string name="hint_date">Date</string>
     <string name="hint_time">Time</string>
-    <string name="hint_goal">Goal</string>
+    <string name="hint_session_note">Note</string>
     <string name="hint_hours">Hours</string>
     <string name="hint_minutes">Minutes</string>
     <string name="button_content_description_start_timer">Button to start timer</string>
 
-    <!-- Practice Activity Dialog -->
-    <string name="heading_practice_activity">Practice Activity</string>
-    <string name="heading_new_practice_activity">New Practice Activity</string>
-    <string name="hint_practice_activity_type">Select Practice Activity</string>
-    <string name="hint_technical_work_type">Select Technical Work Type</string>
-    <string name="hint_key">Select Key</string>
+    <!-- Goals Dialog -->
+    <string name="heading_goal">Goal</string>
+    <string name="heading_new_goal">New Goal</string>
+    <string name="hint_goal_category">Goal Category</string>
+    <string name="hint_technical_work_type">Technical Work Type</string>
+    <string name="hint_key">Key</string>
     <string name="hint_bpm">BPM</string>
     <string name="hint_enter_notes">Enter notes…</string>
 

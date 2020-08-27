@@ -114,11 +114,7 @@ class SessionFragment : Fragment() {
         binding.txtEMinutes.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 59.0F))
 
         binding.btnSaveSession.setOnClickListener {
-            if (args.isViewingSession) {
-                viewModel.updateSession()
-            } else {
-                viewModel.insertSession()
-            }
+            viewModel.insertSession()
             view?.findNavController()
                 ?.navigate(
                     SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
@@ -140,12 +136,23 @@ class SessionFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.title == "Delete" && viewModel.sessionId > 0) {
-            viewModel.deleteSession()
-            view?.findNavController()
-                ?.navigate(
-                    SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
-                )
+        if (viewModel.sessionId > 0) {
+            when (item.title) {
+                getString(R.string.delete) -> {
+                    viewModel.deleteSession()
+                    view?.findNavController()
+                        ?.navigate(
+                            SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
+                        )
+                }
+                getString(R.string.save) -> {
+                    viewModel.updateSession()
+                    view?.findNavController()
+                        ?.navigate(
+                            SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
+                        )
+                }
+            }
         }
         return false
     }

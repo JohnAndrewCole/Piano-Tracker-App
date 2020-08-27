@@ -82,9 +82,9 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         binding.toolbar.let {
             it.title = if (args.isViewingPracticeActivity) {
-                getString(R.string.heading_practice_activity)
+                getString(R.string.heading_goal)
             } else {
-                getString(R.string.heading_new_practice_activity)
+                getString(R.string.heading_new_goal)
             }
 
             it.setNavigationOnClickListener {
