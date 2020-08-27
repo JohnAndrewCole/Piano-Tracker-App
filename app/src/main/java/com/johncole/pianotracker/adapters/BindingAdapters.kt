@@ -27,6 +27,11 @@ fun TextView.setStartDateString(item: Session) {
     text = convertDateToFormattedString(LocalDate.parse(item.date))
 }
 
+@BindingAdapter("sessionIdString")
+fun TextView.setSessionIdString(item: Session) {
+    text = context.getString(R.string.recycler_text_session_id_hash, item.sessionId.toString())
+}
+
 @BindingAdapter("sessionTimeString")
 fun TextView.setStartTimeString(item: Session) {
     text = if (item.startTime.isNullOrEmpty()) {
