@@ -6,10 +6,10 @@
 
         <variable
             name="viewModel"
-            type="com.johncole.pianotracker.viewmodels.PracticeActivityViewModel" />
+            type="com.johncole.pianotracker.viewmodels.GoalViewModel" />
 
         <variable
-            name="isViewingPracticeActivity"
+            name="isViewingGoal"
             type="boolean" />
 
         <variable
@@ -23,7 +23,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/practice_activity_constraint_layout"
+            android:id="@+id/goal_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -47,7 +47,7 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/practice_activity_spinner_container"
+                android:id="@+id/goal_category_spinner_container"
                 style="@style/DropdownTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -59,10 +59,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
                 <AutoCompleteTextView
-                    android:id="@+id/spinner_select_practice_activity"
+                    android:id="@+id/spinner_select_goal_category"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:entries="@array/practice_type_array"
+                    android:entries="@array/goal_category_array"
                     android:hint="@string/hint_goal_category" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -78,7 +78,7 @@
                 app:isGone="@{!isTechnicalWorkNotSelected}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/practice_activity_spinner_container">
+                app:layout_constraintTop_toBottomOf="@+id/goal_category_spinner_container">
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner_select_technical_work_type"
@@ -177,7 +177,7 @@
             android:layout_alignParentBottom="true">
 
             <Button
-                android:id="@+id/btn_save_practice_activity"
+                android:id="@+id/btn_save_goal"
                 style="@style/TextButtonStandard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -188,17 +188,17 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
-                android:id="@+id/btn_delete_practice_activity"
+                android:id="@+id/btn_delete_goal"
                 style="@style/TextButtonNegative"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/btn_save_practice_activity"
-                android:layout_alignBottom="@id/btn_save_practice_activity"
+                android:layout_alignEnd="@+id/btn_save_goal"
+                android:layout_alignBottom="@id/btn_save_goal"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="@dimen/spacing_normal"
                 android:text="@string/delete"
-                app:isGone="@{!isViewingPracticeActivity}"
-                app:layout_constraintBaseline_toBaselineOf="@+id/btn_save_practice_activity"
+                app:isGone="@{!isViewingGoal}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btn_save_goal"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

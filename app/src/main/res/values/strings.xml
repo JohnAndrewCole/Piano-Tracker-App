@@ -16,7 +16,7 @@
     <!-- Session List Screen -->
     <string name="button_text_add_session">Add Session</string>
     <string name="recycler_text_no_start_time_set">No Start Time Set</string>
-    <string name="recycler_text_no_goal_set">No Goal Set</string>
+    <string name="recycler_text_no_notes_added">No Notes Added</string>
 
     <!-- Session Screen -->
     <string name="heading_session_details">Session Details</string>
@@ -25,10 +25,12 @@
     <string name="recycler_text_no_bpm_set">No BPM Set</string>
     <string name="hint_date">Date</string>
     <string name="hint_time">Time</string>
-    <string name="hint_session_note">Note</string>
+    <string name="hint_session_note">Notes</string>
     <string name="hint_hours">Hours</string>
     <string name="hint_minutes">Minutes</string>
-    <string name="button_content_description_start_timer">Button to start timer</string>
+    <string name="button_text_add_goal">Add Goal</string>
+    <string name="button_text_start_timer">Start Timer</string>
+    <string name="description_goal_list">This is where you add your goals for this session. For example, practicing chords could be one of your goals in a session, and making progress on a piece could be another.</string>
 
     <!-- Goals Dialog -->
     <string name="heading_goal">Goal</string>

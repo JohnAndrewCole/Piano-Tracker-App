@@ -51,26 +51,26 @@
                 android:name="sessionId"
                 app:argType="long" />
             <action
-                android:id="@+id/action_sessionFragment_to_PracticeActivityDialogFragment"
-                app:destination="@id/PracticeActivityDialogFragment" />
+                android:id="@+id/action_sessionFragment_to_GoalDialogFragment"
+                app:destination="@id/GoalDialogFragment" />
         </fragment>
 
         <dialog
-            android:id="@+id/PracticeActivityDialogFragment"
-            android:name="com.johncole.pianotracker.dialogs.PracticeActivityDialogFragment"
-            android:label="PracticeActivityDialogFragment">
+            android:id="@+id/GoalDialogFragment"
+            android:name="com.johncole.pianotracker.dialogs.GoalDialogFragment"
+            android:label="GoalDialogFragment">
             <argument
-                android:name="isViewingPracticeActivity"
+                android:name="isViewingGoal"
                 android:defaultValue="false"
                 app:argType="boolean" />
             <argument
                 android:name="sessionId"
                 app:argType="long" />
             <argument
-                android:name="practiceActivityId"
+                android:name="goalId"
                 app:argType="long" />
             <action
-                android:id="@+id/action_PracticeActivityDialogFragment_to_sessionFragment"
+                android:id="@+id/action_GoalDialogFragment_to_sessionFragment"
                 app:destination="@id/sessionFragment"
                 app:popUpTo="@id/sessionFragment"
                 app:popUpToInclusive="true" />

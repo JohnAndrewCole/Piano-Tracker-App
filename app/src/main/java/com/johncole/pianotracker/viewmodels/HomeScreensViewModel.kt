@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.johncole.pianotracker.data.PracticeActivityRepository
+import com.johncole.pianotracker.data.GoalRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
 import com.johncole.pianotracker.utilities.ResultsRange
@@ -15,7 +15,7 @@ import java.time.LocalDate
 
 class HomeScreensViewModel(
     private val sessionRepository: SessionRepository,
-    private val practiceActivityRepository: PracticeActivityRepository
+    private val goalRepository: GoalRepository
 ) : ViewModel() {
 
     // region Properties
@@ -99,7 +99,7 @@ class HomeScreensViewModel(
     fun deleteAllRecords() {
         viewModelScope.launch {
             sessionRepository.deleteAllSessions()
-            practiceActivityRepository.deleteAllPracticeActivities()
+            goalRepository.deleteAllGoals()
         }
     }
 

@@ -27,7 +27,7 @@
         <item>NA</item>
     </string-array>
 
-    <string-array name="practice_type_array">
+    <string-array name="goal_category_array">
         <item>Technical Work</item>
         <item>Playing for Fun</item>
         <item>Working on a Piece</item>

@@ -29,10 +29,10 @@ data class Session(
     @ColumnInfo(name = "session_start_time") val startTime: String? = null,
 
     /**
-     * Indicates an optional goal for the [Session]
+     * Indicates notes for the [Session]
      * This is an OPTIONAL field.
      */
-    @ColumnInfo(name = "session_goal") val sessionGoal: String? = null,
+    @ColumnInfo(name = "session_notes") val sessionNotes: String? = null,
 
     /**
      * The duration of a [Session], measured in minutes.

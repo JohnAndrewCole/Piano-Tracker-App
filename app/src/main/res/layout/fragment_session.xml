@@ -17,10 +17,6 @@
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.SessionViewModel" />
 
-        <variable
-            name="hasPracticeActivities"
-            type="boolean" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +32,7 @@
             style="@style/BoxHeadingText"
             android:text="@string/heading_session_details"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/hint_session_note"
                 android:hint="@string/hint_session_note"
-                android:text="@={viewModel.sessionGoal}" />
+                android:text="@={viewModel.sessionNotes}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,7 +142,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/practice_activity_section_heading"
+            android:id="@+id/goal_section_heading"
             style="@style/BoxHeadingText"
             android:layout_marginTop="@dimen/spacing_normal"
             android:text="@string/heading_goal_list"
@@ -154,54 +151,79 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />
 
+        <TextView
+            android:id="@+id/txt_v_goal_list_description"
+            style="@style/BoxSubHeadingText"
+            android:text="@string/description_goal_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goal_section_heading" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/practice_activity_list"
+            android:id="@+id/goal_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:isGone="@{isCreatingSession}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/constraint_layout_button_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/practice_activity_section_heading"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_v_goal_list_description"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_add_practice_activity"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_button_bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_small"
-            android:src="@drawable/ic_add_white_24"
-            app:backgroundTint="@color/secondaryLightColor"
-            app:fabSize="mini"
-            app:isGone="@{isCreatingSession}"
-            app:layout_constraintEnd_toEndOf="@+id/practice_activity_list"
-            app:layout_constraintTop_toBottomOf="@+id/practice_activity_section_heading"
-            app:tint="@color/secondaryTextColor" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_save_session"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:enabled="@{hasDateEntered}"
-            android:text="@string/save"
-            app:isGone="@{!isCreatingSession}"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btn_start_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:contentDescription="@string/button_content_description_start_timer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_recent_history" />
+            android:background="@color/secondaryTextColor" >
+
+            <Button
+                android:id="@+id/btn_add_goal"
+                style="@style/TextButtonStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btn_start_timer"
+                android:layout_alignBottom="@id/btn_start_timer"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_alignParentBottom="true"
+                android:enabled="@{hasDateEntered}"
+                android:text="@string/button_text_add_goal"
+                app:isGone="@{isCreatingSession}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btn_start_timer"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btn_start_timer"
+                style="@style/TextButtonStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:enabled="@{hasDateEntered}"
+                android:text="@string/button_text_start_timer"
+                android:textColor="@color/primaryDarkColor"
+                app:isGone="@{isCreatingSession}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="visible" />
+
+            <Button
+                android:id="@+id/btn_save_session"
+                style="@style/TextButtonStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:enabled="@{hasDateEntered}"
+                android:text="@string/save"
+                app:isGone="@{!isCreatingSession}"
+                tools:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

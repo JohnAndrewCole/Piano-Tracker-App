@@ -14,6 +14,18 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="BoxSubHeadingText">
+        <item name="android:background">@color/primaryLighterColor</item>
+        <item name="android:paddingHorizontal">@dimen/padding_normal</item>
+        <item name="android:paddingTop">@dimen/padding_normal</item>
+        <item name="android:paddingBottom">@dimen/padding_normal</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/primaryDarkColor</item>
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="HeadingText">
         <item name="android:textSize">@dimen/font_large</item>
         <item name="android:textStyle">bold</item>

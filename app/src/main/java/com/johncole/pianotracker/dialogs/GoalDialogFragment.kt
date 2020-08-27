@@ -13,32 +13,32 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.johncole.pianotracker.R
-import com.johncole.pianotracker.databinding.DialogPracticeActivityBinding
+import com.johncole.pianotracker.databinding.DialogGoalBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
-import com.johncole.pianotracker.viewmodels.PracticeActivityViewModel
+import com.johncole.pianotracker.viewmodels.GoalViewModel
 
-class PracticeActivityDialogFragment : DialogFragment() {
+class GoalDialogFragment : DialogFragment() {
 
-    private var _binding: DialogPracticeActivityBinding? = null
+    private var _binding: DialogGoalBinding? = null
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel: PracticeActivityViewModel by viewModels {
-        InjectorUtils.providePracticeActivityViewModelFactory(requireContext())
+    private val viewModel: GoalViewModel by viewModels {
+        InjectorUtils.provideGoalViewModelFactory(requireContext())
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        _binding = DialogPracticeActivityBinding.inflate(LayoutInflater.from(context), null, false)
+        _binding = DialogGoalBinding.inflate(LayoutInflater.from(context), null, false)
         binding.viewModel = viewModel
 
-        val args = PracticeActivityDialogFragmentArgs.fromBundle(requireArguments())
+        val args = GoalDialogFragmentArgs.fromBundle(requireArguments())
         viewModel.sessionId = args.sessionId
-        if (args.isViewingPracticeActivity) {
-            binding.isViewingPracticeActivity = true
-            viewModel.practiceActivityId = args.practiceActivityId
-            viewModel.getPracticeActivityById()
-            binding.btnSavePracticeActivity.isEnabled = true
+        if (args.isViewingGoal) {
+            binding.isViewingGoal = true
+            viewModel.goalId = args.goalId
+            viewModel.getGoalById()
+            binding.btnSaveGoal.isEnabled = true
         }
 
         binding.isTechnicalWorkNotSelected = false
@@ -52,27 +52,27 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         // region Bindings
 
-        binding.btnSavePracticeActivity.setOnClickListener {
-            if (args.isViewingPracticeActivity) {
-                viewModel.updatePracticeActivity()
+        binding.btnSaveGoal.setOnClickListener {
+            if (args.isViewingGoal) {
+                viewModel.updateGoal()
             } else {
-                viewModel.savePracticeActivity()
+                viewModel.saveGoal()
             }
             findNavController(requireParentFragment())
                 .navigate(
-                    PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
+                    GoalDialogFragmentDirections.actionGoalDialogFragmentToSessionFragment(
                         true,
                         viewModel.sessionId
                     )
                 )
         }
 
-        binding.btnDeletePracticeActivity.let {
+        binding.btnDeleteGoal.let {
             it.setOnClickListener {
-                viewModel.deleteByPracticeActivityId()
+                viewModel.deleteGoalById()
                 findNavController(requireParentFragment())
                     .navigate(
-                        PracticeActivityDialogFragmentDirections.actionPracticeActivityDialogFragmentToSessionFragment(
+                        GoalDialogFragmentDirections.actionGoalDialogFragmentToSessionFragment(
                             true,
                             viewModel.sessionId
                         )
@@ -81,7 +81,7 @@ class PracticeActivityDialogFragment : DialogFragment() {
         }
 
         binding.toolbar.let {
-            it.title = if (args.isViewingPracticeActivity) {
+            it.title = if (args.isViewingGoal) {
                 getString(R.string.heading_goal)
             } else {
                 getString(R.string.heading_new_goal)
@@ -94,11 +94,11 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         // region Spinner Set-up
 
-        binding.spinnerSelectPracticeActivity.let {
+        binding.spinnerSelectGoalCategory.let {
 
             val adapter = ArrayAdapter.createFromResource(
                 requireContext(),
-                R.array.practice_type_array,
+                R.array.goal_category_array,
                 R.layout.dropdown_menu_popup_item
             )
             it.setAdapter(adapter)
@@ -109,9 +109,9 @@ class PracticeActivityDialogFragment : DialogFragment() {
             it.onItemClickListener =
                 AdapterView.OnItemClickListener { parent, _, pos, _ ->
                     val selectedItem = parent?.getItemAtPosition(pos)
-                    viewModel.practiceActivityType.value = selectedItem.toString()
+                    viewModel.goalCategoryType.value = selectedItem.toString()
                     binding.isTechnicalWorkNotSelected = selectedItem.toString() == "Technical Work"
-                    binding.btnSavePracticeActivity.isEnabled = true
+                    binding.btnSaveGoal.isEnabled = true
                 }
         }
 
@@ -172,10 +172,10 @@ class PracticeActivityDialogFragment : DialogFragment() {
 
         // region ViewModel Observers
 
-        viewModel.practiceActivityType.observe(
+        viewModel.goalCategoryType.observe(
             viewLifecycleOwner,
             { activityType ->
-                binding.spinnerSelectPracticeActivity.setText(activityType, false)
+                binding.spinnerSelectGoalCategory.setText(activityType, false)
                 binding.isTechnicalWorkNotSelected = activityType == "Technical Work"
             }
         )
