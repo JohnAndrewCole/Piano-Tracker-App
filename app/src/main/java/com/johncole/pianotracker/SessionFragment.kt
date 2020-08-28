@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.johncole.pianotracker.adapters.PracticeActivityListAdapter
+import com.johncole.pianotracker.adapters.GoalListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
 import com.johncole.pianotracker.dialogs.TimePickerFragment
@@ -38,8 +38,8 @@ class SessionFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val adapter = PracticeActivityListAdapter()
-        binding.practiceActivityList.let {
+        val adapter = GoalListAdapter()
+        binding.goalList.let {
             it.layoutManager = LinearLayoutManager(requireContext())
             it.adapter = adapter
             it.setDivider(R.drawable.recycler_view_divider)
@@ -58,10 +58,9 @@ class SessionFragment : Fragment() {
 
         //region LiveData Observers
 
-        viewModel.practiceActivities.observe(
+        viewModel.goals.observe(
             viewLifecycleOwner,
             { result ->
-                binding.hasPracticeActivities = !result.isNullOrEmpty()
                 adapter.submitList(result)
             }
         )
@@ -99,10 +98,10 @@ class SessionFragment : Fragment() {
             TimePickerFragment().show(parentFragmentManager, "timePicker")
         }
 
-        binding.btnAddPracticeActivity.setOnClickListener {
+        binding.btnAddGoal.setOnClickListener {
             view?.findNavController()
                 ?.navigate(
-                    SessionFragmentDirections.actionSessionFragmentToPracticeActivityDialogFragment(
+                    SessionFragmentDirections.actionSessionFragmentToGoalDialogFragment(
                         false,
                         args.sessionId,
                         0
@@ -114,11 +113,7 @@ class SessionFragment : Fragment() {
         binding.txtEMinutes.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 59.0F))
 
         binding.btnSaveSession.setOnClickListener {
-            if (args.isViewingSession) {
-                viewModel.updateSession()
-            } else {
-                viewModel.insertSession()
-            }
+            viewModel.insertSession()
             view?.findNavController()
                 ?.navigate(
                     SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
@@ -140,12 +135,23 @@ class SessionFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.title == "Delete" && viewModel.sessionId > 0) {
-            viewModel.deleteSession()
-            view?.findNavController()
-                ?.navigate(
-                    SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
-                )
+        if (viewModel.sessionId > 0) {
+            when (item.title) {
+                getString(R.string.delete) -> {
+                    viewModel.deleteSession()
+                    view?.findNavController()
+                        ?.navigate(
+                            SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
+                        )
+                }
+                getString(R.string.save) -> {
+                    viewModel.updateSession()
+                    view?.findNavController()
+                        ?.navigate(
+                            SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
+                        )
+                }
+            }
         }
         return false
     }

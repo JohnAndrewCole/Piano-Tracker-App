@@ -16,26 +16,30 @@
     <!-- Session List Screen -->
     <string name="button_text_add_session">Add Session</string>
     <string name="recycler_text_no_start_time_set">No Start Time Set</string>
-    <string name="recycler_text_no_goal_set">No Goal Set</string>
+    <string name="recycler_text_no_notes_added">No Notes Added</string>
+    <string name="recycler_text_session_id_hash">#%1$s</string>
 
     <!-- Session Screen -->
     <string name="heading_session_details">Session Details</string>
-    <string name="heading_practice_activity_list">Practice Activity List</string>
-    <string name="recycler_text_no_key_set">No Key Set</string>
-    <string name="recycler_text_no_bpm_set">No BPM Set</string>
+    <string name="heading_goal_list">Goal List</string>
+    <string name="recycler_text_no_key_set">No key set</string>
+    <string name="recycler_text_no_bpm_set">No BPM set</string>
+    <string name="recycler_text_no_goal_duration_set">No duration set</string>
     <string name="hint_date">Date</string>
     <string name="hint_time">Time</string>
-    <string name="hint_goal">Goal</string>
+    <string name="hint_session_note">Notes</string>
     <string name="hint_hours">Hours</string>
     <string name="hint_minutes">Minutes</string>
-    <string name="button_content_description_start_timer">Button to start timer</string>
+    <string name="button_text_add_goal">Add Goal</string>
+    <string name="button_text_start_timer">Start Timer</string>
+    <string name="description_goal_list">This is where you add your goals for this session. For example, practicing chords could be one of your goals in a session, and making progress on a piece could be another.</string>
 
-    <!-- Practice Activity Dialog -->
-    <string name="heading_practice_activity">Practice Activity</string>
-    <string name="heading_new_practice_activity">New Practice Activity</string>
-    <string name="hint_practice_activity_type">Select Practice Activity</string>
-    <string name="hint_technical_work_type">Select Technical Work Type</string>
-    <string name="hint_key">Select Key</string>
+    <!-- Goals Dialog -->
+    <string name="heading_goal">Goal</string>
+    <string name="heading_new_goal">New Goal</string>
+    <string name="hint_goal_category">Goal Category</string>
+    <string name="hint_technical_work_type">Technical Work Type</string>
+    <string name="hint_key">Key</string>
     <string name="hint_bpm">BPM</string>
     <string name="hint_enter_notes">Enter notes…</string>
 

@@ -4,10 +4,11 @@ import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.johncole.pianotracker.R
-import com.johncole.pianotracker.data.PracticeActivity
+import com.johncole.pianotracker.data.Goal
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.utilities.convertDateToFormattedString
 import com.johncole.pianotracker.utilities.convertTimeToFormattedString
+import com.johncole.pianotracker.utilities.convertTotalLongDurationToHoursAndMinutesFormattedString
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -27,6 +28,11 @@ fun TextView.setStartDateString(item: Session) {
     text = convertDateToFormattedString(LocalDate.parse(item.date))
 }
 
+@BindingAdapter("sessionIdString")
+fun TextView.setSessionIdString(item: Session) {
+    text = context.getString(R.string.recycler_text_session_id_hash, item.sessionId.toString())
+}
+
 @BindingAdapter("sessionTimeString")
 fun TextView.setStartTimeString(item: Session) {
     text = if (item.startTime.isNullOrEmpty()) {
@@ -36,26 +42,26 @@ fun TextView.setStartTimeString(item: Session) {
     }
 }
 
-@BindingAdapter("sessionGoalString")
-fun TextView.setGoalString(item: Session) {
-    text = if (item.sessionGoal.isNullOrEmpty()) {
-        context.getString(R.string.recycler_text_no_goal_set)
+@BindingAdapter("sessionNotesString")
+fun TextView.setNotesString(item: Session) {
+    text = if (item.sessionNotes.isNullOrEmpty()) {
+        context.getString(R.string.recycler_text_no_notes_added)
     } else {
-        item.sessionGoal
+        item.sessionNotes
     }
 }
 
 // endregion
 
-// region Practice Activity List Binding Adapters
+// region Goal List Binding Adapters
 
-@BindingAdapter("practiceActivityName")
-fun TextView.setPracticeActivityName(item: PracticeActivity) {
-    text = item.practiceActivityType
+@BindingAdapter("goalName")
+fun TextView.setGoalName(item: Goal) {
+    text = item.goalCategory
 }
 
-@BindingAdapter("practiceActivityKey")
-fun TextView.setPracticeActivityKey(item: PracticeActivity) {
+@BindingAdapter("goalKey")
+fun TextView.setGoalKey(item: Goal) {
     text = if (item.key.isNullOrEmpty()) {
         context.getString(R.string.recycler_text_no_key_set)
     } else {
@@ -63,8 +69,8 @@ fun TextView.setPracticeActivityKey(item: PracticeActivity) {
     }
 }
 
-@BindingAdapter("practiceActivityBpm")
-fun TextView.setPracticeActivityBpm(item: PracticeActivity) {
+@BindingAdapter("goalBpm")
+fun TextView.setGoalBpm(item: Goal) {
     text = if (item.bpm.isNullOrEmpty()) {
         context.getString(R.string.recycler_text_no_bpm_set)
     } else {
@@ -72,4 +78,12 @@ fun TextView.setPracticeActivityBpm(item: PracticeActivity) {
     }
 }
 
+@BindingAdapter("goalDuration")
+fun TextView.setGoalDuration(item: Goal) {
+    text = if (item.goalDuration == null) {
+        context.getString(R.string.recycler_text_no_goal_duration_set)
+    } else {
+        convertTotalLongDurationToHoursAndMinutesFormattedString(item.goalDuration)
+    }
+}
 // endregion

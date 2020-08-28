@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.johncole.pianotracker.data.PracticeActivity
-import com.johncole.pianotracker.data.PracticeActivityRepository
+import com.johncole.pianotracker.data.Goal
+import com.johncole.pianotracker.data.GoalRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
 import com.johncole.pianotracker.utilities.Timer
@@ -20,7 +20,7 @@ import java.time.LocalTime
 
 class SessionViewModel(
     private val sessionRepository: SessionRepository,
-    private val practiceActivityRepository: PracticeActivityRepository
+    private val goalRepository: GoalRepository
 ) : ViewModel() {
 
     //region Properties
@@ -32,9 +32,9 @@ class SessionViewModel(
 
     //region LiveData
 
-    val practiceActivities: LiveData<List<PracticeActivity>>
+    val goals: LiveData<List<Goal>>
         get() {
-            return practiceActivityRepository.getPracticeActivitiesBySessionId(sessionId)
+            return goalRepository.getGoalsBySessionId(sessionId)
         }
 
     private val _sessionDate = MutableLiveData<LocalDate>()
@@ -45,9 +45,9 @@ class SessionViewModel(
     val sessionStartTime: LiveData<LocalTime>
         get() = _sessionStartTime
 
-    private val _sessionGoal = MutableLiveData<String>()
-    val sessionGoal: MutableLiveData<String>
-        get() = _sessionGoal
+    private val _sessionNotes = MutableLiveData<String>()
+    val sessionNotes: MutableLiveData<String>
+        get() = _sessionNotes
 
     private val _sessionHours = MutableLiveData<String>()
     val sessionHours: MutableLiveData<String>
@@ -94,7 +94,7 @@ class SessionViewModel(
             _sessionDate.value = LocalDate.parse(session.date)
             _sessionStartTime.value =
                 if (session.startTime != null) LocalTime.parse(session.startTime) else null
-            session.sessionGoal?.let { _sessionGoal.value = it }
+            session.sessionNotes?.let { _sessionNotes.value = it }
             session.sessionDuration?.let {
                 _sessionHours.value = convertLongDurationToHours(it)
                 _sessionMinutes.value = convertLongDurationToMinutes(it)
@@ -111,7 +111,7 @@ class SessionViewModel(
             sessionDate.value.toString(),
             convertLocalDateToEpochDay(sessionDate.value!!),
             newSessionStartTime,
-            sessionGoal.value,
+            sessionNotes.value,
             convertHoursAndMinutesToDurationLong(sessionHours.value, sessionMinutes.value)
         )
 
@@ -131,7 +131,7 @@ class SessionViewModel(
                 sessionDate.value.toString(),
                 convertLocalDateToEpochDay(sessionDate.value!!),
                 newSessionStartTime,
-                sessionGoal.value,
+                sessionNotes.value,
                 convertHoursAndMinutesToDurationLong(sessionHours.value, sessionMinutes.value)
             )
         }
@@ -140,7 +140,7 @@ class SessionViewModel(
     fun deleteSession() {
         viewModelScope.launch {
             sessionRepository.deleteSession(sessionId)
-            practiceActivityRepository.deletePracticeActivitiesBySessionId(sessionId)
+            goalRepository.deleteGoalsBySessionId(sessionId)
         }
     }
 

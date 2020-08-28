@@ -2,10 +2,10 @@ package com.johncole.pianotracker.utilities
 
 import android.content.Context
 import com.johncole.pianotracker.data.AppDatabase
-import com.johncole.pianotracker.data.PracticeActivityRepository
+import com.johncole.pianotracker.data.GoalRepository
 import com.johncole.pianotracker.data.SessionRepository
+import com.johncole.pianotracker.viewmodels.factories.GoalViewModelFactory
 import com.johncole.pianotracker.viewmodels.factories.HomeScreensViewModelFactory
-import com.johncole.pianotracker.viewmodels.factories.PracticeActivityViewModelFactory
 import com.johncole.pianotracker.viewmodels.factories.SessionViewModelFactory
 
 /**
@@ -19,29 +19,29 @@ object InjectorUtils {
         )
     }
 
-    private fun getPracticeActivityRepository(context: Context): PracticeActivityRepository {
-        return PracticeActivityRepository.getInstance(
-            AppDatabase.getInstance(context.applicationContext).practiceActivityDao()
+    private fun getGoalRepository(context: Context): GoalRepository {
+        return GoalRepository.getInstance(
+            AppDatabase.getInstance(context.applicationContext).goalDao()
         )
     }
 
     fun provideHomeScreensViewModelFactory(context: Context): HomeScreensViewModelFactory {
         return HomeScreensViewModelFactory(
             getSessionRepository(context),
-            getPracticeActivityRepository(context)
+            getGoalRepository(context)
         )
     }
 
     fun provideSessionViewModelFactory(context: Context): SessionViewModelFactory {
         return SessionViewModelFactory(
             getSessionRepository(context),
-            getPracticeActivityRepository(context)
+            getGoalRepository(context)
         )
     }
 
-    fun providePracticeActivityViewModelFactory(context: Context): PracticeActivityViewModelFactory {
-        return PracticeActivityViewModelFactory(
-            getPracticeActivityRepository(context)
+    fun provideGoalViewModelFactory(context: Context): GoalViewModelFactory {
+        return GoalViewModelFactory(
+            getGoalRepository(context)
         )
     }
 }

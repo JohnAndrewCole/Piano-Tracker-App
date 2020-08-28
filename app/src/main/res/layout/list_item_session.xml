@@ -42,11 +42,19 @@
             tools:text="01:28:30" />
 
         <TextView
-            android:id="@+id/txt_v_session_goal"
+            android:id="@+id/txt_v_session_notes"
             style="@style/ListItemStandardSubHeading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_v_session_start_time"
-            app:sessionGoalString="@{session}"
+            app:sessionNotesString="@{session}"
             tools:text="Practiced chords, pedaling and lea..." />
+
+        <TextView
+            android:id="@+id/txt_v_session_id"
+            style="@style/ListItemStandardHeading"
+            app:layout_constraintBaseline_toBaselineOf="@+id/txt_v_session_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:sessionIdString="@{session}"
+            tools:text="#1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
