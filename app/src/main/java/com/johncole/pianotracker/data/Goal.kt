@@ -23,13 +23,13 @@ data class Goal(
      * figure out which [Goal]s should be displayed in a [Session].
      * This is a REQUIRED field.
      */
-    @ColumnInfo(name = "session_id") var sessionId: String,
+    @ColumnInfo(name = "session_id") val sessionId: String,
 
     /**
      * Sets the type of [Goal], i.e. Technical Work, Improvisation, etc.
      * This is a REQUIRED field.
      */
-    @ColumnInfo(name = "goal_category") var goalCategory: String,
+    @ColumnInfo(name = "goal_category") val goalCategory: String,
 
     /**
      * Describes the type of technical work done. This is only required when the
@@ -38,35 +38,33 @@ data class Goal(
      * When the [goalCategory] is set to "Technical Work", this is a REQUIRED
      * type. Otherwise, this field will be set to NULL.
      */
-    @ColumnInfo(name = "technical_work_type") var technicalWorkType: String? = null,
+    @ColumnInfo(name = "technical_work_type") val technicalWorkType: String? = null,
 
     /**
      * Describes the key of the [Goal]. A user will not always be
      * practicing with a certain key in mind and, as such, this is a nullable field.
      * This is an OPTIONAL field.
      */
-    @ColumnInfo(name = "key") var key: String? = null,
+    @ColumnInfo(name = "key") val key: String? = null,
 
     /**
      * The BPM of the [Goal]. This is nullable for the same reasoning
      * as making the [key] field nullable.
      * This is an OPTIONAL field.
      */
-    @ColumnInfo(name = "bpm") var bpm: String? = null,
+    @ColumnInfo(name = "bpm") val bpm: String? = null,
 
     /**
      * Stores any notes that the user records to describe the [Goal].
      * This is an OPTIONAL field.
      */
-    @ColumnInfo(name = "notes") var notes: String? = null,
+    @ColumnInfo(name = "notes") val notes: String? = null,
 
     /**
-     * Indicates the length of the [Goal], measured in seconds. This
-     * is nullable at first, and will only be set when the user begins timing
-     * a [Session].
+     * Indicates the length of the [Goal], measured in seconds.
      * This is an OPTIONAL field.
      */
-    @ColumnInfo(name = "length") var length: String? = null
+    @ColumnInfo(name = "goal_duration") val goalDuration: Long? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

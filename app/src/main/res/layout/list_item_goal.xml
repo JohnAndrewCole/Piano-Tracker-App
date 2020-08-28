@@ -23,31 +23,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{clickListener}"
-        android:padding="8dp">
+        android:padding="@dimen/padding_normal">
 
         <TextView
             android:id="@+id/txt_v_goal_category"
             style="@style/ListItemStandardHeading"
+            app:goalName="@{goal}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:goalName="@{goal}"
             tools:text="Technical Work" />
 
         <TextView
             android:id="@+id/txt_v_key_display"
             style="@style/ListItemStandardSubHeading"
+            app:goalKey="@{goal}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_v_goal_category"
-            app:goalKey="@{goal}"
             tools:text="C#" />
 
         <TextView
             android:id="@+id/txt_v_bpm_display"
             style="@style/ListItemStandardSubHeading"
+            app:goalBpm="@{goal}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_v_key_display"
-            app:goalBpm="@{goal}"
             tools:text="100 BPM" />
+
+        <TextView
+            android:id="@+id/txt_v_goal_duration_display"
+            style="@style/ListItemStandardSubHeading"
+            android:layout_marginEnd="@dimen/spacing_small"
+            app:goalDuration="@{goal}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/txt_v_goal_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="2 hr 9 min" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

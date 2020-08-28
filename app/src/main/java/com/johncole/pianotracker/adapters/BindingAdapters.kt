@@ -8,6 +8,7 @@ import com.johncole.pianotracker.data.Goal
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.utilities.convertDateToFormattedString
 import com.johncole.pianotracker.utilities.convertTimeToFormattedString
+import com.johncole.pianotracker.utilities.convertTotalLongDurationToHoursAndMinutesFormattedString
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -77,4 +78,12 @@ fun TextView.setGoalBpm(item: Goal) {
     }
 }
 
+@BindingAdapter("goalDuration")
+fun TextView.setGoalDuration(item: Goal) {
+    text = if (item.goalDuration == null) {
+        context.getString(R.string.recycler_text_no_goal_duration_set)
+    } else {
+        convertTotalLongDurationToHoursAndMinutesFormattedString(item.goalDuration)
+    }
+}
 // endregion

@@ -2,6 +2,7 @@ package com.johncole.pianotracker.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.InputFilter
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.johncole.pianotracker.R
 import com.johncole.pianotracker.databinding.DialogGoalBinding
 import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.utilities.TimeInputFilterMinMax
 import com.johncole.pianotracker.viewmodels.GoalViewModel
 
 class GoalDialogFragment : DialogFragment() {
@@ -51,6 +53,9 @@ class GoalDialogFragment : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
 
         // region Bindings
+
+        binding.txtEGoalDurationHours.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 24.0F))
+        binding.txtEGoalDurationMinutes.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 59.0F))
 
         binding.btnSaveGoal.setOnClickListener {
             if (args.isViewingGoal) {

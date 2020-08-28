@@ -20,7 +20,7 @@ interface GoalDao {
     @Query("DELETE FROM goal WHERE session_id = :sessionId")
     suspend fun deleteGoalsBySessionId(sessionId: Long)
 
-    @Query("UPDATE goal SET session_id = :sessionId, goal_category = :goalCategory, technical_work_type = :technicalWorkType, key = :key, bpm = :bpm, notes = :notes WHERE id = :goalId")
+    @Query("UPDATE goal SET session_id = :sessionId, goal_category = :goalCategory, technical_work_type = :technicalWorkType, key = :key, bpm = :bpm, notes = :notes, goal_duration = :goalDuration WHERE id = :goalId")
     suspend fun updateSession(
         goalId: Long,
         sessionId: String,
@@ -28,7 +28,8 @@ interface GoalDao {
         technicalWorkType: String?,
         key: String?,
         bpm: String?,
-        notes: String?
+        notes: String?,
+        goalDuration: Long?
     )
 
     @Insert

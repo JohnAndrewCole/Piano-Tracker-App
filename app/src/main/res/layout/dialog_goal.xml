@@ -142,7 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/spacing_normal"
                 app:counterEnabled="true"
                 app:counterMaxLength="60"
@@ -150,7 +150,7 @@
                 app:helperTextEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bpm_container">
+                app:layout_constraintTop_toBottomOf="@+id/goal_duration_minutes_container">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/TextInputText"
@@ -158,6 +158,53 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_enter_notes"
                     android:text="@={viewModel.notes}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/goal_duration_hour_container"
+                style="@style/CustomTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                app:helperText="@string/optional"
+                app:helperTextEnabled="true"
+                app:layout_constraintBaseline_toBaselineOf="@+id/goal_duration_minutes_container"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_e_goal_duration_hours"
+                    style="@style/TextInputDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_hours"
+                    android:text="@={viewModel.goalHours}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/goal_duration_minutes_container"
+                style="@style/CustomTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                app:helperText="@string/optional"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/bpm_container">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_e_goal_duration_minutes"
+                    style="@style/TextInputDuration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_minutes"
+                    android:text="@={viewModel.goalMinutes}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

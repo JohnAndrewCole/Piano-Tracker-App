@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.johncole.pianotracker.data.Goal
 import com.johncole.pianotracker.data.GoalRepository
+import com.johncole.pianotracker.utilities.convertHoursAndMinutesToDurationLong
+import com.johncole.pianotracker.utilities.convertLongDurationToHours
+import com.johncole.pianotracker.utilities.convertLongDurationToMinutes
 import kotlinx.coroutines.launch
 
 class GoalViewModel(
@@ -13,10 +16,7 @@ class GoalViewModel(
 
     // region Properties
 
-    private lateinit var _goal: Goal
-
     var goalId: Long = 0
-
     var sessionId: Long = 0
 
     //region LiveData
@@ -41,6 +41,14 @@ class GoalViewModel(
     val notes: MutableLiveData<String>
         get() = _notes
 
+    private val _goalHours = MutableLiveData<String>()
+    val goalHours: MutableLiveData<String>
+        get() = _goalHours
+
+    private val _goalMinutes = MutableLiveData<String>()
+    val goalMinutes: MutableLiveData<String>
+        get() = _goalMinutes
+
     //endregion
 
     // endregion
@@ -55,7 +63,8 @@ class GoalViewModel(
             technicalWorkType.value,
             keySelected.value,
             bpmSelected.value,
-            notes.value
+            notes.value,
+            convertHoursAndMinutesToDurationLong(goalHours.value, goalMinutes.value)
         )
 
         viewModelScope.launch {
@@ -65,25 +74,16 @@ class GoalViewModel(
 
     fun getGoalById() {
         viewModelScope.launch {
-            _goal =
-                goalRepository.getGoalById(goalId)
+            val goal = goalRepository.getGoalById(goalId)
 
-            _goalCategoryType.value = _goal.goalCategory
-
-            if (!_goal.technicalWorkType.isNullOrEmpty()) {
-                _technicalWorkType.value = _goal.technicalWorkType!!
-            }
-
-            if (!_goal.key.isNullOrEmpty()) {
-                _keySelected.value = _goal.key!!
-            }
-
-            if (!_goal.bpm.isNullOrEmpty()) {
-                _bpmSelected.value = _goal.bpm!!
-            }
-
-            if (!_goal.notes.isNullOrEmpty()) {
-                _notes.value = _goal.notes!!
+            _goalCategoryType.value = goal.goalCategory
+            goal.technicalWorkType?.let { _technicalWorkType.value = it }
+            goal.key?.let { _keySelected.value = it }
+            goal.bpm?.let { _bpmSelected.value = it }
+            goal.notes?.let { _notes.value = it }
+            goal.goalDuration?.let {
+                _goalHours.value = convertLongDurationToHours(it)
+                _goalMinutes.value = convertLongDurationToMinutes(it)
             }
         }
     }
@@ -97,7 +97,8 @@ class GoalViewModel(
                 technicalWorkType.value,
                 keySelected.value,
                 bpmSelected.value,
-                notes.value
+                notes.value,
+                convertHoursAndMinutesToDurationLong(goalHours.value, goalMinutes.value)
             )
         }
     }

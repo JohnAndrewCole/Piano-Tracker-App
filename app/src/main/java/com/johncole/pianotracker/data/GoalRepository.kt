@@ -23,7 +23,8 @@ class GoalRepository private constructor(private val goalDao: GoalDao) {
         technicalWorkType: String?,
         key: String?,
         bpm: String?,
-        notes: String?
+        notes: String?,
+        goalDuration: Long?
     ) {
         goalDao.updateSession(
             goalId,
@@ -32,7 +33,8 @@ class GoalRepository private constructor(private val goalDao: GoalDao) {
             technicalWorkType,
             key,
             bpm,
-            notes
+            notes,
+            goalDuration
         )
     }
 

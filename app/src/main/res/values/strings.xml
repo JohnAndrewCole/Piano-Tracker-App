@@ -22,8 +22,9 @@
     <!-- Session Screen -->
     <string name="heading_session_details">Session Details</string>
     <string name="heading_goal_list">Goal List</string>
-    <string name="recycler_text_no_key_set">No Key Set</string>
-    <string name="recycler_text_no_bpm_set">No BPM Set</string>
+    <string name="recycler_text_no_key_set">No key set</string>
+    <string name="recycler_text_no_bpm_set">No BPM set</string>
+    <string name="recycler_text_no_goal_duration_set">No duration set</string>
     <string name="hint_date">Date</string>
     <string name="hint_time">Time</string>
     <string name="hint_session_note">Notes</string>
