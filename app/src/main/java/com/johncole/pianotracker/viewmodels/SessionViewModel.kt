@@ -1,6 +1,5 @@
 package com.johncole.pianotracker.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,6 @@ import com.johncole.pianotracker.data.Goal
 import com.johncole.pianotracker.data.GoalRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
-import com.johncole.pianotracker.utilities.Timer
 import com.johncole.pianotracker.utilities.convertHoursAndMinutesToDurationLong
 import com.johncole.pianotracker.utilities.convertLocalDateToEpochDay
 import com.johncole.pianotracker.utilities.convertLongDurationToHours
@@ -25,7 +23,6 @@ class SessionViewModel(
 
     //region Properties
 
-    private val timer = Timer()
     var sessionId: Long = 0
 
     //endregion
@@ -60,19 +57,6 @@ class SessionViewModel(
     //endregion
 
     //region Functions
-
-    fun startTimer() {
-        Log.d("SessionViewModel", "Timer has been started.")
-        timer.start()
-    }
-
-    fun stopTimer() {
-        timer.stop()
-        Log.d(
-            "SessionViewModel",
-            "Timer has been stopped at a length of ${timer.getElapsedTimeSecs()}."
-        )
-    }
 
     //region Property-setting Functions
 

@@ -74,11 +74,22 @@
                 app:destination="@id/sessionFragment"
                 app:popUpTo="@id/sessionFragment"
                 app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_GoalDialogFragment_to_sessionTimerDialogFragment"
+                app:destination="@id/sessionTimerDialogFragment" />
         </dialog>
         <action
             android:id="@+id/action_sessionFragment_to_sessionListFragment"
             app:destination="@id/sessionListFragment"
             app:popUpTo="@id/sessionListFragment"
             app:popUpToInclusive="true" />
+        <fragment
+            android:id="@+id/sessionTimerDialogFragment"
+            android:name="com.johncole.pianotracker.dialogs.SessionTimerDialogFragment"
+            android:label="SessionTimerDialogFragment" >
+            <action
+                android:id="@+id/action_sessionTimerDialogFragment_to_GoalDialogFragment"
+                app:destination="@id/GoalDialogFragment" />
+        </fragment>
     </navigation>
 </navigation>
