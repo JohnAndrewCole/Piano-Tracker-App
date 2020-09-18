@@ -74,7 +74,7 @@ fun TextView.setGoalBpm(item: Goal) {
     text = if (item.bpm.isNullOrEmpty()) {
         context.getString(R.string.recycler_text_no_bpm_set)
     } else {
-        item.bpm
+        "${item.bpm} BPM"
     }
 }
 
