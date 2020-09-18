@@ -70,6 +70,8 @@
             android:layout_marginEnd="@dimen/spacing_normal"
             app:layout_constraintBaseline_toBaselineOf="@+id/session_date_edit_text"
             app:layout_constraintEnd_toEndOf="parent"
+            app:helperText="@string/optional"
+            app:helperTextEnabled="true"
             app:layout_constraintStart_toStartOf="@+id/guideline">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -89,6 +91,8 @@
             android:layout_marginTop="@dimen/spacing_normal"
             app:counterEnabled="true"
             app:counterMaxLength="60"
+            app:helperText="@string/optional"
+            app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="@+id/session_date_edit_text"
             app:layout_constraintStart_toStartOf="@+id/session_date_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text">
@@ -110,6 +114,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_normal"
+            app:helperText="@string/optional"
+            app:helperTextEnabled="true"
             app:layout_constraintBaseline_toBaselineOf="@+id/session_goal_edit_text"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline">
@@ -130,6 +136,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_normal"
+            app:helperText="@string/optional"
+            app:helperTextEnabled="true"
             app:layout_constraintBaseline_toBaselineOf="@+id/session_goal_edit_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2">
