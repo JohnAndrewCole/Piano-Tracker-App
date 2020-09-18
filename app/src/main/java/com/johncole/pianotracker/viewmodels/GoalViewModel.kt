@@ -62,7 +62,7 @@ class GoalViewModel(
             goalCategoryType.value!!,
             technicalWorkType.value,
             keySelected.value,
-            bpmSelected.value,
+            bpmSelected.value?.trimStart('0'),
             notes.value,
             convertHoursAndMinutesToDurationLong(goalHours.value, goalMinutes.value)
         )
