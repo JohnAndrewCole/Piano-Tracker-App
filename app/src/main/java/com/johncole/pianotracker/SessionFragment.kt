@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.johncole.pianotracker.adapters.GoalListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
@@ -122,11 +121,13 @@ class SessionFragment : Fragment() {
         }
 
         binding.btnStartTimer.setOnClickListener {
-            Snackbar.make(
-                binding.root,
-                "00:00",
-                Snackbar.LENGTH_INDEFINITE
-            ).show()
+            viewModel.startTimer()
+            binding.isTimingSession = true
+        }
+
+        binding.btnStopTimer.setOnClickListener {
+            viewModel.stopTimer()
+            binding.isTimingSession = false
         }
 
         //endregion

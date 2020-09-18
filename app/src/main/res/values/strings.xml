@@ -32,6 +32,7 @@
     <string name="hint_minutes">Minutes</string>
     <string name="button_text_add_goal">Add Goal</string>
     <string name="button_text_start_timer">Start Timer</string>
+    <string name="snackbar_text_stop_timer">Stop Timer</string>
     <string name="description_goal_list">This is where you add your goals for this session. For example, practicing chords could be one of your goals in a session, and making progress on a piece could be another.</string>
 
     <!-- Goals Dialog -->

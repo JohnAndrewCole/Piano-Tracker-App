@@ -14,6 +14,10 @@
             type="boolean" />
 
         <variable
+            name="isTimingSession"
+            type="boolean" />
+
+        <variable
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.SessionViewModel" />
 
@@ -220,6 +224,41 @@
                 android:text="@string/save"
                 app:isGone="@{!isCreatingSession}"
                 tools:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_session_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:isGone="@{!isTimingSession}"
+            tools:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/session_timer_background" >
+
+            <TextView
+                android:id="@+id/snackbar_text_time_elapsed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@={viewModel.sessionDuration}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_stop_timer"
+                style="@style/TextButtonStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="16dp"
+                android:text="@string/snackbar_text_stop_timer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

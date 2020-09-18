@@ -8,13 +8,18 @@ import com.johncole.pianotracker.data.Goal
 import com.johncole.pianotracker.data.GoalRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
+import com.johncole.pianotracker.utilities.Timer
 import com.johncole.pianotracker.utilities.convertHoursAndMinutesToDurationLong
 import com.johncole.pianotracker.utilities.convertLocalDateToEpochDay
 import com.johncole.pianotracker.utilities.convertLongDurationToHours
 import com.johncole.pianotracker.utilities.convertLongDurationToMinutes
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
+import java.util.concurrent.TimeUnit
 
 class SessionViewModel(
     private val sessionRepository: SessionRepository,
@@ -24,6 +29,7 @@ class SessionViewModel(
     //region Properties
 
     var sessionId: Long = 0
+    private val timer = Timer()
 
     //endregion
 
@@ -54,6 +60,10 @@ class SessionViewModel(
     val sessionMinutes: MutableLiveData<String>
         get() = _sessionMinutes
 
+    private val _sessionDuration = MutableLiveData<String>()
+    val sessionDuration: MutableLiveData<String>
+        get() = _sessionDuration
+
     //endregion
 
     //region Functions
@@ -66,6 +76,50 @@ class SessionViewModel(
 
     fun setStartTime(newTime: LocalTime) {
         _sessionStartTime.value = newTime
+    }
+
+    private fun repeatFun(): Job {
+        return viewModelScope.launch {
+            while (isActive) {
+                val timeElapsed = timer.getElapsedTime()
+                _sessionDuration.value = String.format(
+                    "%02d:%02d:%02d",
+                    TimeUnit.MILLISECONDS.toHours(timeElapsed),
+                    TimeUnit.MILLISECONDS.toMinutes(timeElapsed) % TimeUnit.HOURS.toMinutes(1),
+                    TimeUnit.MILLISECONDS.toSeconds(timeElapsed) % TimeUnit.MINUTES.toSeconds(1)
+                )
+                delay(1000)
+            }
+        }
+    }
+
+    fun startTimer() {
+        timer.start()
+
+        val repeatFun = repeatFun()
+        // Start the loop
+        repeatFun.start()
+    }
+
+    fun stopTimer() {
+        timer.stop()
+        val repeatFun = repeatFun()
+        // Cancel the loop
+        repeatFun.cancel()
+
+        val timeElapsed = timer.getElapsedTimeSecs()
+
+        val minutesElapsed = TimeUnit.SECONDS.toMinutes(timeElapsed).toString()
+        val hoursElapsed = TimeUnit.SECONDS.toHours(timeElapsed).toString()
+
+        _sessionMinutes.value = when (minutesElapsed) {
+            "0" -> ""
+            else -> minutesElapsed
+        }
+        _sessionHours.value = when (hoursElapsed) {
+            "0" -> ""
+            else -> hoursElapsed
+        }
     }
 
     //endregion
