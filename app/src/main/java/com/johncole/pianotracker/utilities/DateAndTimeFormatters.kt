@@ -71,13 +71,17 @@ fun convertHoursAndMinutesToDurationLong(hours: String?, minutes: String?): Long
 fun convertLongDurationToHours(length: Long): String {
     val hours = length / 60
     if (hours < 1) {
-        return 0.toString()
+        return ""
     }
     return hours.toString()
 }
 
 fun convertLongDurationToMinutes(length: Long): String {
-    return (length.toInt() % 60).toString()
+    val minutes = length % 60
+    if (minutes == 0L) {
+        return ""
+    }
+    return minutes.toString()
 }
 
 fun convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration: Long): String {

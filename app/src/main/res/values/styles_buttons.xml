@@ -2,6 +2,10 @@
 <resources>
     <style name="TextButtonStandard" parent="Widget.MaterialComponents.Button.TextButton" />
 
+    <style name="TimerButtonText" parent="TextButtonStandard">
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
     <style name="TextButtonNegative" parent="TextButtonStandard">
         <item name="android:textColor">@color/errorColor</item>
     </style>

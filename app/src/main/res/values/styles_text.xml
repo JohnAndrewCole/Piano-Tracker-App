@@ -95,4 +95,8 @@
     <style name="StatsDetails.Numbers">
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="TimerText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:color">@color/primaryTextColor</item>
+    </style>
 </resources>
