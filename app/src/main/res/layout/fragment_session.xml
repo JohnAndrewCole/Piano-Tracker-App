@@ -163,6 +163,7 @@
             android:id="@+id/txt_v_goal_list_description"
             style="@style/BoxSubHeadingText"
             android:text="@string/description_goal_list"
+            app:isGone="@{isCreatingSession}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/goal_section_heading" />
@@ -181,11 +182,11 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_button_bar"
+            style="@style/BottomButtonBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:background="@color/secondaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -212,7 +213,6 @@
                 android:layout_marginEnd="@dimen/spacing_normal"
                 android:enabled="@{hasDateEntered}"
                 android:text="@string/button_text_start_timer"
-                android:textColor="@color/primaryDarkColor"
                 app:isGone="@{isCreatingSession}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

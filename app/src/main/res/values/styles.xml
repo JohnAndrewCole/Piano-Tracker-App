@@ -27,4 +27,8 @@
         <item name="actionMenuTextColor">@color/accentColor</item>
     </style>
 
+    <style name="BottomNavBar" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="backgroundTint">@color/secondaryTextColor</item>
+    </style>
+
 </resources>
