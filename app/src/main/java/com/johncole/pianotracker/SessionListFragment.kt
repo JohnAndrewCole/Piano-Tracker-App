@@ -69,7 +69,7 @@ class SessionListFragment : Fragment() {
                     val builder = AlertDialog.Builder(it)
                     builder.apply {
                         setTitle(R.string.app_name)
-                        setMessage(R.string.description)
+                        setMessage(getString(R.string.description, BuildConfig.VERSION_NAME))
                         setPositiveButton(
                             R.string.close
                         ) { dialog, _ ->
