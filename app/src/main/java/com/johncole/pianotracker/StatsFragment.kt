@@ -67,9 +67,9 @@ class StatsFragment : Fragment() {
                 Collections.sort(values, EntryXComparator())
 
                 val dataSet = LineDataSet(values, "Time series").apply {
-                    color = Color.DKGRAY
-                    valueTextColor = Color.RED
-                    valueTextSize = 12F
+                    color = getColor(R.color.primaryColor)
+                    valueTextSize = 10F
+                    valueFormatter = DateValueFormatter()
                 }
 
                 for (session in sessionsBeforeCurrentDate) {
@@ -84,7 +84,7 @@ class StatsFragment : Fragment() {
                         values.add(
                             Entry(
                                 session.sessionDateTimestamp.toFloat(),
-                                (session.sessionDuration / 60).toFloat()
+                                (session.sessionDuration).toFloat()
                             )
                         )
                     }
@@ -97,8 +97,12 @@ class StatsFragment : Fragment() {
                     axisRight.isEnabled = false
                     description.text = ""
 
+                    extraRightOffset = resources.getDimensionPixelSize(R.dimen.padding_huge).toFloat()
+                    extraLeftOffset = resources.getDimensionPixelSize(R.dimen.padding_huge).toFloat()
+
                     xAxis.apply {
                         valueFormatter = DateValueFormatter()
+                        labelCount = 5
                         when (viewModel.durationOfStats.value) {
                             "Week" -> {
                                 axisMinimum = viewModel.currentDateEpochDay - 7

@@ -3,12 +3,16 @@ package com.johncole.pianotracker.utilities
 import android.text.InputFilter
 import android.text.Spanned
 import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.johncole.pianotracker.SessionFragment
 import com.johncole.pianotracker.StatsFragment
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+
+
+
 
 /**
  * Convert a LocalDate into a string format
@@ -88,16 +92,22 @@ fun convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration: Long
     var hours = convertLongDurationToHours(totalDuration)
     var minutes = convertLongDurationToMinutes(totalDuration)
 
-    if (hours == "1") {
-        hours = "1 hr"
-    } else {
-        hours = "$hours hrs"
+    hours = when (hours) {
+        "" -> {
+            "0 hr"
+        }
+        else -> {
+            "$hours hr"
+        }
     }
 
-    if (minutes == "1") {
-        minutes = "1 min"
-    } else {
-        minutes = "$minutes mins"
+    minutes = when (minutes) {
+        "" -> {
+            "0 min"
+        }
+        else -> {
+            "$minutes min"
+        }
     }
 
     return "$hours $minutes"
@@ -152,7 +162,32 @@ class TimeInputFilterMinMax(min: Float, max: Float) : InputFilter {
  */
 class DateValueFormatter : ValueFormatter() {
 
+    private val formatter = DateTimeFormatter.ofPattern("dd/MM")
+
     override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-        return LocalDate.ofEpochDay(value.toLong()).toString()
+        val dateLabel = LocalDate.ofEpochDay(value.toLong())
+
+        return dateLabel.format(formatter)
+    }
+
+    override fun getPointLabel(entry: Entry?): String {
+        val date = entry?.x?.toLong()
+        val dateLabel = date?.let { LocalDate.ofEpochDay(it) }
+
+        val lengthOfSession = entry?.y?.toLong()
+        var formattedTime = ""
+
+        if (lengthOfSession != null) {
+            formattedTime = convertTotalLongDurationToHoursAndMinutesFormattedString(lengthOfSession)
+            if (dateLabel != null) {
+                return "$formattedTime on ${dateLabel.format(formatter)}"
+            }
+        }
+
+        if (dateLabel != null) {
+            return dateLabel.format(formatter)
+        }
+
+        return ""
     }
 }

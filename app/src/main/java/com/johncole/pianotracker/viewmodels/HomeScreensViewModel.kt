@@ -71,6 +71,13 @@ class HomeScreensViewModel(
                         totalDuration += session.sessionDuration
                     }
                 }
+                _totalTimeSpentPracticing.value =
+                    convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration)
+
+                // For average length of all sessions
+                averageDuration =
+                    convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration / sessionsToBeDisplayed.value!!.size)
+                _averageDurationOfSessions.value = averageDuration
 
                 // For average start time of all sessions
                 val startTimeMap: List<String?> = sessionsToBeDisplayed.value!!.map { it.startTime }
@@ -82,15 +89,7 @@ class HomeScreensViewModel(
                 } else {
                     favouriteStartTime
                 }
-
-                // For average length of all sessions
-                averageDuration =
-                    convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration / sessionsToBeDisplayed.value!!.size)
             }
-
-            _averageDurationOfSessions.value = averageDuration
-            _totalTimeSpentPracticing.value =
-                convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration)
         }
     }
 
