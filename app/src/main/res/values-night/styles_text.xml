@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BoxHeadingText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:fontFamily">@font/amiko</item>
+        <item name="android:background">@color/primaryDarkerColor</item>
+        <item name="android:paddingHorizontal">@dimen/padding_normal</item>
+        <item name="android:paddingTop">@dimen/padding_normal</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textSize">@dimen/font_large</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="BoxSubHeadingText">
+        <item name="android:background">@color/primaryDarkestColor</item>
+        <item name="android:paddingHorizontal">@dimen/padding_normal</item>
+        <item name="android:paddingTop">@dimen/padding_normal</item>
+        <item name="android:paddingBottom">@dimen/padding_normal</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/tertiaryTextColor</item>
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TimerText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:color">@color/primaryTextColor</item>
+    </style>
+</resources>

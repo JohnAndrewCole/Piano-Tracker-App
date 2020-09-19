@@ -4,11 +4,15 @@
   <color name="primaryLightColor">#90aec0</color>
   <color name="primaryLighterColor">#E5F0F6</color>
   <color name="primaryDarkColor">#355362</color>
+  <color name="primaryDarkerColor">#152228</color>
+  <color name="primaryDarkestColor">#070B0D</color>
+  <color name="darkModeBackground">#121212</color>
   <color name="accentColor">#90617f</color>
   <color name="secondaryColor">#90617f</color>
   <color name="secondaryLightColor">#c18fae</color>
   <color name="secondaryDarkColor">#623653</color>
   <color name="primaryTextColor">#000000</color>
   <color name="secondaryTextColor">#ffffff</color>
+  <color name="tertiaryTextColor">#AEAEAE</color>
   <color name="errorColor">#E65151</color>
 </resources>

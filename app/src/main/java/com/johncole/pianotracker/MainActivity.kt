@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         // setting the Bottom navigation visibility
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.sessionFragment || destination.id == R.id.GoalDialogFragment) {
+            if (destination.id == R.id.sessionFragment || destination.id == R.id.goalDialogFragment) {
                 navView.visibility = View.GONE
             } else {
                 navView.visibility = View.VISIBLE

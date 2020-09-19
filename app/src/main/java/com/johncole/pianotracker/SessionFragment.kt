@@ -1,5 +1,6 @@
 package com.johncole.pianotracker
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -121,7 +122,27 @@ class SessionFragment : Fragment() {
         }
 
         binding.btnStartTimer.setOnClickListener {
+            val sessionTimer = binding.constraintLayoutSessionTimer
+
+            ObjectAnimator.ofFloat(sessionTimer, "translationY", 0F).apply {
+                duration = 250
+                start()
+            }
+
             viewModel.startTimer()
+        }
+
+        binding.btnStopTimer.setOnClickListener {
+            val sessionTimer = binding.constraintLayoutSessionTimer
+
+            val yPosition = resources.getDimensionPixelSize(R.dimen.session_timer_off_screen_y_translation).toFloat()
+
+            ObjectAnimator.ofFloat(sessionTimer, "translationY", yPosition).apply {
+                duration = 250
+                start()
+            }
+
+            viewModel.stopTimer()
         }
 
         //endregion

@@ -8,6 +8,11 @@
     <string name="optional">Optional</string>
     <string name="error_no_sessions_yet">You have no sessions yet!</string>
 
+    <!-- About Dialog -->
+    <string name="menu_item_about">About</string>
+    <string name="description">© John Cole, 2020\n\nA simple app that allows you to record the details and length of time of piano practices, and then saves and visualises that data for you.</string>
+    <string name="close">Close</string>
+
     <!-- Bottom Nav Tab Titles -->
     <string name="menu_session">Session</string>
     <string name="menu_stats">Stats</string>
@@ -32,6 +37,7 @@
     <string name="hint_minutes">Minutes</string>
     <string name="button_text_add_goal">Add Goal</string>
     <string name="button_text_start_timer">Start Timer</string>
+    <string name="snackbar_text_stop_timer">Stop Timer</string>
     <string name="description_goal_list">This is where you add your goals for this session. For example, practicing chords could be one of your goals in a session, and making progress on a piece could be another.</string>
 
     <!-- Goals Dialog -->

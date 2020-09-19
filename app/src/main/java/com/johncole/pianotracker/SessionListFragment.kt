@@ -1,7 +1,11 @@
 package com.johncole.pianotracker
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -24,6 +28,7 @@ class SessionListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         val binding = FragmentSessionListBinding.inflate(inflater, container, false)
         val adapter = SessionListAdapter()
         binding.sessionListRecyclerView.let {
@@ -50,5 +55,34 @@ class SessionListFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_screens_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.title) {
+            getString(R.string.menu_item_about) -> {
+                val alertDialog: AlertDialog? = activity?.let {
+                    val builder = AlertDialog.Builder(it)
+                    builder.apply {
+                        setTitle(R.string.app_name)
+                        setMessage(R.string.description)
+                        setPositiveButton(
+                            R.string.close
+                        ) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                    }
+
+                    // Create the AlertDialog
+                    builder.create()
+                }
+                alertDialog?.show()
+            }
+        }
+        return false
     }
 }

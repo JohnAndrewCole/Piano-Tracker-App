@@ -24,7 +24,6 @@
             android:layout_marginEnd="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_normal"
             android:text="@string/button_text_add_session"
-            app:backgroundTint="@color/secondaryLightColor"
             app:cornerRadius="@dimen/button_rounded_radius"
             app:icon="@drawable/ic_add_white_24"
             app:iconTint="@color/secondaryTextColor"

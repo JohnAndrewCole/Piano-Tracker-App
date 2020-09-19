@@ -16,7 +16,7 @@ buildscript {
         legacySupportVersion = '1.0.0'
         lifecycleVersion = '2.3.0-alpha07'
         lifecycleExtensionsVersion = '2.2.0'
-        materialVersion = '1.2.0'
+        materialVersion = '1.2.1'
         navigationVersion = '2.3.0'
         recyclerViewVersion = '1.1.0'
         roomVersion = '2.3.0-alpha02'
