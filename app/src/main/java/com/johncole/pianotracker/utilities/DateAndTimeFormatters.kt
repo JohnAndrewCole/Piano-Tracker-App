@@ -172,10 +172,9 @@ class DateValueFormatter : ValueFormatter() {
         val dateLabel = date?.let { LocalDate.ofEpochDay(it) }
 
         val lengthOfSession = entry?.y?.toLong()
-        var formattedTime = ""
 
         if (lengthOfSession != null) {
-            formattedTime = convertTotalLongDurationToHoursAndMinutesFormattedString(lengthOfSession)
+            val formattedTime = convertTotalLongDurationToHoursAndMinutesFormattedString(lengthOfSession)
             if (dateLabel != null) {
                 return "$formattedTime on ${dateLabel.format(formatter)}"
             }

@@ -8,6 +8,11 @@
     <string name="optional">Optional</string>
     <string name="error_no_sessions_yet">You have no sessions yet!</string>
 
+    <!-- About Dialog -->
+    <string name="menu_item_about">About</string>
+    <string name="description">© John Cole, 2020\n\nA simple app that allows you to record the details and length of time of piano practices, and then saves and visualises that data for you.</string>
+    <string name="close">Close</string>
+
     <!-- Bottom Nav Tab Titles -->
     <string name="menu_session">Session</string>
     <string name="menu_stats">Stats</string>

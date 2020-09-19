@@ -61,7 +61,6 @@ class HomeScreensViewModel(
     fun getTimeStatsForCurrentSessions() {
         viewModelScope.launch {
             var totalDuration = 0L
-            var averageDuration = "0 hrs 0 mins"
 
             if (!sessionsToBeDisplayed.value.isNullOrEmpty()) {
 
@@ -75,9 +74,7 @@ class HomeScreensViewModel(
                     convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration)
 
                 // For average length of all sessions
-                averageDuration =
-                    convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration / sessionsToBeDisplayed.value!!.size)
-                _averageDurationOfSessions.value = averageDuration
+                _averageDurationOfSessions.value = convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration / sessionsToBeDisplayed.value!!.size)
 
                 // For average start time of all sessions
                 val startTimeMap: List<String?> = sessionsToBeDisplayed.value!!.map { it.startTime }
