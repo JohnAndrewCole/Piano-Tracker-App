@@ -17,9 +17,6 @@
             name="viewModel"
             type="com.johncole.pianotracker.viewmodels.SessionViewModel" />
 
-        <variable
-            name="hasPracticeActivities"
-            type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,204 +29,244 @@
 
         <TextView
             android:id="@+id/date_and_time_section_heading"
-            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/primaryLightColor"
-            android:fontFamily="@font/amiko"
-            android:paddingHorizontal="5dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="2dp"
-            android:text="@string/session_details_section_heading"
-            android:textAlignment="textStart"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="18sp"
+            style="@style/BoxHeadingText"
+            android:text="@string/heading_session_details"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_date_edit_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_small"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_and_time_section_heading">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextInputDateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/date_input"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="@string/date_input"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:textSize="@dimen/paragraph_text" />
+                android:autofillHints="@string/hint_date"
+                android:hint="@string/hint_date" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_time_edit_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            app:helperText="@string/optional"
+            app:helperTextEnabled="true"
             app:layout_constraintBaseline_toBaselineOf="@+id/session_date_edit_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextInputDateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/time_input"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="@string/time_input"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:textSize="@dimen/paragraph_text" />
+                android:autofillHints="@string/hint_time"
+                android:hint="@string/hint_time" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_goal_edit_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/spacing_normal"
             app:counterEnabled="true"
             app:counterMaxLength="60"
+            app:helperText="@string/optional"
+            app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="@+id/session_date_edit_text"
             app:layout_constraintStart_toStartOf="@+id/session_date_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/session_time_edit_text">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/TextInputText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/goal_input"
-                android:ems="10"
-                android:hint="@string/goal_input"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:maxLength="60"
-                android:text="@={viewModel.sessionGoal}"
-                android:textSize="@dimen/paragraph_text" />
+                android:autofillHints="@string/hint_session_note"
+                android:hint="@string/hint_session_note"
+                android:text="@={viewModel.sessionNotes}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_duration_hour_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            app:helperText="@string/optional"
+            app:helperTextEnabled="true"
             app:layout_constraintBaseline_toBaselineOf="@+id/session_goal_edit_text"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txt_e_hours"
+                style="@style/TextInputDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/duration_hours_hint"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="@={viewModel.sessionHours}"
-                android:textAlignment="center"
-                android:textSize="@dimen/paragraph_text" />
+                android:hint="@string/hint_hours"
+                android:text="@={viewModel.sessionHours}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/session_duration_minutes_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/CustomTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            app:helperText="@string/optional"
+            app:helperTextEnabled="true"
             app:layout_constraintBaseline_toBaselineOf="@+id/session_goal_edit_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2">
 
             <com.google.android.material.textfield.TextInputEditText
-
                 android:id="@+id/txt_e_minutes"
+                style="@style/TextInputDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:ems="10"
-                android:hint="@string/duration_minutes_hint"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="@={viewModel.sessionMinutes}"
-                android:textAlignment="center"
-                android:textSize="@dimen/paragraph_text" />
+                android:layout_marginStart="@dimen/spacing_small"
+                android:hint="@string/hint_minutes"
+                android:text="@={viewModel.sessionMinutes}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <TextView
-            android:id="@+id/practice_activity_section_heading"
-            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/primaryLightColor"
-            android:fontFamily="@font/amiko"
-            android:paddingHorizontal="5dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="2dp"
-            android:text="@string/practice_activity_section_heading"
-            android:textAlignment="textStart"
-            android:textAllCaps="true"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="18sp"
+            android:id="@+id/goal_section_heading"
+            style="@style/BoxHeadingText"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:text="@string/heading_goal_list"
             app:isGone="@{isCreatingSession}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/session_goal_edit_text" />
 
+        <TextView
+            android:id="@+id/txt_v_goal_list_description"
+            style="@style/BoxSubHeadingText"
+            android:text="@string/description_goal_list"
+            app:isGone="@{isCreatingSession}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goal_section_heading" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/practice_activity_list"
+            android:id="@+id/goal_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:isGone="@{isCreatingSession}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/constraint_layout_button_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/practice_activity_section_heading"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_v_goal_list_description"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_add_practice_activity"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_button_bar"
+            style="@style/BottomButtonBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_add_white_24"
-            app:backgroundTint="@color/secondaryLightColor"
-            app:fabSize="mini"
-            app:isGone="@{isCreatingSession}"
-            app:layout_constraintEnd_toEndOf="@+id/practice_activity_list"
-            app:layout_constraintTop_toBottomOf="@+id/practice_activity_section_heading"
-            app:tint="@color/secondaryTextColor" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
+            <Button
+                android:id="@+id/btn_add_goal"
+                style="@style/TextButtonStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btn_start_timer"
+                android:layout_alignBottom="@id/btn_start_timer"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:enabled="@{hasDateEntered}"
+                android:text="@string/button_text_add_goal"
+                app:isGone="@{isCreatingSession}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btn_start_timer"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btn_start_timer"
+                style="@style/TextButtonStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:enabled="@{hasDateEntered}"
+                android:text="@string/button_text_start_timer"
+                app:isGone="@{isCreatingSession}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="visible" />
+
+            <Button
+                android:id="@+id/btn_save_session"
+                style="@style/TextButtonStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:enabled="@{hasDateEntered}"
+                android:text="@string/save"
+                app:isGone="@{!isCreatingSession}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="invisible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_session_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/session_timer_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:translationY="@dimen/session_timer_off_screen_y_translation" >
+
+            <TextView
+                style="@style/TimerText"
+                android:id="@+id/snackbar_text_time_elapsed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:text="@={viewModel.sessionDuration}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_stop_timer"
+                style="@style/TimerButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:text="@string/snackbar_text_stop_timer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -238,35 +275,12 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.75" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_save_session"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:enabled="@{hasDateEntered}"
-            android:text="@string/save_session"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btn_start_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="@string/btn_start_timer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_recent_history" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

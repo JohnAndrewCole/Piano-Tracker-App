@@ -3,18 +3,13 @@ package com.johncole.pianotracker.utilities
 import android.text.InputFilter
 import android.text.Spanned
 import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.johncole.pianotracker.SessionFragment
 import com.johncole.pianotracker.StatsFragment
-import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-
-
-
-
 
 /**
  * Convert a LocalDate into a string format
@@ -53,19 +48,6 @@ fun convertLocalDateToEpochDay(date: LocalDate): Long {
 }
 
 /**
- * This converts a supplied Unix time in milliseconds to its equivalent day value.
- * @return float (because this function gets used to convert the date of the
- *                 install of the package from the Epoch Milliseconds to the
- *                Epoch Days, and is used on the MPAndroidChart line chart
- *                in the stats screen, it returns a float as required by
- *                the library).
- */
-fun convertEpochMillisecondsToEpochDay(milliseconds: Long): Float {
-    val time = Instant.ofEpochMilli(milliseconds).atZone(ZoneId.systemDefault()).toLocalDate()
-    return convertLocalDateToEpochDay(time).toFloat()
-}
-
-/**
  * Converts two numbers representing a duration, in hours and minutes, to a string
  * representing the total duration in minutes. This is for database storage.
  * @param hours the hours captured in the hour number picker
@@ -90,29 +72,39 @@ fun convertHoursAndMinutesToDurationLong(hours: String?, minutes: String?): Long
 fun convertLongDurationToHours(length: Long): String {
     val hours = length / 60
     if (hours < 1) {
-        return 0.toString()
+        return ""
     }
     return hours.toString()
 }
 
 fun convertLongDurationToMinutes(length: Long): String {
-    return (length.toInt() % 60).toString()
+    val minutes = length % 60
+    if (minutes == 0L) {
+        return ""
+    }
+    return minutes.toString()
 }
 
 fun convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration: Long): String {
     var hours = convertLongDurationToHours(totalDuration)
     var minutes = convertLongDurationToMinutes(totalDuration)
 
-    if (hours == "1") {
-        hours = "1 hr"
-    } else {
-        hours = "$hours hrs"
+    hours = when (hours) {
+        "" -> {
+            "0 hr"
+        }
+        else -> {
+            "$hours hr"
+        }
     }
 
-    if (minutes == "1") {
-        minutes = "1 min"
-    } else {
-        minutes = "$minutes mins"
+    minutes = when (minutes) {
+        "" -> {
+            "0 min"
+        }
+        else -> {
+            "$minutes min"
+        }
     }
 
     return "$hours $minutes"
@@ -143,10 +135,12 @@ class TimeInputFilterMinMax(min: Float, max: Float) : InputFilter {
         dend: Int
     ): CharSequence? {
         try {
-            val input = (dest.subSequence(0, dstart).toString() + source + dest.subSequence(
-                dend,
-                dest.length
-            )).toFloat()
+            val input = (
+                dest.subSequence(0, dstart).toString() + source + dest.subSequence(
+                    dend,
+                    dest.length
+                )
+                ).toFloat()
             if (isInRange(min, max, input))
                 return null
         } catch (nfe: NumberFormatException) {
@@ -165,7 +159,31 @@ class TimeInputFilterMinMax(min: Float, max: Float) : InputFilter {
  */
 class DateValueFormatter : ValueFormatter() {
 
+    private val formatter = DateTimeFormatter.ofPattern("dd/MM")
+
     override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-        return LocalDate.ofEpochDay(value.toLong()).toString()
+        val dateLabel = LocalDate.ofEpochDay(value.toLong())
+
+        return dateLabel.format(formatter)
+    }
+
+    override fun getPointLabel(entry: Entry?): String {
+        val date = entry?.x?.toLong()
+        val dateLabel = date?.let { LocalDate.ofEpochDay(it) }
+
+        val lengthOfSession = entry?.y?.toLong()
+
+        if (lengthOfSession != null) {
+            val formattedTime = convertTotalLongDurationToHoursAndMinutesFormattedString(lengthOfSession)
+            if (dateLabel != null) {
+                return "$formattedTime on ${dateLabel.format(formatter)}"
+            }
+        }
+
+        if (dateLabel != null) {
+            return dateLabel.format(formatter)
+        }
+
+        return ""
     }
 }

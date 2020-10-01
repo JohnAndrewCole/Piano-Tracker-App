@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: "org.jmailen.kotlinter"
 
 android {
     compileSdkVersion 29
@@ -12,7 +13,7 @@ android {
         applicationId "com.johncole.pianotracker"
         minSdkVersion defaultMinSdkVersion
         targetSdkVersion 29
-        versionCode 1
+        versionCode 3
         versionName "1.0"
 
         archivesBaseName = "piano-tracker-v$versionCode($versionName)"
@@ -32,6 +33,11 @@ android {
         dataBinding = true
     }
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-DEBUG'
+        }
+
         release {
             // Enables code shrinking, obfuscation, and optimization for only
             // your project's release build type.
@@ -85,4 +91,6 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$testExtJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
+    // Debug dependencies
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }

@@ -1,19 +1,28 @@
 package com.johncole.pianotracker
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.InputFilter
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.johncole.pianotracker.adapters.PracticeActivityListAdapter
+import com.johncole.pianotracker.adapters.GoalListAdapter
 import com.johncole.pianotracker.databinding.FragmentSessionBinding
 import com.johncole.pianotracker.dialogs.DatePickerFragment
 import com.johncole.pianotracker.dialogs.TimePickerFragment
-import com.johncole.pianotracker.utilities.*
+import com.johncole.pianotracker.utilities.InjectorUtils
+import com.johncole.pianotracker.utilities.TimeInputFilterMinMax
+import com.johncole.pianotracker.utilities.convertDateToFormattedString
+import com.johncole.pianotracker.utilities.convertTimeToFormattedString
+import com.johncole.pianotracker.utilities.setDivider
 import com.johncole.pianotracker.viewmodels.SessionViewModel
-
 
 class SessionFragment : Fragment() {
 
@@ -30,8 +39,8 @@ class SessionFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val adapter = PracticeActivityListAdapter()
-        binding.practiceActivityList.let {
+        val adapter = GoalListAdapter()
+        binding.goalList.let {
             it.layoutManager = LinearLayoutManager(requireContext())
             it.adapter = adapter
             it.setDivider(R.drawable.recycler_view_divider)
@@ -50,21 +59,33 @@ class SessionFragment : Fragment() {
 
         //region LiveData Observers
 
-        viewModel.practiceActivities.observe(viewLifecycleOwner, { result ->
-            binding.hasPracticeActivities = !result.isNullOrEmpty()
-            adapter.submitList(result)
-        })
-
-        viewModel.sessionDate.observe(viewLifecycleOwner, { newDate ->
-            binding.sessionDateEditText.editText?.setText(convertDateToFormattedString(newDate))
-            binding.hasDateEntered = true
-        })
-
-        viewModel.sessionStartTime.observe(viewLifecycleOwner, { newTime ->
-            if (newTime != null) {
-                binding.sessionTimeEditText.editText?.setText(convertTimeToFormattedString(newTime))
+        viewModel.goals.observe(
+            viewLifecycleOwner,
+            { result ->
+                adapter.submitList(result)
             }
-        })
+        )
+
+        viewModel.sessionDate.observe(
+            viewLifecycleOwner,
+            { newDate ->
+                binding.sessionDateEditText.editText?.setText(convertDateToFormattedString(newDate))
+                binding.hasDateEntered = true
+            }
+        )
+
+        viewModel.sessionStartTime.observe(
+            viewLifecycleOwner,
+            { newTime ->
+                if (newTime != null) {
+                    binding.sessionTimeEditText.editText?.setText(
+                        convertTimeToFormattedString(
+                            newTime
+                        )
+                    )
+                }
+            }
+        )
 
         //endregion
 
@@ -78,10 +99,10 @@ class SessionFragment : Fragment() {
             TimePickerFragment().show(parentFragmentManager, "timePicker")
         }
 
-        binding.btnAddPracticeActivity.setOnClickListener {
+        binding.btnAddGoal.setOnClickListener {
             view?.findNavController()
                 ?.navigate(
-                    SessionFragmentDirections.actionSessionFragmentToPracticeActivityDialogFragment(
+                    SessionFragmentDirections.actionSessionFragmentToGoalDialogFragment(
                         false,
                         args.sessionId,
                         0
@@ -93,11 +114,7 @@ class SessionFragment : Fragment() {
         binding.txtEMinutes.filters = arrayOf<InputFilter>(TimeInputFilterMinMax(0.0F, 59.0F))
 
         binding.btnSaveSession.setOnClickListener {
-            if (args.isViewingSession) {
-                viewModel.updateSession()
-            } else {
-                viewModel.insertSession()
-            }
+            viewModel.insertSession()
             view?.findNavController()
                 ?.navigate(
                     SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
@@ -105,7 +122,27 @@ class SessionFragment : Fragment() {
         }
 
         binding.btnStartTimer.setOnClickListener {
+            val sessionTimer = binding.constraintLayoutSessionTimer
+
+            ObjectAnimator.ofFloat(sessionTimer, "translationY", 0F).apply {
+                duration = 250
+                start()
+            }
+
             viewModel.startTimer()
+        }
+
+        binding.btnStopTimer.setOnClickListener {
+            val sessionTimer = binding.constraintLayoutSessionTimer
+
+            val yPosition = resources.getDimensionPixelSize(R.dimen.session_timer_off_screen_y_translation).toFloat()
+
+            ObjectAnimator.ofFloat(sessionTimer, "translationY", yPosition).apply {
+                duration = 250
+                start()
+            }
+
+            viewModel.stopTimer()
         }
 
         //endregion
@@ -119,12 +156,23 @@ class SessionFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.title == "Delete" && viewModel.sessionId > 0) {
-            viewModel.deleteSession()
-            view?.findNavController()
-                ?.navigate(
-                    SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
-                )
+        if (viewModel.sessionId > 0) {
+            when (item.title) {
+                getString(R.string.delete) -> {
+                    viewModel.deleteSession()
+                    view?.findNavController()
+                        ?.navigate(
+                            SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
+                        )
+                }
+                getString(R.string.save) -> {
+                    viewModel.updateSession()
+                    view?.findNavController()
+                        ?.navigate(
+                            SessionFragmentDirections.actionSessionFragmentToSessionListFragment()
+                        )
+                }
+            }
         }
         return false
     }

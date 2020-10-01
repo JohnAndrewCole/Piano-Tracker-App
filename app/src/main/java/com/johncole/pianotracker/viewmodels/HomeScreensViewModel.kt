@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.johncole.pianotracker.data.PracticeActivityRepository
+import com.johncole.pianotracker.data.GoalRepository
 import com.johncole.pianotracker.data.Session
 import com.johncole.pianotracker.data.SessionRepository
 import com.johncole.pianotracker.utilities.ResultsRange
@@ -15,7 +15,7 @@ import java.time.LocalDate
 
 class HomeScreensViewModel(
     private val sessionRepository: SessionRepository,
-    private val practiceActivityRepository: PracticeActivityRepository
+    private val goalRepository: GoalRepository
 ) : ViewModel() {
 
     // region Properties
@@ -61,7 +61,6 @@ class HomeScreensViewModel(
     fun getTimeStatsForCurrentSessions() {
         viewModelScope.launch {
             var totalDuration = 0L
-            var averageDuration = "0 hrs 0 mins"
 
             if (!sessionsToBeDisplayed.value.isNullOrEmpty()) {
 
@@ -71,6 +70,11 @@ class HomeScreensViewModel(
                         totalDuration += session.sessionDuration
                     }
                 }
+                _totalTimeSpentPracticing.value =
+                    convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration)
+
+                // For average length of all sessions
+                _averageDurationOfSessions.value = convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration / sessionsToBeDisplayed.value!!.size)
 
                 // For average start time of all sessions
                 val startTimeMap: List<String?> = sessionsToBeDisplayed.value!!.map { it.startTime }
@@ -82,15 +86,7 @@ class HomeScreensViewModel(
                 } else {
                     favouriteStartTime
                 }
-
-                // For average length of all sessions
-                averageDuration =
-                    convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration / sessionsToBeDisplayed.value!!.size)
             }
-
-            _averageDurationOfSessions.value = averageDuration
-            _totalTimeSpentPracticing.value =
-                convertTotalLongDurationToHoursAndMinutesFormattedString(totalDuration)
         }
     }
 
@@ -99,7 +95,7 @@ class HomeScreensViewModel(
     fun deleteAllRecords() {
         viewModelScope.launch {
             sessionRepository.deleteAllSessions()
-            practiceActivityRepository.deleteAllPracticeActivities()
+            goalRepository.deleteAllGoals()
         }
     }
 
@@ -130,13 +126,8 @@ class HomeScreensViewModel(
                         currentEpochDay
                     )
                 }
-                // Setting this to the same as week because the spinner that sets this value
-                // defaults to the "Week" option.
                 else -> {
-                    sessionRepository.getAllSessionsInRange(
-                        currentEpochDay - ResultsRange.Week.resultsRangeLength,
-                        currentEpochDay
-                    )
+                    null
                 }
             }
         }

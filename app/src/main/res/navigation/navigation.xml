@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/sessionListFragment"
         android:name="com.johncole.pianotracker.SessionListFragment"
-        android:label="@string/your_sessions">
+        android:label="@string/toolbar_text_your_sessions">
         <action
             android:id="@+id/action_sessionListFragment_to_sessionFragment"
             app:destination="@id/sessionNavigation"
@@ -16,11 +16,14 @@
             app:exitAnim="@anim/fragment_close_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_sessionListFragment_to_aboutDialogFragment"
+            app:destination="@id/aboutDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
         android:name="com.johncole.pianotracker.StatsFragment"
-        android:label="@string/your_stats"
+        android:label="@string/toolbar_text_your_stats"
         tools:layout="@layout/fragment_stats" />
     <fragment
         android:id="@+id/settingsFragment"
@@ -41,7 +44,7 @@
         <fragment
             android:id="@+id/sessionFragment"
             android:name="com.johncole.pianotracker.SessionFragment"
-            android:label="@string/viewing_session"
+            android:label="@string/toolbar_text_viewing_session"
             tools:layout="@layout/fragment_session">
             <argument
                 android:name="isViewingSession"
@@ -51,26 +54,26 @@
                 android:name="sessionId"
                 app:argType="long" />
             <action
-                android:id="@+id/action_sessionFragment_to_PracticeActivityDialogFragment"
-                app:destination="@id/PracticeActivityDialogFragment" />
+                android:id="@+id/action_sessionFragment_to_GoalDialogFragment"
+                app:destination="@id/goalDialogFragment" />
         </fragment>
 
         <dialog
-            android:id="@+id/PracticeActivityDialogFragment"
-            android:name="com.johncole.pianotracker.dialogs.PracticeActivityDialogFragment"
-            android:label="PracticeActivityDialogFragment">
+            android:id="@+id/goalDialogFragment"
+            android:name="com.johncole.pianotracker.dialogs.GoalDialogFragment"
+            android:label="GoalDialogFragment">
             <argument
-                android:name="isViewingPracticeActivity"
+                android:name="isViewingGoal"
                 android:defaultValue="false"
                 app:argType="boolean" />
             <argument
                 android:name="sessionId"
                 app:argType="long" />
             <argument
-                android:name="practiceActivityId"
+                android:name="goalId"
                 app:argType="long" />
             <action
-                android:id="@+id/action_PracticeActivityDialogFragment_to_sessionFragment"
+                android:id="@+id/action_GoalDialogFragment_to_sessionFragment"
                 app:destination="@id/sessionFragment"
                 app:popUpTo="@id/sessionFragment"
                 app:popUpToInclusive="true" />
@@ -81,4 +84,8 @@
             app:popUpTo="@id/sessionListFragment"
             app:popUpToInclusive="true" />
     </navigation>
+    <fragment
+        android:id="@+id/aboutDialogFragment"
+        android:name="com.johncole.pianotracker.dialogs.AboutDialogFragment"
+        android:label="AboutDialogFragment" />
 </navigation>

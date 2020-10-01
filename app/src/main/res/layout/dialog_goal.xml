@@ -6,10 +6,10 @@
 
         <variable
             name="viewModel"
-            type="com.johncole.pianotracker.viewmodels.PracticeActivityViewModel" />
+            type="com.johncole.pianotracker.viewmodels.GoalViewModel" />
 
         <variable
-            name="isViewingPracticeActivity"
+            name="isViewingGoal"
             type="boolean" />
 
         <variable
@@ -17,13 +17,12 @@
             type="boolean" />
     </data>
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/practice_activity_constraint_layout"
+            android:id="@+id/goal_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -37,66 +36,67 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
+                    style="@style/FullScreenDialogToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:paddingStart="6dp"
-                    android:paddingEnd="16dp"
+                    android:paddingStart="@dimen/padding_normal"
+                    android:paddingEnd="@dimen/padding_huge"
                     app:contentInsetStartWithNavigation="0dp"
                     app:navigationIcon="@drawable/ic_close_24" />
 
             </com.google.android.material.appbar.AppBarLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/practice_activity_spinner_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:id="@+id/goal_category_spinner_container"
+                style="@style/DropdownTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
                 <AutoCompleteTextView
-                    android:id="@+id/spinner_select_practice_activity"
+                    android:id="@+id/spinner_select_goal_category"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:entries="@array/practice_type_array"
-                    android:hint="@string/set_practice_activity" />
+                    android:entries="@array/goal_category_array"
+                    android:hint="@string/hint_goal_category" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/technical_work_spinner_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                style="@style/DropdownTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 app:isGone="@{!isTechnicalWorkNotSelected}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/practice_activity_spinner_container">
+                app:layout_constraintTop_toBottomOf="@+id/goal_category_spinner_container">
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner_select_technical_work_type"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:entries="@array/technical_work_type_array"
-                    android:hint="@string/set_technical_work" />
+                    android:hint="@string/hint_technical_work_type" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/key_select_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                style="@style/DropdownTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 app:helperText="@string/optional"
                 app:helperTextEnabled="true"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -108,18 +108,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:entries="@array/key_array"
-                    android:hint="@string/set_key" />
+                    android:hint="@string/hint_key" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/bpm_container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 app:helperText="@string/optional"
                 app:helperTextEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -128,46 +128,83 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_e_set_bpm"
+                    style="@style/TextInputBpm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/bpm"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    android:text="@={viewModel.bpmSelected}"
-                    android:textSize="@dimen/paragraph_text" />
+                    android:hint="@string/hint_bpm"
+                    android:text="@={viewModel.bpmSelected}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txt_e_enter_notes"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/spacing_normal"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 app:counterEnabled="true"
                 app:counterMaxLength="60"
                 app:helperText="@string/optional"
                 app:helperTextEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/goal_duration_minutes_container">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/TextInputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_enter_notes"
+                    android:text="@={viewModel.notes}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/goal_duration_hour_container"
+                style="@style/CustomTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                app:helperText="@string/optional"
+                app:helperTextEnabled="true"
+                app:layout_constraintBaseline_toBaselineOf="@+id/goal_duration_minutes_container"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_e_goal_duration_hours"
+                    style="@style/TextInputDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_hours"
+                    android:text="@={viewModel.goalHours}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/goal_duration_minutes_container"
+                style="@style/CustomTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                app:helperText="@string/optional"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toBottomOf="@+id/bpm_container">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_e_goal_duration_minutes"
+                    style="@style/TextInputDuration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/enter_notes"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:maxLength="60"
-                    android:text="@={viewModel.notes}"
-                    android:textSize="@dimen/paragraph_text" />
+                    android:hint="@string/hint_minutes"
+                    android:text="@={viewModel.goalMinutes}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -187,29 +224,28 @@
             android:layout_alignParentBottom="true">
 
             <Button
-                android:id="@+id/btn_save_practice_activity"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/btn_save_goal"
+                style="@style/TextButtonStandard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="@string/save"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 android:enabled="false"
+                android:text="@string/save"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
-                android:id="@+id/btn_delete_practice_activity"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/btn_delete_goal"
+                style="@style/TextButtonNegative"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/btn_save_practice_activity"
-                android:layout_alignBottom="@id/btn_save_practice_activity"
+                android:layout_alignEnd="@+id/btn_save_goal"
+                android:layout_alignBottom="@id/btn_save_goal"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/spacing_normal"
                 android:text="@string/delete"
-                android:textColor="@color/errorColor"
-                app:isGone="@{!isViewingPracticeActivity}"
-                app:layout_constraintBaseline_toBaselineOf="@+id/btn_save_practice_activity"
+                app:isGone="@{!isViewingGoal}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btn_save_goal"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,8 +14,8 @@
             type="android.view.View.OnClickListener" />
 
         <variable
-            name="practiceActivity"
-            type="com.johncole.pianotracker.data.PracticeActivity" />
+            name="goal"
+            type="com.johncole.pianotracker.data.Goal" />
 
     </data>
 
@@ -23,41 +23,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{clickListener}"
-        android:padding="8dp">
+        android:padding="@dimen/padding_normal">
 
         <TextView
-            android:id="@+id/txt_v_practice_activity_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:id="@+id/txt_v_goal_category"
+            style="@style/ListItemStandardHeading"
+            app:goalName="@{goal}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:practiceActivityName="@{practiceActivity}"
             tools:text="Technical Work" />
 
         <TextView
             android:id="@+id/txt_v_key_display"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            style="@style/ListItemStandardSubHeading"
+            app:goalKey="@{goal}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_v_practice_activity_name"
-            app:practiceActivityKey="@{practiceActivity}"
+            app:layout_constraintTop_toBottomOf="@+id/txt_v_goal_category"
             tools:text="C#" />
 
         <TextView
             android:id="@+id/txt_v_bpm_display"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            style="@style/ListItemStandardSubHeading"
+            app:goalBpm="@{goal}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_v_key_display"
-            app:practiceActivityBpm="@{practiceActivity}"
             tools:text="100 BPM" />
+
+        <TextView
+            android:id="@+id/txt_v_goal_duration_display"
+            style="@style/ListItemStandardSubHeading"
+            android:layout_marginEnd="@dimen/spacing_small"
+            app:goalDuration="@{goal}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/txt_v_goal_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="2 hr 9 min" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

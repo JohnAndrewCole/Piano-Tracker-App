@@ -26,37 +26,35 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/session_date_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:id="@+id/txt_v_session_date"
+            style="@style/ListItemStandardHeading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:sessionDateString="@{session}"
             tools:text="20th June 2020" />
 
         <TextView
-            android:id="@+id/session_start_time_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/session_date_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/session_date_text_view"
+            android:id="@+id/txt_v_session_start_time"
+            style="@style/ListItemStandardSubHeading"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_v_session_date"
             app:sessionTimeString="@{session}"
             tools:text="01:28:30" />
 
         <TextView
-            android:id="@+id/session_goal_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/session_start_time_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/session_start_time_text_view"
-            app:sessionGoalString="@{session}"
+            android:id="@+id/txt_v_session_notes"
+            style="@style/ListItemStandardSubHeading"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_v_session_start_time"
+            app:sessionNotesString="@{session}"
             tools:text="Practiced chords, pedaling and lea..." />
+
+        <TextView
+            android:id="@+id/txt_v_session_id"
+            style="@style/ListItemStandardHeading"
+            app:layout_constraintBaseline_toBaselineOf="@+id/txt_v_session_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:sessionIdString="@{session}"
+            tools:text="#1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

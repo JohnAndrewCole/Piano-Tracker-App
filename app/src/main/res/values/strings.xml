@@ -1,83 +1,69 @@
 <resources>
+    <!-- General -->
     <string name="app_name">Piano Tracker</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Piano Tracker</string>
-    <string name="nav_header_subtitle">by John Cole</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="settings">Settings</string>
+    <string name="delete">Delete</string>
+    <string name="optional">Optional</string>
+    <string name="error_no_sessions_yet">You have no sessions yet!</string>
+
+    <!-- About Dialog -->
+    <string name="app_name_version">Piano Tracker</string>
+    <string name="menu_item_about">About</string>
+    <string name="description">Version %1$s\n\n© John Cole, 2020\n\nA simple app that allows you to record the details and length of time of piano practices, and then saves and visualises that data for you.</string>
+    <string name="close">Close</string>
 
     <!-- Bottom Nav Tab Titles -->
     <string name="menu_session">Session</string>
     <string name="menu_stats">Stats</string>
     <string name="menu_settings">Settings</string>
 
-    <string name="home_welcomeBack">Welcome Back!</string>
-    <string name="home_callToAction">Let\'s learn some piano!</string>
-    <string name="session_readyToPractice">Ready to Practice?</string>
-    <string name="your_sessions">Your Sessions</string>
+    <!-- Session List Screen -->
+    <string name="button_text_add_session">Add Session</string>
+    <string name="recycler_text_no_start_time_set">No Start Time Set</string>
+    <string name="recycler_text_no_notes_added">No Notes Added</string>
+    <string name="recycler_text_session_id_hash">#%1$s</string>
 
-    <!-- Practice Activity Dialog -->
-    <string name="session_practiceType">Practice type:</string>
-    <string name="key_name">Enter key name…</string>
-    <string name="start_session">Start</string>
-    <string name="add_an_activity">Add an activity to your practice list. When you are done, click \"Start Session\" to begin timing.</string>
-    <string name="select_bpm">Select BPM:</string>
-    <string name="set_practice_activity">Select Practice Activity</string>
-    <string name="set_technical_work">Select Technical Work Type</string>
-    <string name="set_key">Select Key</string>
-    <string name="enter_notes">Enter notes…</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="new_practice_activity">New Practice Activity</string>
-    <string name="practice_activity">Practice Activity</string>
-    <string name="seek_bar_bpm_display">%1$d BPM</string>
-    <string name="bpm">BPM</string>
+    <!-- Session Screen -->
+    <string name="heading_session_details">Session Details</string>
+    <string name="heading_goal_list">Goal List</string>
+    <string name="recycler_text_no_key_set">No key set</string>
+    <string name="recycler_text_no_bpm_set">No BPM set</string>
+    <string name="recycler_text_no_goal_duration_set">No duration set</string>
+    <string name="hint_date">Date</string>
+    <string name="hint_time">Time</string>
+    <string name="hint_session_note">Notes</string>
+    <string name="hint_hours">Hours</string>
+    <string name="hint_minutes">Minutes</string>
+    <string name="button_text_add_goal">Add Goal</string>
+    <string name="button_text_start_timer">Start Timer</string>
+    <string name="snackbar_text_stop_timer">Stop Timer</string>
+    <string name="description_goal_list">This is where you add your goals for this session. For example, practicing chords could be one of your goals in a session, and making progress on a piece could be another.</string>
 
-    <!-- Date and Time Strings -->
-    <string name="minutes_length">%d minutes</string>
-    <string name="hours_length">%d hours</string>
-    <string name="seconds_length">%d seconds</string>
-
-    <string name="no_sessions_yet">You have no sessions yet!</string>
-    <string name="no_practice_activities">No practice activities added. Click here to add more.</string>
-    <string name="add_session">Add Session</string>
-    <string name="date_input">Date</string>
-    <string name="session_name">Session Name:</string>
-    <string name="how_long_session">Length of session:</string>
-    <string name="session_goal">Session Goal:</string>
-    <string name="optional">Optional</string>
-    <string name="save_session">Save</string>
-    <string name="time_input">Time</string>
-    <string name="length_input">Length</string>
-    <string name="goal_input">Goal</string>
-    <string name="session_duration_hint">HH:MM</string>
-    <string name="duration">Duration:</string>
-    <string name="hh">HH</string>
-    <string name="mm">MM</string>
-    <string name="duration_colon">:</string>
-    <string name="duration_hours_hint">Hours</string>
-    <string name="duration_minutes_hint">Minutes</string>
-    <string name="viewing_session">Session</string>
-    <string name="your_stats">Your Stats</string>
-    <string name="settings">Settings</string>
-    <string name="delete">Delete</string>
-    <string name="no_start_time_set">No Start Time Set</string>
-    <string name="no_goal_set">No Goal Set</string>
-    <string name="no_key_set">No Key Set</string>
-    <string name="no_bpm_set">No BPM Set</string>
+    <!-- Goals Dialog -->
+    <string name="heading_goal">Goal</string>
+    <string name="heading_new_goal">New Goal</string>
+    <string name="hint_goal_category">Goal Category</string>
+    <string name="hint_technical_work_type">Technical Work Type</string>
+    <string name="hint_key">Key</string>
+    <string name="hint_bpm">BPM</string>
+    <string name="hint_enter_notes">Enter notes…</string>
 
     <!-- Stats Screen -->
-    <string name="stats_over_time">Duration:</string>
-    <string name="detailed_breakdown">Details for this Period</string>
-    <string name="clear_out_database">Delete all your saved records:</string>
-    <string name="warning_cannot_undo">Be careful! You cannot undo this.</string>
-    <string name="total_time_spent">Total time spent practicing:</string>
-    <string name="average_time_spent_per_day">Average practice time per session:</string>
-    <string name="time_most_practiced_at">Your favourite time to practice:</string>
-    <string name="session_details_section_heading">Session Details</string>
-    <string name="practice_activity_section_heading">Practice Activity List</string>
+    <string name="heading_practice_time_graph">Your practice time graph</string>
+    <string name="heading_detailed_breakdown">Details for this period</string>
+    <string name="text_total_time_spent">Total time spent practicing:</string>
+    <string name="text_average_time_spent">Average practice time per session:</string>
+    <string name="text_time_most_practiced_at">Your favourite time to practice:</string>
+    <string name="hint_stats_duration">Duration over which to view stats</string>
 
-    <!-- Accessibility -->
-    <string name="btn_start_timer">Button to start timer</string>
+    <!-- Settings Screen -->
+    <string name="text_clear_out_database">Delete all your saved records</string>
+    <string name="warning_cannot_undo">Be careful! You cannot undo this.</string>
+
+    <!-- Navigation -->
+    <string name="toolbar_text_viewing_session">Session</string>
+    <string name="toolbar_text_your_stats">Your Stats</string>
+    <string name="toolbar_text_your_sessions">Your Sessions</string>
 </resources>

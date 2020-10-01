@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/accentColor</item>
         <item name="android:fontFamily">@font/cabin_medium</item>
         <item name="android:includeFontPadding">false</item>
+        <item name="android:toolbarStyle">@style/AppToolbar</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -24,8 +25,22 @@
         <item name="colorAccent">@color/accentColor</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="android:windowIsFloating">false</item>
-        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowBackground">@color/primaryDarkestColor</item>
         <item name="actionMenuTextColor">@color/accentColor</item>
+    </style>
+
+    <style name="BottomNavBar" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="backgroundTint">@color/primaryDarkestColor</item>
+    </style>
+
+    <style name="AppToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="backgroundTint">@color/primaryDarkestColor</item>
+        <item name="title"></item>
+        <item name="colorOnPrimary">@color/primaryDarkestColor</item>
+    </style>
+
+    <style name="FullScreenDialogToolbar">
+        <item name="android:background">@color/primaryDarkestColor</item>
     </style>
 
 </resources>

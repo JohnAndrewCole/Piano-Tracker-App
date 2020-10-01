@@ -10,11 +10,11 @@ import com.johncole.pianotracker.utilities.DATABASE_NAME
 /**
  * The Room database for this app
  */
-@Database(entities = [Session::class, PracticeActivity::class], version = 14, exportSchema = false)
+@Database(entities = [Session::class, Goal::class], version = 16, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun sessionDao(): SessionDao
-    abstract fun practiceActivityDao(): PracticeActivityDao
+    abstract fun goalDao(): GoalDao
 
     companion object {
 

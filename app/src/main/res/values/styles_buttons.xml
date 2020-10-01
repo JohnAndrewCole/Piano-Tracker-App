@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomButtonBar">
+        <item name="android:background">@color/secondaryTextColor</item>
+    </style>
+
+    <style name="TextButtonStandard" parent="Widget.MaterialComponents.Button.TextButton" />
+
+    <style name="TimerButtonText" parent="TextButtonStandard">
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <style name="TextButtonNegative" parent="TextButtonStandard">
+        <item name="android:textColor">@color/errorColor</item>
+    </style>
+
+    <style name="ExtendedFloatingActionButton">
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:backgroundTint">@color/primaryDarkColor</item>
+    </style>
+
+    <style name="DangerButton" parent="TextButtonStandard">
+        <item name="android:textColor">@color/secondaryTextColor</item>
+    </style>
+</resources>
